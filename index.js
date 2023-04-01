@@ -23,7 +23,7 @@ async function run() {
     const galleriesCollection = client.db("Alumni-project-data").collection("galleries");
     const galleryCollection = client.db("Alumni-project-data").collection("gallery");
 
-    //  gallery Category api
+    //  gallery Category data
     app.get("/galleryCategories", async (req, res) => {
       const query = {};
       const cursor = galleriesCollection.find(query);
@@ -31,7 +31,7 @@ async function run() {
       res.send(galleries);
     });
 
-    // all gallery api
+    // all gallery data
     app.get("/galleries", async (req, res) => {
       const query = {};
       const cursor = galleryCollection.find(query).limit(6);
@@ -39,7 +39,7 @@ async function run() {
       res.send(gallery);
     });
 
-    // CategoryWise gallery api
+    // CategoryWise gallery data
     app.get("/galleries/:id", async (req, res) => {
       const id = req.params.id;
       const query = { gellary_id: id };
