@@ -1,0 +1,23 @@
+[
+  { "_id": "6433ae2b7a80526391760e2b", "gallery_category_id": 2, "name": "Events" },
+  {
+    "gallery_category_id": "6433ae2b7a80526391760e2c",
+    "gallery_category_id": 4,
+    "name": "Foundation"
+  },
+  {
+    "gallery_category_id": "6433ae2b7a80526391760e2d",
+    "gallery_category_id": 1,
+    "name": "Old Memories"
+  },
+  {
+    "gallery_category_id": "6433ae2b7a80526391760e2e",
+    "gallery_category_id": 3,
+    "name": "Picnic"
+  },
+  {
+    "gallery_category_id": "6433ae2b7a80526391760e2f",
+    "gallery_category_id": 5,
+    "name": "Convocation"
+  }
+]
