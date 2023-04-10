@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "643452a15a3105272a3afadf",
+    "eventCategory": "AllEvents"
+  },
+  {
+    "_id": "643452a15a3105272a3afae0",
+    "eventCategory": "Yearly Alumni Seminar"
+  },
+  {
+    "_id": "643452a15a3105272a3afae1",
+    "eventCategory": "category-2"
+  },
+  {
+    "_id": "643452a15a3105272a3afae2",
+    "eventCategory": "category-3"
+  },
+  {
+    "_id": "643452a15a3105272a3afae3",
+    "eventCategory": "category-4"
+  },
+  {
+    "_id": "643452a15a3105272a3afae4",
+    "eventCategory": "category-5"
+  }
+]

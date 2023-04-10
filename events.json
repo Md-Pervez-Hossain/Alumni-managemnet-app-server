@@ -1,0 +1,42 @@
+[
+  {
+    "batch": ["All Batch", "1990"],
+    "event_title": "Charity Fundraiser",
+    "date": "2023-05-15",
+    "time": "18:00",
+    "location": "123 Main St, Anytown USA",
+    "description": "Join us for a night of giving to support local charities.",
+    "category": "643452a15a3105272a3afae0",
+    "image_url": "https://i.ibb.co/5M3bCB1/meeting.jpg"
+  },
+  {
+    "batch": ["All Batch", "1990"],
+    "event_title": "Concert in the Park",
+    "date": "2023-06-25",
+    "time": "19:00",
+    "location": "Central Park, New York City",
+    "description": "Enjoy a free outdoor concert featuring local artists.",
+    "category": "643452a15a3105272a3afae0",
+    "image_url": "https://i.ibb.co/5M3bCB1/meeting.jpg"
+  },
+  {
+    "batch": ["All Batch", "1990"],
+    "event_title": "Art Exhibit Opening",
+    "date": "2023-07-10",
+    "time": "17:30",
+    "location": "456 Elm St, Anytown USA",
+    "description": "View the latest works from emerging artists.",
+    "category": "643452a15a3105272a3afae0",
+    "image_url": "https://i.ibb.co/5M3bCB1/meeting.jpg"
+  },
+  {
+    "batch": ["All Batch", "1990"],
+    "event_title": "Food Festival",
+    "date": "2023-08-12",
+    "time": "12:00",
+    "location": "789 Oak St, Anytown USA",
+    "description": "Sample a variety of cuisines from local food vendors.",
+    "category": "643452a15a3105272a3afae0",
+    "image_url": "https://i.ibb.co/5M3bCB1/meeting.jpg"
+  }
+]

@@ -24,9 +24,13 @@ async function run() {
     const galleriesCategory = client
       .db("alumni-management-app")
       .collection("alumniGalleryCategories");
+    const eventsCategory = client
+      .db("alumni-management-app")
+      .collection("allEventCategories");
     const AllGalleryPhotos = client
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
+    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
 
     // api end points
     // all gallery Category data
@@ -36,21 +40,13 @@ async function run() {
       const galleries = await cursor.toArray();
       res.send(galleries);
     });
+
     // single gallery Category data
     app.get("/galleryCategories/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const category = await galleriesCategory.findOne(query);
       res.send(category);
-    });
-
-    // batch wise gallery Category data
-    app.get("/batchGallery/:batchNumber", async (req, res) => {
-      const batchNumber = req.params.batchNumber;
-      const query = { batchNumber: batchNumber };
-      const cursor = AllGalleryPhotos.find(query);
-      const galleries = await cursor.toArray();
-      res.send(galleries);
     });
 
     // all gallery data
@@ -61,6 +57,31 @@ async function run() {
       res.send(gallery);
     });
 
+    // batch wise gallery Category data
+    app.get("/galleries/batch/:batchNumber", async (req, res) => {
+      const batchNumber = req.params.batchNumber;
+      const query = { batchNumber: batchNumber };
+      const cursor = AllGalleryPhotos.find(query);
+      const galleries = await cursor.toArray();
+      res.send(galleries);
+    });
+
+    // gallery based on featured photos
+    app.get("/galleries/featured", async (req, res) => {
+      const query = { "others_info.is_fatured": true };
+      const cursor = AllGalleryPhotos.find(query);
+      const featuredItems = await cursor.toArray();
+      res.send(featuredItems);
+    });
+
+    // gallery based on trending photos
+    app.get("/galleries/trending", async (req, res) => {
+      const query = { "others_info.is_trending": true };
+      const cursor = AllGalleryPhotos.find(query);
+      const trendingItems = await cursor.toArray();
+      res.send(trendingItems);
+    });
+
     // CategoryWise gallery data
     app.get("/galleries/:id", async (req, res) => {
       const id = req.params.id;
@@ -68,6 +89,41 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+
+    //  Events api
+
+    // all events data
+    app.get("/events", async (req, res) => {
+      const query = {};
+      const cursor = AllEventsData.find(query);
+      const gallery = await cursor.toArray();
+      res.send(gallery);
+    });
+
+    // all event Category data
+    app.get("/eventCategories", async (req, res) => {
+      const query = {};
+      const cursor = eventsCategory.find(query);
+      const galleries = await cursor.toArray();
+      res.send(galleries);
+    });
+
+    // CategoryWise event data
+    app.get("/events/category/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { category: id };
+      const cursor = AllEventsData.find(query);
+      const gallery = await cursor.toArray();
+      res.send(gallery);
+    });
+
+    // single event data
+    app.get("/events/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const category = await AllEventsData.findOne(query);
+      res.send(category);
     });
   } finally {
   }
