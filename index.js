@@ -24,13 +24,23 @@ async function run() {
     const galleriesCategory = client
       .db("alumni-management-app")
       .collection("alumniGalleryCategories");
-    const eventsCategory = client
-      .db("alumni-management-app")
-      .collection("allEventCategories");
+
     const AllGalleryPhotos = client
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
+
     const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const eventsCategory = client
+      .db("alumni-management-app")
+      .collection("allEventCategories");
+
+    const AllAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const AllUniversityName = client
+      .db("alumni-management-app")
+      .collection("AllUniversityName");
+    const AllBatchesName = client
+      .db("alumni-management-app")
+      .collection("allBatchesName");
 
     // api end points
     // all gallery Category data
@@ -124,6 +134,51 @@ async function run() {
       const query = { _id: new ObjectId(id) };
       const category = await AllEventsData.findOne(query);
       res.send(category);
+    });
+
+    //  Alumni data
+    // AllAlumniData
+    // AllUniversityName
+    // AllBatchesName
+
+    // All University Name data
+    app.get("/allUniversityName", async (req, res) => {
+      const query = {};
+      const cursor = AllUniversityName.find(query);
+      const AllUniversityName = await cursor.toArray();
+      res.send(AllUniversityName);
+    });
+    // All Batches Name data
+    app.get("/allBatchesName", async (req, res) => {
+      const query = {};
+      const cursor = AllBatchesName.find(query);
+      const AllBatchesName = await cursor.toArray();
+      res.send(AllBatchesName);
+    });
+
+    // all Alumni data
+    app.get("/alumni", async (req, res) => {
+      const query = {};
+      const cursor = AllAlumniData.find(query);
+      const AllAlumni = await cursor.toArray();
+      res.send(AllAlumni);
+    });
+
+    // year event data
+    app.get("/alumni/batch/:year", async (req, res) => {
+      const year = req.params.year;
+      const query = { category: year };
+      const cursor = AllAlumniData.find(query);
+      const gallery = await cursor.toArray();
+      res.send(gallery);
+    });
+
+    // single person data
+    app.get("/alumni/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const personData = await AllEventsData.findOne(query);
+      res.send(personData);
     });
   } finally {
   }
