@@ -42,6 +42,14 @@ async function run() {
       .db("alumni-management-app")
       .collection("allBatchesName");
 
+    //   replace "%20" with "-" for blank spaces
+    app.get("/api/:query", (req, res) => {
+      const query = req.params.query;
+      const formattedQuery = query.replace(/%20/g, "-");
+      // process the formatted query
+      res.send(formattedQuery);
+    });
+
     // api end points
     // all gallery Category data
     app.get("/galleryCategories", async (req, res) => {
@@ -164,20 +172,19 @@ async function run() {
       res.send(AllAlumni);
     });
 
-    // year event data
+    // year wise batch data
     app.get("/alumni/batch/:year", async (req, res) => {
       const year = req.params.year;
       const query = { graduation_year: year };
       const cursor = AllAlumniData.find(query);
-      const gallery = await cursor.toArray();
-      res.send(gallery);
+      const yearWiseBatchData = await cursor.toArray();
+      res.send(yearWiseBatchData);
     });
 
     // single person data
     app.get("/alumni/:id", async (req, res) => {
-      const id = req.params.id;
-      // const query = { _id: new ObjectId(id) };
-      const query = { _id: new ObjectId(id) };
+      const alumniId = req.params.id;
+      const query = { _id: new ObjectId(alumniId) };
       const personData = await AllEventsData.findOne(query);
       res.send(personData);
     });
