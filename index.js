@@ -185,7 +185,7 @@ async function run() {
     app.get("/alumni/:id", async (req, res) => {
       const alumniId = req.params.id;
       const query = { _id: new ObjectId(alumniId) };
-      const personData = await AllEventsData.findOne(query);
+      const personData = await AllAlumniData.findOne(query);
       res.send(personData);
     });
   } finally {
