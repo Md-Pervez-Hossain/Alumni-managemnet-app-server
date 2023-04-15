@@ -167,7 +167,7 @@ async function run() {
     // year event data
     app.get("/alumni/batch/:year", async (req, res) => {
       const year = req.params.year;
-      const query = { category: year };
+      const query = { graduation_year: year };
       const cursor = AllAlumniData.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
