@@ -16,7 +16,7 @@ The run() function is an asynchronous function that connects to the database and
 
 The application defines several API endpoints, which are described below:
 
-- the site is hosted in https://alumni-managemnet-app-server.vercel.app/
+## the site is hosted in https://alumni-managemnet-app-server.vercel.app/
 
 * /galleryCategories GET endpoint that returns all gallery categories data
 * /galleryCategories/:id GET endpoint that returns a single gallery category data based on the id parameter
