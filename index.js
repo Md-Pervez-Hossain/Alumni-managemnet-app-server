@@ -29,18 +29,71 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const AllAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const AllAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
     const AllUniversityName = client
       .db("alumni-management-app")
       .collection("AllUniversityName");
     const AllBatchesName = client
       .db("alumni-management-app")
       .collection("allBatchesName");
+
+    const newsCollection = client
+      .db("alumni-management-app")
+      .collection("alumniNews");
+
+    const eventsCollection = client
+      .db("alumni-management-app")
+      .collection("alumniEvents");
+
+    // news post
+    app.post("/news", async (req, res) => {
+      const news = req.body;
+      console.log(news);
+      const cursor = await newsCollection.insertOne(news);
+      res.send(cursor);
+    });
+    // news get
+    app.get("/news", async (req, res) => {
+      const query = {};
+      const newsResult = await newsCollection.find(query).toArray();
+      res.send(newsResult);
+    });
+    //single news get
+    app.get("/news/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const singleNewsResult = await newsCollection.findOne(query);
+      res.send(singleNewsResult);
+    });
+
+    // events post
+    app.post("/alumniEvents", async (req, res) => {
+      const events = req.body;
+      const cursor = await eventsCollection.insertOne(events);
+      res.send(cursor);
+    });
+    // events get
+    app.get("/alumniEvents", async (req, res) => {
+      const query = {};
+      const eventResult = await eventsCollection.find(query).toArray();
+      res.send(eventResult);
+    });
+    // single events get
+    app.get("/alumniEvents/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const singleEventResult = await eventsCollection.findOne(query);
+      res.send(singleEventResult);
+    });
 
     //   replace "%20" with "-" for blank spaces
     app.get("/api/:query", (req, res) => {
