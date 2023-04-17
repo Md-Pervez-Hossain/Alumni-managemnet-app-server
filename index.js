@@ -29,16 +29,12 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client
-      .db("alumni-management-app")
-      .collection("AllEvents");
+    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const AllAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const AllAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
     const AllUniversityName = client
       .db("alumni-management-app")
       .collection("AllUniversityName");
@@ -46,9 +42,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("allBatchesName");
 
-    const newsCollection = client
-      .db("alumni-management-app")
-      .collection("alumniNews");
+    const newsCollection = client.db("alumni-management-app").collection("alumniNews");
 
     const eventsCollection = client
       .db("alumni-management-app")
@@ -203,18 +197,19 @@ async function run() {
     // AllBatchesName
 
     // All University Name data
-    app.get("/allUniversityName", async (req, res) => {
+
+    app.get("/all-university-name", async (req, res) => {
       const query = {};
-      const cursor = AllUniversityName.find(query);
-      const AllUniversityName = await cursor.toArray();
-      res.send(AllUniversityName);
+      const newsResult = await AllUniversityName.find(query).toArray();
+      res.send(newsResult);
     });
+
     // All Batches Name data
-    app.get("/allBatchesName", async (req, res) => {
+    app.get("/all-batches", async (req, res) => {
       const query = {};
       const cursor = AllBatchesName.find(query);
-      const AllBatchesName = await cursor.toArray();
-      res.send(AllBatchesName);
+      const AllAlumni = await cursor.toArray();
+      res.send(AllAlumni);
     });
 
     // all Alumni data
