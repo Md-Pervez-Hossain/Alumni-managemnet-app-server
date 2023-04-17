@@ -114,7 +114,7 @@ async function run() {
     // all events data
     app.get("/events", async (req, res) => {
       const query = {};
-      const cursor = AllEventsData.find(query);
+      const cursor = AllEventsData.find(query).sort({ date: 1 });
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
