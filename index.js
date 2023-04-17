@@ -35,9 +35,11 @@ async function run() {
       .collection("allEventCategories");
 
     const AllAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+
     const AllUniversityName = client
       .db("alumni-management-app")
       .collection("AllUniversityName");
+
     const AllBatchesName = client
       .db("alumni-management-app")
       .collection("allBatchesName");
@@ -49,17 +51,11 @@ async function run() {
       .db("alumni-management-app")
       .collection("alumniNewsCategories");
 
-    const eventsCollection = client
-      .db("alumni-management-app")
-      .collection("alumniEvents");
+    // const eventsCollection = client
+    //   .db("alumni-management-app")
+    //   .collection("alumniEvents");
 
-    // news post
-    app.post("/news", async (req, res) => {
-      const news = req.body;
-      console.log(news);
-      const cursor = await alumniNewsCollection.insertOne(news);
-      res.send(cursor);
-    });
+    // N E W S //
     // all news data
     app.get("/news", async (req, res) => {
       const query = {};
@@ -83,32 +79,11 @@ async function run() {
       res.send(singleNewsResult);
     });
 
-    // events post
-    app.post("/alumniEvents", async (req, res) => {
-      const events = req.body;
-      const cursor = await eventsCollection.insertOne(events);
+    // create a news
+    app.post("/news", async (req, res) => {
+      const news = req.body;
+      const cursor = await alumniNewsCollection.insertOne(news);
       res.send(cursor);
-    });
-    // events get
-    app.get("/alumniEvents", async (req, res) => {
-      const query = {};
-      const eventResult = await eventsCollection.find(query).toArray();
-      res.send(eventResult);
-    });
-    // single events get
-    app.get("/alumniEvents/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const singleEventResult = await eventsCollection.findOne(query);
-      res.send(singleEventResult);
-    });
-
-    //   replace "%20" with "-" for blank spaces
-    app.get("/api/:query", (req, res) => {
-      const query = req.params.query;
-      const formattedQuery = query.replace(/%20/g, "-");
-      // process the formatted query
-      res.send(formattedQuery);
     });
 
     // api end points
@@ -170,7 +145,7 @@ async function run() {
       res.send(gallery);
     });
 
-    //  Events api
+    // E V E N T S //
 
     // all events data
     app.get("/events", async (req, res) => {
@@ -205,6 +180,13 @@ async function run() {
       res.send(category);
     });
 
+    // events post
+    app.post("/events", async (req, res) => {
+      const events = req.body;
+      const cursor = await AllEventsData.insertOne(events);
+      res.send(cursor);
+    });
+
     //  Alumni data
     // AllAlumniData
     // AllUniversityName
@@ -226,7 +208,8 @@ async function run() {
       res.send(AllAlumni);
     });
 
-    // all Alumni data
+    //  A L U M N I //
+    //all Alumni data
     app.get("/alumni", async (req, res) => {
       const query = {};
       const cursor = AllAlumniData.find(query);
@@ -234,7 +217,7 @@ async function run() {
       res.send(AllAlumni);
     });
 
-    // year wise batch data
+    //year wise batch data
     app.get("/alumni/batch/:year", async (req, res) => {
       const year = req.params.year;
       const query = { graduation_year: year };
@@ -249,6 +232,16 @@ async function run() {
       const query = { _id: new ObjectId(alumniId) };
       const personData = await AllAlumniData.findOne(query);
       res.send(personData);
+    });
+
+    //---- U T I L S ----//
+
+    //   replace "%20" with "-" for blank spaces
+    app.get("/api/:query", (req, res) => {
+      const query = req.params.query;
+      const formattedQuery = query.replace(/%20/g, "-");
+      // process the formatted query
+      res.send(formattedQuery);
     });
   } finally {
   }

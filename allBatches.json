@@ -1,4 +1,5 @@
 [
+  { "batchNumber": "All", "url": "/batch/all" },
   { "batchNumber": "1980", "url": "/batch/1980" },
   { "batchNumber": "1981", "url": "/batch/1981" },
   { "batchNumber": "1982", "url": "/batch/1982" },
