@@ -42,7 +42,12 @@ async function run() {
       .db("alumni-management-app")
       .collection("allBatchesName");
 
-    const newsCollection = client.db("alumni-management-app").collection("alumniNews");
+    const alumniNewsCollection = client
+      .db("alumni-management-app")
+      .collection("alumniNews");
+    const alumniNewsCategories = client
+      .db("alumni-management-app")
+      .collection("alumniNewsCategories");
 
     const eventsCollection = client
       .db("alumni-management-app")
@@ -52,20 +57,29 @@ async function run() {
     app.post("/news", async (req, res) => {
       const news = req.body;
       console.log(news);
-      const cursor = await newsCollection.insertOne(news);
+      const cursor = await alumniNewsCollection.insertOne(news);
       res.send(cursor);
     });
-    // news get
+    // all news data
     app.get("/news", async (req, res) => {
       const query = {};
-      const newsResult = await newsCollection.find(query).toArray();
+      const newsResult = await alumniNewsCollection.find(query).toArray();
       res.send(newsResult);
     });
+
+    // all news Category data
+    app.get("/alumniNewsCategories", async (req, res) => {
+      const query = {};
+      const cursor = alumniNewsCategories.find(query);
+      const galleries = await cursor.toArray();
+      res.send(galleries);
+    });
+
     //single news get
     app.get("/news/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const singleNewsResult = await newsCollection.findOne(query);
+      const singleNewsResult = await alumniNewsCollection.findOne(query);
       res.send(singleNewsResult);
     });
 
