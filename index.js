@@ -180,14 +180,14 @@ async function run() {
       res.send(category);
     });
 
-    // events post
+    // create a event api // event post
     app.post("/events", async (req, res) => {
       const events = req.body;
       const cursor = await AllEventsData.insertOne(events);
       res.send(cursor);
     });
 
-    //  Alumni data
+    // Alumni data
     // AllAlumniData
     // AllUniversityName
     // AllBatchesName
@@ -203,7 +203,9 @@ async function run() {
     // All Batches Name data
     app.get("/all-batches", async (req, res) => {
       const query = {};
-      const cursor = AllBatchesName.find(query);
+      const options = { sort: { batchNumber: -1 } };
+
+      const cursor = AllBatchesName.find(query, options);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
