@@ -44,6 +44,10 @@ async function run() {
       .db("alumni-management-app")
       .collection("allBatchesName");
 
+    const AllGraduationMajor = client
+      .db("alumni-management-app")
+      .collection("AllGraduationMajor");
+
     const alumniNewsCollection = client
       .db("alumni-management-app")
       .collection("alumniNews");
@@ -206,6 +210,15 @@ async function run() {
       const options = { sort: { batchNumber: -1 } };
 
       const cursor = AllBatchesName.find(query, options);
+      const AllAlumni = await cursor.toArray();
+      res.send(AllAlumni);
+    });
+
+    // All Batches Name data
+    app.get("/all-graduation-major", async (req, res) => {
+      const query = {};
+      const options = { sort: { graduationMajor: 1 } };
+      const cursor = AllGraduationMajor.find(query, options);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
