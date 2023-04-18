@@ -54,6 +54,9 @@ async function run() {
     const alumniNewsCategories = client
       .db("alumni-management-app")
       .collection("alumniNewsCategories");
+    const membershipForm = client
+      .db("alumni-management-app")
+      .collection("mebership-Form-Data");
 
     // const eventsCollection = client
     //   .db("alumni-management-app")
@@ -258,6 +261,27 @@ async function run() {
       // process the formatted query
       res.send(formattedQuery);
     });
+
+
+//Membership apply form post request
+
+app.post('/membership', (req, res) => {
+  const formData = req.body;
+  console.log(formData);
+    membershipForm.insertOne(formData, (err, result) => {
+      if (err) throw err;
+
+      res.status(200).send('data inserted successfully');
+      client.close();
+    });
+
+});
+
+
+
+
+
+
   } finally {
   }
 }
