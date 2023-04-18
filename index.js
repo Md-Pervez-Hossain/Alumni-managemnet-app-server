@@ -174,7 +174,16 @@ async function run() {
     app.get("/events/category/:id", async (req, res) => {
       const id = req.params.id;
       const query = { category: id };
-      const cursor = AllEventsData.find(query);
+      const cursor = AllEventsData.find(query).sort({ date: 1 });
+      const gallery = await cursor.toArray();
+      res.send(gallery);
+    });
+
+    // batchWise event data
+    app.get("/events/batch/:year", async (req, res) => {
+      const year = req.params.year;
+      const query = { batch: year };
+      const cursor = AllEventsData.find(query).sort({ date: 1 });
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
@@ -262,26 +271,17 @@ async function run() {
       res.send(formattedQuery);
     });
 
+    //Membership apply form post request
 
-//Membership apply form post request
-
-app.post('/membership', (req, res) => {
-  const formData = req.body;
-  console.log(formData);
-    membershipForm.insertOne(formData, (err, result) => {
-      if (err) throw err;
-
-      res.status(200).send('data inserted successfully');
-      client.close();
+    app.post("/membership", (req, res) => {
+      const formData = req.body;
+      console.log(formData);
+      membershipForm.insertOne(formData, (err, result) => {
+        if (err) throw err;
+        res.status(200).send("data inserted successfully");
+        client.close();
+      });
     });
-
-});
-
-
-
-
-
-
   } finally {
   }
 }
