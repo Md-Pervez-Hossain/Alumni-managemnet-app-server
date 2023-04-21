@@ -1,0 +1,586 @@
+[
+  {
+    "_id": "642e8aee7a80526391ea66b4",
+    "name": "University of Dhaka",
+    "website": "www.du.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66b5",
+    "name": "University of Rajshahi",
+    "website": "www.ru.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66b6",
+    "name": "Bangladesh Agricultural University",
+    "website": "www.bau.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66b7",
+    "name": "Bangladesh University of Engineering & Technology",
+    "website": "www.buet.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66b8",
+    "name": "University of Chittagong",
+    "website": "www.cu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66b9",
+    "name": "Jahangirnagar University",
+    "website": "www.juniv.edu"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66ba",
+    "name": "Islamic University, Bangladesh",
+    "website": "www.iu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66bb",
+    "name": "Shahjalal University of Science & Technology",
+    "website": "www.sust.edu"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66bc",
+    "name": "Khulna University",
+    "website": "www.ku.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66bd",
+    "name": "National University",
+    "website": "www.nu.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66be",
+    "name": "Bangladesh Open University",
+    "website": "www.bou.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66bf",
+    "name": "Bangabandhu Sheikh Mujib Medical University",
+    "website": "www.bsmmu.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c0",
+    "name": "Bangabandhu Sheikh Mujibur Rahman Agricultural University",
+    "website": "www.bsmrau.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c1",
+    "name": "Hajee Mohammad Danesh Science & Technology University",
+    "website": "www.hstu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c2",
+    "name": "Mawlana Bhashani Science & Technology University",
+    "website": "www.mbstu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c3",
+    "name": "Patuakhali Science And Technology University",
+    "website": "www.pstu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c4",
+    "name": "Sher-e-Bangla Agricultural University",
+    "website": "www.sau.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c5",
+    "name": "Chittagong University of Engineering & Technology",
+    "website": "www.cuet.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c6",
+    "name": "Rajshahi University of Engineering & Technology",
+    "website": "www.ruet.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c7",
+    "name": "Khulna University of Engineering & Technology",
+    "website": "www.kuet.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c8",
+    "name": "Dhaka University of Engineering & Technology",
+    "website": "www.duet.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66c9",
+    "name": "Noakhali Science & Technology University",
+    "website": "www.nstu.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66ca",
+    "name": "Jagannath University",
+    "website": "www.jnu.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66cb",
+    "name": "Comilla University",
+    "website": "www.cou.ac.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66cc",
+    "name": "Jatiya Kabi Kazi Nazrul Islam University",
+    "website": "www.jkkniu.edu.bd"
+  },
+  {
+    "_id": "642e8aee7a80526391ea66cd",
+    "name": "Chittagong Veterinary and Animal Sciences University",
+    "website": "www.cvasu.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5745",
+    "name": "Sylhet Agricultural University",
+    "website": "www.sau.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5746",
+    "name": "Jessore University of Science & Technology",
+    "website": "www.just.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5747",
+    "name": "Pabna University of Science and Technology",
+    "website": "www.pust.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5748",
+    "name": "Begum Rokeya University, Rangpur",
+    "website": "www.brur.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5749",
+    "name": "Bangladesh University of Professionals",
+    "website": "www.bup.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574a",
+    "name": "Bangabandhu Sheikh Mujibur Rahman Science & Technology University",
+    "website": "www.bsmrstu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574b",
+    "name": "Bangladesh University of Textiles",
+    "website": "www.butex.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574c",
+    "name": "University of Barishal",
+    "website": "www.bu.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574d",
+    "name": "Rangamati Science and Technology University",
+    "website": "www.rmstu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574e",
+    "name": "Bangabandhu Sheikh Mujibur Rahman Maritime University, Bangladesh",
+    "website": "www.bsmrmu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee574f",
+    "name": "Islamic Arabic University",
+    "website": "www.iau.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5750",
+    "name": "Chittagong Medical University",
+    "website": "www.cmu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5751",
+    "name": "Rajshahi Medical University",
+    "website": "www.rmu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5752",
+    "name": "Rabindra University, Bangladesh",
+    "website": "www.rub.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5753",
+    "name": "Bangabandhu Sheikh Mujibur Rahman Digital University, Bangladesh",
+    "website": "www.bdu.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5754",
+    "name": "Sheikh Hasina University",
+    "website": "https://shubd.net/"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5755",
+    "name": "Khulna Agricultural University",
+    "website": "www.kau.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5756",
+    "name": "Bangamata Sheikh Fojilatunnesa Mujib Science and Technology University",
+    "website": "https://bsfmstu.ac.bd/"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5757",
+    "name": "Sylhet Medical University",
+    "website": "www.smu.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5758",
+    "name": "Bangabandhu Sheikh Mujibur Rahman Aviation And Aerospace University (BSMRAAU)",
+    "website": "www.bsmraau.edu.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee5759",
+    "name": "Chandpur Science and Technology University",
+    "website": ""
+  },
+  {
+    "_id": "642e8d5f7a80526391ee575a",
+    "name": "Bangabandhu Sheikh Mujibur Rahman University, Kishoreganj",
+    "website": "bsmru.ac.bd."
+  },
+  {
+    "_id": "642e8d5f7a80526391ee575b",
+    "name": "Hobiganj Agricultural University",
+    "website": "www.hau.ac.bd"
+  },
+  {
+    "_id": "642e8d5f7a80526391ee575c",
+    "name": "Sheikh Hasina Medical University, Khulna",
+    "website": ""
+  },
+  { "name": "North South University", "website": "www.northsouth.edu" },
+  {
+    "name": "University of Science & Technology Chittagong",
+    "website": "www.ustc.edu.bd"
+  },
+  { "name": "Independent University, Bangladesh", "website": "www.iub.edu.bd" },
+  { "name": "Central Women's University", "website": "www.cwu.edu.bd" },
+  {
+    "name": "International University of Business Agriculture & Technology",
+    "website": "www.iubat.edu"
+  },
+  { "name": "International Islamic University Chittagong", "website": "www.iiuc.ac.bd" },
+  {
+    "name": "Ahsanullah University of Science and Technology",
+    "website": "www.aust.edu"
+  },
+  { "name": "American International University-Bangladesh", "website": "www.aiub.edu" },
+  { "name": "East West University", "website": "www.ewubd.edu" },
+  { "name": "University of Asia Pacific", "website": "www.uap-bd.edu" },
+  { "name": "Gono Bishwabidyalay", "website": "www.gonouniversity.edu.bd" },
+  { "name": "The People's University of Bangladesh", "website": "www.pub.ac.bd" },
+  { "name": "Asian University of Bangladesh", "website": "www.aub.ac.bd" },
+  { "name": "Dhaka International University", "website": "www.diu.ac" },
+  { "name": "Manarat International University", "website": "www.manarat.ac.bd" },
+  { "name": "BRAC University", "website": "www.bracu.ac.bd" },
+  { "name": "Bangladesh University", "website": "www.bu.edu.bd" },
+  { "name": "Leading University", "website": "www.lus.ac.bd" },
+  { "name": "BGC Trust University Bangladesh", "website": "www.bgctub.ac.bd" },
+  { "name": "Sylhet International University", "website": "www.siu.edu.bd" },
+  {
+    "name": "University of Development Alternative",
+    "website": "www.uoda.edu.bd"
+  },
+  {
+    "name": "Premier University",
+    "website": "www.puc.ac.bd"
+  },
+  {
+    "name": "Southeast University",
+    "website": "www.seu.ac.bd"
+  },
+  {
+    "name": "Daffodil International University",
+    "website": "www.daffodilvarsity.edu.bd"
+  },
+  {
+    "name": "Stamford University Bangladesh",
+    "website": "www.stamforduniversity.edu.bd"
+  },
+  {
+    "name": "State University of Bangladesh (SUB)",
+    "website": "https://www.sub.ac.bd"
+  },
+  {
+    "name": "City University",
+    "website": "www.cityuniversity.edu.bd"
+  },
+  {
+    "name": "Prime University",
+    "website": "www.primeuniversity.edu.bd"
+  },
+  {
+    "name": "Northern University Bangladesh",
+    "website": "www.nub.ac.bd"
+  },
+  {
+    "name": "Southern University Bangladesh",
+    "website": "www.southern.edu.bd"
+  },
+  {
+    "name": "Green University of Bangladesh",
+    "website": "www.green.edu.bd"
+  },
+  {
+    "name": "Pundra University of Science & Technology",
+    "website": "www.pundrauniversity.edu.bd"
+  },
+  {
+    "name": "World University of Bangladesh",
+    "website": "www.wub.edu.bd"
+  },
+  {
+    "name": "Shanto-Mariam University of Creative Technology",
+    "website": "www.smuct.ac.bd"
+  },
+  {
+    "name": "The Millennium University",
+    "website": "www.themillenniumuniversity.edu.bd"
+  },
+  {
+    "name": "Eastern University",
+    "website": "www.easternuni.edu.bd"
+  },
+  {
+    "name": "Metropolitan University",
+    "website": "www.metrouni.edu.bd"
+  },
+  {
+    "name": "Uttara University",
+    "website": "www.uttarauniversity.edu.bd"
+  },
+  {
+    "name": "United International University",
+    "website": "www.uiu.ac.bd"
+  },
+  {
+    "name": "University of South Asia",
+    "website": "www.southasiauni.ac.bd"
+  },
+  {
+    "name": "Victoria University of Bangladesh",
+    "website": "www.vub.edu.bd"
+  },
+  {
+    "name": "Bangladesh University of Business & Technology",
+    "website": "www.bubt.ac.bd"
+  },
+  {
+    "name": "Presidency University",
+    "website": "www.presidency.edu.bd"
+  },
+  {
+    "name": "University of Information Technology & Sciences",
+    "website": "www.uits.edu.bd"
+  },
+  {
+    "name": "Primeasia University",
+    "website": "www.primeasia.edu.bd"
+  },
+  {
+    "name": "Royal University of Dhaka",
+    "website": "www.royal.edu.bd"
+  },
+  {
+    "name": "University of Liberal Arts Bangladesh",
+    "website": "www.ulab.edu.bd"
+  },
+  {
+    "name": "Atish Dipankar University of Science & Technology",
+    "website": "www.adust.edu.bd"
+  },
+  { "name": "Bangladesh Islami University", "website": "www.biu.ac.bd" },
+  { "name": "ASA University Bangladesh", "website": "www.asaub.edu.bd" },
+  { "name": "East Delta University", "website": "www.eastdelta.edu.bd" },
+  { "name": "European University of Bangladesh", "website": "www.eub.edu.bd" },
+  { "name": "Varendra University", "website": "www.vu.edu.bd" },
+  { "name": "Hamdard University Bangladesh", "website": "www.hamdarduniversity.edu.bd" },
+  {
+    "name": "BGMEA University of Fashion & Technology(BUFT)",
+    "website": "www.buft.edu.bd"
+  },
+  { "name": "North East University Bangladesh", "website": "www.neub.edu.bd" },
+  { "name": "First Capital University of Bangladesh", "website": "www.fcub.edu.bd" },
+  {
+    "name": "Ishakha International University, Bangladesh",
+    "website": "www.ishakha.edu.bd"
+  },
+  {
+    "name": "Z.H Sikder University of Science & Technology",
+    "website": "www.zhsust.edu.bd"
+  },
+  {
+    "name": "Exim Bank Agricultural University, Bangladesh",
+    "website": "www.ebaub.edu.bd"
+  },
+  { "name": "North Western University", "website": "www.nwu.edu.bd" },
+  { "name": "Khwaja Yunus Ali University", "website": "www.kyau.edu.bd" },
+  { "name": "Sonargaon University", "website": "www.su.edu.bd" },
+  { "name": "Feni University", "website": "www.feniuniversity.edu.bd" },
+  { "name": "Britannia University", "website": "www.britannia.ac" },
+  { "name": "Port City International University", "website": "www.portcity.edu.bd" },
+  { "name": "Bangladesh University of Health Sciences", "website": "www.buhs.ac.bd" },
+  { "name": "Chittagong Independent University", "website": "www.ciu.edu.bd" },
+  { "name": "Notre Dame University Bangladesh", "website": "www.ndub.edu.bd" },
+  {
+    "name": "Times University, Bangladesh",
+    "website": "http://www.timesuniversitybd.com"
+  },
+  {
+    "name": "North Bengal International University",
+    "website": "www.nbiu.edu.bd"
+  },
+  {
+    "name": "Fareast International University",
+    "website": "www.fiu.edu.bd"
+  },
+  {
+    "name": "Rajshahi Science & Technology University (RSTU), Natore",
+    "website": "www.rstu.edu.bd"
+  },
+  {
+    "name": "Sheikh Fazilatunnesa Mujib University",
+    "website": "www.sfmuniversity.org"
+  },
+  {
+    "name": "Cox's Bazar International University",
+    "website": "www.cbiu.ac.bd"
+  },
+  {
+    "name": "R. P. Shaha University",
+    "website": "www.rpsu.ac.bd"
+  },
+  {
+    "name": "German University Bangladesh",
+    "website": "www.gub.edu.bd"
+  },
+  {
+    "name": "Global University Bangladesh",
+    "website": "www.globaluniversity.edu.bd"
+  },
+  {
+    "name": "CCN University of Science & Technology",
+    "website": "www.ccnust.edu.bd"
+  },
+  {
+    "name": "Bangladesh Army University of Science and Technology(BAUST), Saidpur",
+    "website": "www.baust.edu.bd"
+  },
+  {
+    "name": "Bangladesh Army University of Engineering and Technology (BAUET), Qadirabad",
+    "website": "www.bauet.ac.bd"
+  },
+  {
+    "name": "Bangladesh Army International University of Science & Technology(BAIUST) ,Comilla",
+    "website": "www.baiust.edu.bd"
+  },
+  {
+    "name": "The International University of Scholars",
+    "website": "www.ius.edu.bd"
+  },
+  {
+    "name": "Canadian University of Bangladesh",
+    "website": "www.cub.edu.bd"
+  },
+  {
+    "name": "N.P.I University of Bangladesh",
+    "website": "www.npiub.edu.bd"
+  },
+  {
+    "name": "Northern University of Business & Technology, Khulna",
+    "website": "www.nubtkhulna.ac.bd"
+  },
+  {
+    "name": "Rabindra Maitree University, Kushtia",
+    "website": null
+  },
+  {
+    "name": "University of Creative Technology, Chittagong",
+    "website": "www.uctc.edu.bd"
+  },
+  {
+    "name": "Central University of Science and Technology",
+    "website": "www.cust.edu.bd"
+  },
+  {
+    "name": "Tagore University of Creative Arts, Uttara, Dhaka, Bangladesh",
+    "website": "www.tuca.edu.bd"
+  },
+  {
+    "name": "University of Global Village",
+    "website": "www.ugv.edu.bd"
+  },
+  {
+    "name": "Rupayan A.K.M Shamsuzzoha University",
+    "website": null
+  },
+  {
+    "name": "Anwer Khan Modern University",
+    "website": "www.akmu.edu.bd"
+  },
+  {
+    "name": "ZNRF University of Management Sciences",
+    "website": "www.zums.edu.bd"
+  },
+  {
+    "name": "Ahsania Mission University of Science and Technology",
+    "website": null
+  },
+  {
+    "name": "Ahsania Mission University of Science and Technology",
+    "website": "https://www.amust.edu.bd/"
+  },
+  {
+    "name": "Khulna Khan Bahadur Ahsanullah University",
+    "website": "http://www.kkbau.ac.bd/"
+  },
+  {
+    "name": "Bandarban University",
+    "website": "http://www.bubban.edu.bd/"
+  },
+  {
+    "name": "Shah Makhdum Management University, Rajshahi",
+    "website": null
+  },
+  {
+    "name": "Trust University, Barishal",
+    "website": "https://trustuniversity.edu.bd/"
+  },
+  {
+    "name": "International Standard University",
+    "website": "https://isu.ac.bd/"
+  },
+  {
+    "name": "University of Brahmanbaria",
+    "website": "https://uob.edu.bd/"
+  },
+  {
+    "name": "University of Skill Enrichment and Technology",
+    "website": "https://www.uset.edu.bd/"
+  },
+  {
+    "name": "Microland University of Science and Technology",
+    "website": null
+  },
+  {
+    "name": "R.T.M Al-Kabir Technical University",
+    "website": "https://rtm-aktu.edu.bd/"
+  },
+  {
+    "name": "Sheikh Hasina University of Science and Technology",
+    "website": "Website information not available"
+  },
+  {
+    "name": "Chattogram BGMEA University of Fashion and Technology",
+    "website": "Website information not available"
+  },
+  {
+    "name": "IBAIS University",
+    "website": "https://www.ibaisuniv.edu.bd/"
+  },
+  {
+    "name": "The University of Comilla",
+    "website": null
+  }
+]

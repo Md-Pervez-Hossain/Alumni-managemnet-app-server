@@ -34,17 +34,20 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const AllAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
-    const AllUniversityName = client
+    const allUniversityName = client
       .db("alumni-management-app")
       .collection("AllUniversityName");
+    const allDegreePrograms = client
+      .db("alumni-management-app")
+      .collection("allDegreePrograms");
 
-    const AllBatchesName = client
+    const allBatchesName = client
       .db("alumni-management-app")
       .collection("allBatchesName");
 
-    const AllGraduationMajor = client
+    const allGraduationMajor = client
       .db("alumni-management-app")
       .collection("AllGraduationMajor");
 
@@ -212,8 +215,15 @@ async function run() {
 
     app.get("/all-university-name", async (req, res) => {
       const query = {};
-      const newsResult = await AllUniversityName.find(query).toArray();
+      const newsResult = await allUniversityName.find(query).toArray();
       res.send(newsResult);
+    });
+
+    // All Degree Programs
+    app.get("/all-degree-programs", async (req, res) => {
+      const query = {};
+      const allDegreePrograms = await allDegreePrograms.find(query).toArray();
+      res.send(allDegreePrograms);
     });
 
     // All Batches Name data
@@ -221,7 +231,7 @@ async function run() {
       const query = {};
       const options = { sort: { batchNumber: -1 } };
 
-      const cursor = AllBatchesName.find(query, options);
+      const cursor = allBatchesName.find(query, options);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
@@ -230,7 +240,7 @@ async function run() {
     app.get("/all-graduation-major", async (req, res) => {
       const query = {};
       const options = { sort: { graduationMajor: 1 } };
-      const cursor = AllGraduationMajor.find(query, options);
+      const cursor = allGraduationMajor.find(query, options);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
@@ -239,7 +249,7 @@ async function run() {
     //all Alumni data
     app.get("/alumni", async (req, res) => {
       const query = {};
-      const cursor = AllAlumniData.find(query);
+      const cursor = allAlumniData.find(query);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
@@ -248,7 +258,7 @@ async function run() {
     app.get("/alumni/batch/:year", async (req, res) => {
       const year = req.params.year;
       const query = { graduation_year: year };
-      const cursor = AllAlumniData.find(query);
+      const cursor = allAlumniData.find(query);
       const yearWiseBatchData = await cursor.toArray();
       res.send(yearWiseBatchData);
     });
@@ -257,7 +267,7 @@ async function run() {
     app.get("/alumni/:id", async (req, res) => {
       const alumniId = req.params.id;
       const query = { _id: new ObjectId(alumniId) };
-      const personData = await AllAlumniData.findOne(query);
+      const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
 

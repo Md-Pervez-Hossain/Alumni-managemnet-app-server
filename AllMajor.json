@@ -23,10 +23,7 @@
     "graduationMajor": "Chemistry",
     "url": "/major/Chemistry"
   },
-  {
-    "graduationMajor": "Civil Engineering",
-    "url": "/major/Civil-Engineering"
-  },
+
   {
     "graduationMajor": "Computer Science and Engineering",
     "url": "/major/Computer-Science-and-Engineering"
@@ -64,17 +61,10 @@
     "url": "/major/Information-and-Communication-Engineering"
   },
   {
-    "graduationMajor": "Law",
-    "url": "/major/Law"
-  },
-  {
     "graduationMajor": "Mass Communication and Journalism",
     "url": "/major/Mass-Communication-and-Journalism"
   },
-  {
-    "graduationMajor": "Mathematics",
-    "url": "/major/Mathematics"
-  },
+
   {
     "graduationMajor": "Mechanical Engineering",
     "url": "/major/Mechanical-Engineering"
@@ -87,10 +77,7 @@
     "graduationMajor": "Pharmacy",
     "url": "/major/Pharmacy"
   },
-  {
-    "graduationMajor": "Physics",
-    "url": "/major/Physics"
-  },
+
   {
     "graduationMajor": "Political Science",
     "url": "/major/Political-Science"
@@ -114,5 +101,48 @@
   {
     "graduationMajor": "Theatre and Performance Studies",
     "url": "/major/Theatre-and-Performance-Studies"
+  },
+
+  {
+    "graduationMajor": "Civil Engineering",
+    "url": "/major/Civil-Engineering"
+  },
+
+  {
+    "graduationMajor": "Power and Energy Systems",
+    "url": "/major/Power and Energy Systems"
+  },
+  {
+    "graduationMajor": "Economics",
+    "url": "/major/Economics"
+  },
+  {
+    "graduationMajor": "Marketing",
+    "url": "/major/Marketing"
+  },
+  {
+    "graduationMajor": "English",
+    "url": "/major/English"
+  },
+  {
+    "graduationMajor": "Law",
+    "url": "/major/Law"
+  },
+  {
+    "graduationMajor": "Philosophy",
+    "url": "/major/Philosophy"
+  },
+
+  {
+    "graduationMajor": "Mathematics",
+    "url": "/major/Mathematics"
+  },
+  {
+    "graduationMajor": "Physics",
+    "url": "/major/Physics"
+  },
+  {
+    "graduationMajor": "Biotechnology",
+    "url": "/major/Biotechnology"
   }
 ]

@@ -1,0 +1,43 @@
+[
+  { "program_name": "Bachelor of Science (BSc)", "url": "degree/BSc", "degree": "BSc" },
+  { "program_name": "Bachelor of Arts (BA)", "url": "degree/BA", "degree": "BA" },
+  {
+    "program_name": "Bachelor of Business Administration (BBA)",
+    "url": "degree/BBA",
+    "degree": "BBA"
+  },
+  {
+    "program_name": "Bachelor of Science in Engineering (BScEng)",
+    "url": "degree/BScEng",
+    "degree": "BScEng"
+  },
+  { "program_name": "Bachelor of Science (BSc)", "url": "degree/BSc", "degree": "BSc" },
+  { "program_name": "Bachelor of Arts (BA)", "url": "degree/BA", "degree": "BA" },
+  {
+    "program_name": "Bachelor of Science in Textile Engineering (BScTE)",
+    "url": "degree/BScTE",
+    "degree": "BScTE"
+  },
+  {
+    "program_name": "Bachelor of Science in Textile Technology (BScTT)",
+    "url": "degree/BScTT",
+    "degree": "BScTT"
+  },
+  {
+    "program_name": "Bachelor of Business Administration (BBA)",
+    "url": "degree/BBA",
+    "degree": "BBA"
+  },
+  {
+    "program_name": "Bachelor of Science in Engineering (BScEng)",
+    "url": "degree/BScEng",
+    "degree": "BScEng"
+  },
+  { "program_name": "Bachelor of Science (BSc)", "url": "degree/BSc", "degree": "BSc" },
+  { "program_name": "Bachelor of Arts (BA)", "url": "degree/BA", "degree": "BA" },
+  {
+    "program_name": "Bachelor of Business Administration (BBA)",
+    "url": "degree/BBA",
+    "degree": "BBA"
+  }
+]
