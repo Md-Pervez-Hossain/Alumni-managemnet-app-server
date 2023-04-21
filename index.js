@@ -222,8 +222,8 @@ async function run() {
     // All Degree Programs
     app.get("/all-degree-programs", async (req, res) => {
       const query = {};
-      const allDegreePrograms = await allDegreePrograms.find(query).toArray();
-      res.send(allDegreePrograms);
+      const allDegree = await allDegreePrograms.find(query).toArray();
+      res.send(allDegree);
     });
 
     // All Batches Name data
