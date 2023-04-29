@@ -29,12 +29,16 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -60,10 +64,41 @@ async function run() {
     const membershipForm = client
       .db("alumni-management-app")
       .collection("mebership-Form-Data");
-
+    const SuccessFullStory = client
+      .db("alumni-management-app")
+      .collection("all-successFull-story-data");
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
+
+    // successFull Story start
+
+    app.post("/successFullStory", async (req, res) => {
+      const successFullStory = req.body;
+      console.log(successFullStory);
+      const cursor = await SuccessFullStory.insertOne(successFullStory);
+      res.send(cursor);
+    });
+    app.get("/successFullStory", async (req, res) => {
+      const query = {};
+      const successStoryResult = await SuccessFullStory.find(query).toArray();
+      res.send(successStoryResult);
+    });
+    app.get("/successFullStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const successStoryResult = await SuccessFullStory.findOne(query);
+      res.send(successStoryResult);
+    });
+    app.get("/successFullStory/batch/:batchNumber", async (req, res) => {
+      const batchNumber = req.params.batchNumber;
+      console.log(batchNumber);
+      const query = { batchNumber: batchNumber };
+      console.log(query);
+      const cursor = await SuccessFullStory.find(query).toArray();
+      res.send(cursor);
+    });
+    // successFull Story end
 
     // N E W S //
     // all news data
