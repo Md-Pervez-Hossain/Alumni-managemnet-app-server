@@ -7,9 +7,9 @@ const { query } = require("express");
 require("dotenv").config();
 
 // SSL COMMERCE
-const store_id = env.process.STORE_ID;
-const store_passwd = env.process.STORE_PASSWORD;
-const is_live = false; //true for live, false for sandbox
+// const store_id = env.process.STORE_ID;
+// const store_passwd = env.process.STORE_PASSWORD;
+// const is_live = false; //true for live, false for sandbox
 
 // middleware.config
 app.use(cors());
@@ -33,17 +33,13 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client
-      .db("alumni-management-app")
-      .collection("AllEvents");
+    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -94,9 +90,7 @@ async function run() {
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
       console.log(successStoryComments);
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
 
