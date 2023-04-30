@@ -7,8 +7,8 @@ const { query } = require("express");
 require("dotenv").config();
 
 // SSL COMMERCE
-const store_id = "<your_store_id>";
-const store_passwd = "<your_store_password>";
+const store_id = env.process.STORE_ID;
+const store_passwd = env.process.STORE_PASSWORD;
 const is_live = false; //true for live, false for sandbox
 
 // middleware.config
