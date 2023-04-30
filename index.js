@@ -3,9 +3,13 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-
 const { query } = require("express");
 require("dotenv").config();
+
+// SSL COMMERCE
+const store_id = "<your_store_id>";
+const store_passwd = "<your_store_password>";
+const is_live = false; //true for live, false for sandbox
 
 // middleware.config
 app.use(cors());
@@ -32,6 +36,7 @@ async function run() {
     const AllEventsData = client
       .db("alumni-management-app")
       .collection("AllEvents");
+
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
@@ -58,18 +63,71 @@ async function run() {
     const alumniNewsCollection = client
       .db("alumni-management-app")
       .collection("alumniNews");
+
     const alumniNewsCategories = client
       .db("alumni-management-app")
       .collection("alumniNewsCategories");
+
     const membershipForm = client
       .db("alumni-management-app")
       .collection("mebership-Form-Data");
     const SuccessFullStory = client
       .db("alumni-management-app")
       .collection("all-successFull-story-data");
+
+    const allFundingProjects = client
+      .db("alumni-management-app")
+      .collection("allFundingProjects");
+    const allCharityData = client
+      .db("alumni-management-app")
+      .collection("allCharityData");
+    const successFullStoryComments = client
+      .db("alumni-management-app")
+      .collection("successFullStoryComments");
+
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
+
+    // successFullStoryComments start
+
+    app.post("/successFullStoryComments", async (req, res) => {
+      const successStoryComments = req.body;
+      console.log(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
+      res.send(cursor);
+    });
+
+    app.get("/successFullStoryComments", async (req, res) => {
+      const query = {};
+      const result = await successFullStoryComments.find(query).toArray();
+      res.send(result);
+    });
+    // successFullStoryComments end
+
+    //charity start
+    app.post("/charity", async (req, res) => {
+      const charityFunds = req.body;
+      console.log(charityFunds);
+      const cursor = await allCharityData.insertOne(charityFunds);
+      res.send(cursor);
+    });
+
+    app.get("/charity", async (req, res) => {
+      const query = {};
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/charity/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.findOne(query);
+      res.send(result);
+    });
+    //charity end
 
     // successFull Story start
 
@@ -154,6 +212,13 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+
+    app.post("/gallery", async (req, res) => {
+      const gallery = req.body;
+      console.log(gallery);
+      const cursor = await AllGalleryPhotos.insertOne(gallery);
+      res.send(cursor);
     });
 
     // batch wise gallery Category data
@@ -326,6 +391,29 @@ async function run() {
         res.status(200).send("data inserted successfully");
         client.close();
       });
+    });
+
+    // * Funding Projects * //
+    // all Funding Projects data
+    app.get("/funding-projects", async (req, res) => {
+      const query = {};
+      const FundingProjects = await allFundingProjects.find(query).toArray();
+      res.send(FundingProjects);
+    });
+
+    //single Funding Projects get
+    app.get("/funding-projects/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const singleFundingProjects = await allFundingProjects.findOne(query);
+      res.send(singleFundingProjects);
+    });
+
+    // create a Funding Projects
+    app.post("/funding-projects/", async (req, res) => {
+      const fundingProjects = req.body;
+      const cursor = await allFundingProjects.insertOne(fundingProjects);
+      res.send(cursor);
     });
   } finally {
   }
