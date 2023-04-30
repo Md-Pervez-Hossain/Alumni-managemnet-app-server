@@ -33,13 +33,17 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -67,14 +71,92 @@ async function run() {
     const membershipForm = client
       .db("alumni-management-app")
       .collection("mebership-Form-Data");
+    const SuccessFullStory = client
+      .db("alumni-management-app")
+      .collection("all-successFull-story-data");
 
     const allFundingProjects = client
       .db("alumni-management-app")
       .collection("allFundingProjects");
+    const allCharityData = client
+      .db("alumni-management-app")
+      .collection("allCharityData");
+    const successFullStoryComments = client
+      .db("alumni-management-app")
+      .collection("successFullStoryComments");
 
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
+
+    // successFullStoryComments start
+
+    app.post("/successFullStoryComments", async (req, res) => {
+      const successStoryComments = req.body;
+      console.log(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
+      res.send(cursor);
+    });
+
+    app.get("/successFullStoryComments", async (req, res) => {
+      const query = {};
+      const result = await successFullStoryComments.find(query).toArray();
+      res.send(result);
+    });
+    // successFullStoryComments end
+
+    //charity start
+    app.post("/charity", async (req, res) => {
+      const charityFunds = req.body;
+      console.log(charityFunds);
+      const cursor = await allCharityData.insertOne(charityFunds);
+      res.send(cursor);
+    });
+
+    app.get("/charity", async (req, res) => {
+      const query = {};
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/charity/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.findOne(query);
+      res.send(result);
+    });
+    //charity end
+
+    // successFull Story start
+
+    app.post("/successFullStory", async (req, res) => {
+      const successFullStory = req.body;
+      console.log(successFullStory);
+      const cursor = await SuccessFullStory.insertOne(successFullStory);
+      res.send(cursor);
+    });
+    app.get("/successFullStory", async (req, res) => {
+      const query = {};
+      const successStoryResult = await SuccessFullStory.find(query).toArray();
+      res.send(successStoryResult);
+    });
+    app.get("/successFullStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const successStoryResult = await SuccessFullStory.findOne(query);
+      res.send(successStoryResult);
+    });
+    app.get("/successFullStory/batch/:batchNumber", async (req, res) => {
+      const batchNumber = req.params.batchNumber;
+      console.log(batchNumber);
+      const query = { batchNumber: batchNumber };
+      console.log(query);
+      const cursor = await SuccessFullStory.find(query).toArray();
+      res.send(cursor);
+    });
+    // successFull Story end
 
     // N E W S //
     // all news data
@@ -130,6 +212,13 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+
+    app.post("/gallery", async (req, res) => {
+      const gallery = req.body;
+      console.log(gallery);
+      const cursor = await AllGalleryPhotos.insertOne(gallery);
+      res.send(cursor);
     });
 
     // batch wise gallery Category data
