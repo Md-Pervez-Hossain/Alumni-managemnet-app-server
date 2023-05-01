@@ -120,8 +120,19 @@ async function run() {
       const result = await allCharityData.find(query).toArray();
       res.send(result);
     });
+    app.get("/charityFunds", async (req, res) => {
+      const query = {};
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
 
     app.get("/charity/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.findOne(query);
+      res.send(result);
+    });
+    app.get("/charityFunds/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await allCharityData.findOne(query);
