@@ -3,48 +3,23 @@
     "title": "Help fund our school's music program",
     "description": "Our school's music program is in dire need of funding. We need new instruments, sheet music, and other supplies to keep our program running.",
     "goal_amount": 5000,
-    "current_amount": 600,
     "deadline": "2023-06-30",
     "location": {
       "street": "NY",
       "city": "New York",
       "country": "USA"
-    },
-    "donors": [
-      {
-        "name": "John Smith",
-        "donation_amount": 100
-      },
-      {
-        "name": "Jane Doe",
-        "donation_amount": 500
-      }
-    ]
+    }
   },
+
   {
     "title": "Support our local animal shelter",
     "description": "Our local animal shelter needs your help to care for and find homes for homeless animals in our community.",
     "goal_amount": 10000,
-    "current_amount": 7500,
     "deadline": "2023-08-31",
     "location": {
       "city": "Los Angeles",
       "state": "CA",
       "country": "USA"
-    },
-    "donors": [
-      {
-        "name": "Mark Johnson",
-        "donation_amount": 250
-      },
-      {
-        "name": "Samantha Lee",
-        "donation_amount": 1000
-      },
-      {
-        "name": "David Kim",
-        "donation_amount": 5000
-      }
-    ]
+    }
   }
 ]
