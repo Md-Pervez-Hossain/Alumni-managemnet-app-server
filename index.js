@@ -39,6 +39,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
+
     const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
@@ -307,6 +308,8 @@ async function run() {
 
     // All University Name data
 
+
+
     app.get("/all-university-name", async (req, res) => {
       const query = {};
       const newsResult = await allUniversityName.find(query).toArray();
@@ -364,6 +367,21 @@ async function run() {
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
+
+    // user created 
+    app.post('/alumni', (req, res) => {
+
+      
+      allAlumniData.insertOne(req.body, (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send({ message: 'Error saving user data to MongoDB' });
+          return;
+        }
+        res.send({ message: 'User created successfully' });
+      });
+    });
+  
 
     //---- U T I L S ----//
 
