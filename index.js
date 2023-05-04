@@ -81,6 +81,10 @@ async function run() {
       .db("alumni-management-app")
       .collection("successFullStoryComments");
 
+      const allEventsFromData = client
+      .db("alumni-management-app")
+      .collection("allEventsFromData");
+
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
@@ -486,6 +490,59 @@ async function run() {
       const cursor = await allFundingProjects.insertOne(fundingProjects);
       res.send(cursor);
     });
+
+
+    // Event Joining Information
+
+
+     //post all events joining members
+     app.post("/join-event", async (req, res) => {
+      const user = req.body;
+      console.log(user);
+      const cursor = await allEventsFromData.insertOne(user);
+      res.send(cursor);
+    });
+
+
+    // find the event join info
+    app.get("/join-event/:event_id", async (req, res) => {
+      const id = req.params.event_id;
+      const query = { event_id: id };
+      const cursor =  await allEventsFromData.findOne(query);
+      res.send(cursor);
+    });
+
+    // update the event join info
+    app.put('/join-event/:id', async (req, res) => {
+      const id = req.params.id;
+      const updateInfo = req.body;
+      const filter = { _id: new ObjectId(id) }
+      const options = { upsert: true }
+      const updatedDoc = {
+          $set: {
+            first_name: updateInfo.first_name,
+            last_name: updateInfo.last_name,
+            email: updateInfo.email,
+            phone_number: updateInfo.phone_number,
+            date: updateInfo.date
+          }
+      }
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+      res.send(result);
+  })
+
+
+  // Delete The event joining info
+  app.delete('/join-event/delete/:id', async(req,res)=>{
+
+    const id= req.params.id;
+    const filter = {_id: new ObjectId(id)};
+    const result = await allEventsFromData.deleteOne(filter);
+    res.send(result);
+})
+
+
+
   } finally {
   }
 }
