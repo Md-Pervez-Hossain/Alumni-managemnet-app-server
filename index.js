@@ -33,14 +33,17 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -91,12 +94,27 @@ async function run() {
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
       console.log(successStoryComments);
-      const cursor = await successFullStoryComments.insertOne(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
       res.send(cursor);
     });
 
     app.get("/successFullStoryComments", async (req, res) => {
       const query = {};
+      const result = await successFullStoryComments.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/successFullStoryComment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await successFullStoryComments.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/successFullStoryComments/:commentsId", async (req, res) => {
+      const commentsId = req.params.commentsId;
+      const query = { commentsId: commentsId };
       const result = await successFullStoryComments.find(query).toArray();
       res.send(result);
     });
@@ -121,6 +139,19 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/charity/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
+    app.delete("/charity/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.deleteOne(query);
+      res.send(result);
+    });
+
     app.get("/charity/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -136,7 +167,6 @@ async function run() {
     //charity end
 
     // successFull Story start
-
     app.post("/successFullStory", async (req, res) => {
       const successFullStory = req.body;
       console.log(successFullStory);
@@ -148,11 +178,23 @@ async function run() {
       const successStoryResult = await SuccessFullStory.find(query).toArray();
       res.send(successStoryResult);
     });
+    app.get("/successFullStory/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await SuccessFullStory.find(query).toArray();
+      res.send(result);
+    });
     app.get("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const successStoryResult = await SuccessFullStory.findOne(query);
       res.send(successStoryResult);
+    });
+    app.delete("/successFullStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await SuccessFullStory.deleteOne(query);
+      res.send(result);
     });
     app.get("/successFullStory/batch/:batchNumber", async (req, res) => {
       const batchNumber = req.params.batchNumber;
@@ -226,7 +268,12 @@ async function run() {
       const cursor = await AllGalleryPhotos.insertOne(gallery);
       res.send(cursor);
     });
-
+    app.get("/galleries/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await AllGalleryPhotos.find(query).toArray();
+      res.send(result);
+    });
     // batch wise gallery Category data
     app.get("/galleries/batch/:batchNumber", async (req, res) => {
       const batchNumber = req.params.batchNumber;
@@ -259,6 +306,12 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+    app.delete("/galleries/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await AllGalleryPhotos.deleteOne(query);
+      res.send(result);
     });
 
     // E V E N T S //
@@ -319,8 +372,6 @@ async function run() {
 
     // All University Name data
 
-
-
     app.get("/all-university-name", async (req, res) => {
       const query = {};
       const newsResult = await allUniversityName.find(query).toArray();
@@ -379,20 +430,19 @@ async function run() {
       res.send(personData);
     });
 
-    // user created 
-    app.post('/alumni', (req, res) => {
-
-      
+    // user created
+    app.post("/alumni", (req, res) => {
       allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
-          res.status(500).send({ message: 'Error saving user data to MongoDB' });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
-        res.send({ message: 'User created successfully' });
+        res.send({ message: "User created successfully" });
       });
     });
-  
 
     //---- U T I L S ----//
 
