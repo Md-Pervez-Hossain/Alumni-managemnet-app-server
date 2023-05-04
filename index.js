@@ -85,6 +85,10 @@ async function run() {
       .db("alumni-management-app")
       .collection("successFullStoryComments");
 
+    const allEventsFromData = client
+      .db("alumni-management-app")
+      .collection("allEventsFromData");
+
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
@@ -133,11 +137,6 @@ async function run() {
       const result = await allCharityData.find(query).toArray();
       res.send(result);
     });
-    app.get("/charityFunds", async (req, res) => {
-      const query = {};
-      const result = await allCharityData.find(query).toArray();
-      res.send(result);
-    });
 
     app.get("/charity/email/:email", async (req, res) => {
       const email = req.params.email;
@@ -153,12 +152,6 @@ async function run() {
     });
 
     app.get("/charity/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await allCharityData.findOne(query);
-      res.send(result);
-    });
-    app.get("/charityFunds/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await allCharityData.findOne(query);
@@ -438,10 +431,82 @@ async function run() {
           res
             .status(500)
             .send({ message: "Error saving user data to MongoDB" });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
         res.send({ message: "User created successfully" });
       });
+    });
+
+    // user update
+    app.put("/alumni/:email", async (req, res) => {
+      const reqEmail = req.params.email;
+      const filter = { email: reqEmail };
+
+      // if not found then insert a new one
+      const options = { upsert: true };
+      const data = req.body;
+      const updatedUserData = {
+        $set: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          name: `${data.firstName} ${data.lastName}`,
+          profile_picture: data.display_url,
+          graduation_year: data.graduation_year,
+          degree: data.degree,
+          major: data.major,
+          email: data.email,
+          phone: data.phone,
+          universityName: data.universityName,
+          phone_2: data.phone_2,
+          address: {
+            street: data.streetAddress,
+            city: data.city,
+            state: data.stateName,
+            zip: data.zipCode,
+          },
+          education: [
+            {
+              degree: data.degree,
+              major: data.major,
+              institution: data.universityName,
+              graduation_year: data.graduation_year,
+              gpa: "",
+            },
+          ],
+          is_employed: false,
+          careers: [
+            {
+              company: "",
+              position: "",
+              start_date: "",
+              end_date: "",
+              responsibilities: "",
+            },
+          ],
+          personal_information: {
+            date_of_birth: data.dateOfBirth,
+            gender: data.gender,
+            blood_group: data.bloodGroup,
+            fathers_name: data.fatherName,
+            mothers_name: data.motherName,
+            marital_status: "",
+            nationality: "Bangladeshi",
+            languages: ["English", "Bengali"],
+            hobbies: [],
+          },
+        },
+      };
+      const result = await allAlumniData.updateOne(
+        filter,
+        updatedUserData,
+        options
+      );
+      res.send(result);
+      console.log("---- data -----", data);
+      console.log("----updated data -----", updatedUserData);
     });
 
     //---- U T I L S ----//
@@ -487,6 +552,55 @@ async function run() {
       const fundingProjects = req.body;
       const cursor = await allFundingProjects.insertOne(fundingProjects);
       res.send(cursor);
+    });
+
+    // Event Joining Information
+
+    //post all events joining members
+    app.post("/join-event", async (req, res) => {
+      const user = req.body;
+      console.log(user);
+      const cursor = await allEventsFromData.insertOne(user);
+      res.send(cursor);
+    });
+
+    // find the event join info
+    app.get("/join-event/:event_id", async (req, res) => {
+      const id = req.params.event_id;
+      const query = { event_id: id };
+      const cursor = await allEventsFromData.findOne(query);
+      res.send(cursor);
+    });
+
+    // update the event join info
+    app.put("/join-event/:id", async (req, res) => {
+      const id = req.params.id;
+      const updateInfo = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          first_name: updateInfo.first_name,
+          last_name: updateInfo.last_name,
+          email: updateInfo.email,
+          phone_number: updateInfo.phone_number,
+          date: updateInfo.date,
+        },
+      };
+      const result = await allEventsFromData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
+
+    // Delete The event joining info
+    app.delete("/join-event/delete/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await allEventsFromData.deleteOne(filter);
+      res.send(result);
     });
   } finally {
   }
