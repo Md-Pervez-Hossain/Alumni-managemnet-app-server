@@ -39,7 +39,6 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-
     const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
@@ -308,8 +307,6 @@ async function run() {
 
     // All University Name data
 
-
-
     app.get("/all-university-name", async (req, res) => {
       const query = {};
       const newsResult = await allUniversityName.find(query).toArray();
@@ -368,20 +365,82 @@ async function run() {
       res.send(personData);
     });
 
-    // user created 
-    app.post('/alumni', (req, res) => {
-
-      
+    // user created
+    app.post("/alumni", (req, res) => {
       allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
-          res.status(500).send({ message: 'Error saving user data to MongoDB' });
+          res.status(500).send({ message: "Error saving user data to MongoDB" });
           return;
         }
-        res.send({ message: 'User created successfully' });
+        res.send({ message: "User created successfully" });
       });
     });
-  
+
+    // user update
+    app.put("/alumni/:email", async (req, res) => {
+      const reqEmail = req.params.email;
+      const filter = { email: reqEmail };
+
+      // if not found then insert a new one
+      const options = { upsert: true };
+      const data = req.body;
+      const updatedUserData = {
+        $set: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          name: `${data.firstName} ${data.lastName}`,
+          profile_picture: data.display_url,
+          graduation_year: data.graduation_year,
+          degree: data.degree,
+          major: data.major,
+          email: data.email,
+          phone: data.phone,
+          universityName: data.universityName,
+          phone_2: data.phone_2,
+          address: {
+            street: data.streetAddress,
+            city: data.city,
+            state: data.stateName,
+            zip: data.zipCode,
+          },
+          education: [
+            {
+              degree: data.degree,
+              major: data.major,
+              institution: data.universityName,
+              graduation_year: data.graduation_year,
+              gpa: "",
+            },
+          ],
+          is_employed: false,
+          careers: [
+            {
+              company: "",
+              position: "",
+              start_date: "",
+              end_date: "",
+              responsibilities: "",
+            },
+          ],
+          personal_information: {
+            date_of_birth: data.dateOfBirth,
+            gender: data.gender,
+            blood_group: data.bloodGroup,
+            fathers_name: data.fatherName,
+            mothers_name: data.motherName,
+            marital_status: "",
+            nationality: "Bangladeshi",
+            languages: ["English", "Bengali"],
+            hobbies: [],
+          },
+        },
+      };
+      const result = await allAlumniData.updateOne(filter, updatedUserData, options);
+      res.send(result);
+      console.log("---- data -----", data);
+      console.log("----updated data -----", updatedUserData);
+    });
 
     //---- U T I L S ----//
 
