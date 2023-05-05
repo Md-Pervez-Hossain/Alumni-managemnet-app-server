@@ -157,6 +157,32 @@ async function run() {
       const result = await allCharityData.findOne(query);
       res.send(result);
     });
+    app.put("/charity/:id", async (req, res) => {
+      const charityInfo = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedCharityInfo = {
+        $set: {
+          title: charityInfo?.title,
+          goal_amount: charityInfo?.goal_amount,
+          batchNumber: charityInfo?.batchNumber,
+          deadline: charityInfo?.deadline,
+          city: charityInfo?.city,
+          state: charityInfo?.state,
+          country: charityInfo?.country,
+          details: charityInfo?.details,
+          image_url: charityInfo?.image_url,
+          time: charityInfo?.time,
+        },
+      };
+      const result = await allCharityData.updateOne(
+        filter,
+        updatedCharityInfo,
+        options
+      );
+      res.send(result);
+    });
     //charity end
 
     // successFull Story start
@@ -183,6 +209,28 @@ async function run() {
       const successStoryResult = await SuccessFullStory.findOne(query);
       res.send(successStoryResult);
     });
+    app.put("/successFullStory/:id", async (req, res) => {
+      const story = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedStory = {
+        $set: {
+          title: story?.title,
+          batchNumber: story?.batchNumber,
+          details: story?.details,
+          image_url: story?.image_url,
+          time: story?.time,
+        },
+      };
+      const result = await SuccessFullStory.updateOne(
+        filter,
+        updatedStory,
+        options
+      );
+      res.send(result);
+    });
+
     app.delete("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -299,6 +347,34 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+    app.get("/gallery/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await AllGalleryPhotos.findOne(query);
+      res.send(result);
+    });
+    app.put("/gallery/:id", async (req, res) => {
+      const galleryInfo = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedGalleryInfo = {
+        $set: {
+          title: galleryInfo?.title,
+          batchNumber: galleryInfo?.batchNumber,
+          details: galleryInfo?.details,
+          gallery_category: galleryInfo?.gallery_category,
+          time: galleryInfo?.time,
+          image_url: galleryInfo?.image_url,
+        },
+      };
+      const result = await AllGalleryPhotos.updateOne(
+        filter,
+        updatedGalleryInfo,
+        options
+      );
+      res.send(result);
     });
     app.delete("/galleries/:id", async (req, res) => {
       const id = req.params.id;
