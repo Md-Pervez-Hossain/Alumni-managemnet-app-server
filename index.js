@@ -446,12 +446,15 @@ async function run() {
 
 
     // find the event join info
-    app.get("/join-event/:event_id", async (req, res) => {
-      const id = req.params.event_id;
-      const query = { event_id: id };
-      const cursor =  await allEventsFromData.findOne(query);
-      res.send(cursor);
-    });
+    app.get('/join-event', async (req, res) => {
+      id=req.query.id
+      email=req.query.email
+      // console.log(id, email)
+      const filter = {event_id: id, email:email }
+      const result = await allEventsFromData.findOne(filter);
+      res.send(result);
+  })
+
 
     // update the event join info
     app.put('/join-event/:id', async (req, res) => {
@@ -481,6 +484,52 @@ async function run() {
     const result = await allEventsFromData.deleteOne(filter);
     res.send(result);
 })
+
+
+
+
+  // News CRUD system code
+
+  // get news array with author email
+  app.get('/all-news/:email', async (req, res) => {
+    email=req.params.email
+    // console.log( email)
+    const filter = {email:email }
+    const result = await alumniNewsCollection.find(filter).toArray();
+    res.send(result);
+})
+
+// update the News info
+app.put('/news/:id', async (req, res) => {
+  const id = req.params.id;
+  const newsInfo = req.body;
+  // console.log(newsInfo);
+  const filter = { _id: new ObjectId(id) }
+  const options = { upsert: true }
+  const updatedDoc = {
+      $set: {
+        heading:newsInfo.heading,
+        image: newsInfo.image,
+        author: newsInfo.author,
+        authorProfession:newsInfo.authorProfession,
+        NewsCategory:newsInfo.NewsCategory,
+        newsDetails:newsInfo.newsDetails,
+        time:newsInfo.time
+      }
+  }
+  const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
+  res.send(result);
+})
+
+ // Delete The news
+ app.delete('/news/delete/:id', async(req,res)=>{
+
+  const id= req.params.id;
+  const filter = {_id: new ObjectId(id)};
+  const result = await alumniNewsCollection.deleteOne(filter);
+  res.send(result);
+})
+
 
 
 
