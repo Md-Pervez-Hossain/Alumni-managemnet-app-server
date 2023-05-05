@@ -439,7 +439,6 @@ async function run() {
     //post all events joining members
     app.post("/join-event", async (req, res) => {
       const user = req.body;
-      console.log(user);
       const cursor = await allEventsFromData.insertOne(user);
       res.send(cursor);
     });
@@ -448,7 +447,6 @@ async function run() {
     app.get("/join-event", async (req, res) => {
       id = req.query.id;
       email = req.query.email;
-      // console.log(id, email)
       const filter = { event_id: id, email: email };
       const result = await allEventsFromData.findOne(filter);
       res.send(result);
