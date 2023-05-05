@@ -33,13 +33,17 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -94,12 +98,27 @@ async function run() {
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
       console.log(successStoryComments);
-      const cursor = await successFullStoryComments.insertOne(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
       res.send(cursor);
     });
 
     app.get("/successFullStoryComments", async (req, res) => {
       const query = {};
+      const result = await successFullStoryComments.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/successFullStoryComment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await successFullStoryComments.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/successFullStoryComments/:commentsId", async (req, res) => {
+      const commentsId = req.params.commentsId;
+      const query = { commentsId: commentsId };
       const result = await successFullStoryComments.find(query).toArray();
       res.send(result);
     });
@@ -119,16 +138,54 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/charity/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
+    app.delete("/charity/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.deleteOne(query);
+      res.send(result);
+    });
+
     app.get("/charity/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await allCharityData.findOne(query);
       res.send(result);
     });
+    app.put("/charity/:id", async (req, res) => {
+      const charityInfo = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedCharityInfo = {
+        $set: {
+          title: charityInfo?.title,
+          goal_amount: charityInfo?.goal_amount,
+          batchNumber: charityInfo?.batchNumber,
+          deadline: charityInfo?.deadline,
+          city: charityInfo?.city,
+          state: charityInfo?.state,
+          country: charityInfo?.country,
+          details: charityInfo?.details,
+          image_url: charityInfo?.image_url,
+          time: charityInfo?.time,
+        },
+      };
+      const result = await allCharityData.updateOne(
+        filter,
+        updatedCharityInfo,
+        options
+      );
+      res.send(result);
+    });
     //charity end
 
     // successFull Story start
-
     app.post("/successFullStory", async (req, res) => {
       const successFullStory = req.body;
       console.log(successFullStory);
@@ -140,11 +197,45 @@ async function run() {
       const successStoryResult = await SuccessFullStory.find(query).toArray();
       res.send(successStoryResult);
     });
+    app.get("/successFullStory/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await SuccessFullStory.find(query).toArray();
+      res.send(result);
+    });
     app.get("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const successStoryResult = await SuccessFullStory.findOne(query);
       res.send(successStoryResult);
+    });
+    app.put("/successFullStory/:id", async (req, res) => {
+      const story = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedStory = {
+        $set: {
+          title: story?.title,
+          batchNumber: story?.batchNumber,
+          details: story?.details,
+          image_url: story?.image_url,
+          time: story?.time,
+        },
+      };
+      const result = await SuccessFullStory.updateOne(
+        filter,
+        updatedStory,
+        options
+      );
+      res.send(result);
+    });
+
+    app.delete("/successFullStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await SuccessFullStory.deleteOne(query);
+      res.send(result);
     });
     app.get("/successFullStory/batch/:batchNumber", async (req, res) => {
       const batchNumber = req.params.batchNumber;
@@ -218,7 +309,12 @@ async function run() {
       const cursor = await AllGalleryPhotos.insertOne(gallery);
       res.send(cursor);
     });
-
+    app.get("/galleries/email/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await AllGalleryPhotos.find(query).toArray();
+      res.send(result);
+    });
     // batch wise gallery Category data
     app.get("/galleries/batch/:batchNumber", async (req, res) => {
       const batchNumber = req.params.batchNumber;
@@ -251,6 +347,40 @@ async function run() {
       const cursor = AllGalleryPhotos.find(query);
       const gallery = await cursor.toArray();
       res.send(gallery);
+    });
+    app.get("/gallery/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await AllGalleryPhotos.findOne(query);
+      res.send(result);
+    });
+    app.put("/gallery/:id", async (req, res) => {
+      const galleryInfo = req.body;
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedGalleryInfo = {
+        $set: {
+          title: galleryInfo?.title,
+          batchNumber: galleryInfo?.batchNumber,
+          details: galleryInfo?.details,
+          gallery_category: galleryInfo?.gallery_category,
+          time: galleryInfo?.time,
+          image_url: galleryInfo?.image_url,
+        },
+      };
+      const result = await AllGalleryPhotos.updateOne(
+        filter,
+        updatedGalleryInfo,
+        options
+      );
+      res.send(result);
+    });
+    app.delete("/galleries/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await AllGalleryPhotos.deleteOne(query);
+      res.send(result);
     });
 
     // E V E N T S //
@@ -374,7 +504,12 @@ async function run() {
       allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
-          res.status(500).send({ message: "Error saving user data to MongoDB" });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
         res.send({ message: "User created successfully" });
@@ -440,7 +575,11 @@ async function run() {
           },
         },
       };
-      const result = await allAlumniData.updateOne(filter, updatedUserData, options);
+      const result = await allAlumniData.updateOne(
+        filter,
+        updatedUserData,
+        options
+      );
       res.send(result);
       console.log("---- data -----", data);
       console.log("----updated data -----", updatedUserData);
@@ -524,7 +663,11 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+      const result = await allEventsFromData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
       res.send(result);
     });
 
