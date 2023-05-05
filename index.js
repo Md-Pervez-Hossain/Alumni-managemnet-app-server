@@ -86,6 +86,9 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
+    const newsComments = client
+      .db("alumni-management-app")
+      .collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
@@ -278,6 +281,28 @@ async function run() {
       const cursor = await alumniNewsCollection.insertOne(news);
       res.send(cursor);
     });
+
+    // news comments start
+
+    app.post("/newsComments", async (req, res) => {
+      const comments = req.body;
+      console.log(newsComments);
+      const cursor = await newsComments.insertOne(comments);
+      res.send(cursor);
+    });
+    app.get("/newsComments", async (req, res) => {
+      const query = {};
+      const result = await newsComments.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/newsComments/:commentsId", async (req, res) => {
+      const commentsId = req.params.commentsId;
+      const query = { commentsId: commentsId };
+      const result = await newsComments.find(query).toArray();
+      res.send(result);
+    });
+
+    // news comments end
 
     // api end points
     // all gallery Category data
