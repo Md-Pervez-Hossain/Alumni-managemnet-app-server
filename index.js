@@ -43,7 +43,9 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -97,7 +99,9 @@ async function run() {
 
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
       res.send(cursor);
     });
 
@@ -173,7 +177,11 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
+      const result = await allCharityData.updateOne(
+        filter,
+        updatedCharityInfo,
+        options
+      );
       res.send(result);
     });
     //charity end
@@ -216,7 +224,11 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
+      const result = await SuccessFullStory.updateOne(
+        filter,
+        updatedStory,
+        options
+      );
       res.send(result);
     });
 
@@ -494,7 +506,9 @@ async function run() {
         if (err) {
           console.error(err);
 
-          res.status(500).send({ message: "Error saving user data to MongoDB" });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
         res.send({ message: "User created successfully" });
@@ -561,7 +575,11 @@ async function run() {
           },
         },
       };
-      const result = await allAlumniData.updateOne(filter, updatedUserData, options);
+      const result = await allAlumniData.updateOne(
+        filter,
+        updatedUserData,
+        options
+      );
       res.send(result);
       console.log("---- data -----", data);
       console.log("----updated data -----", updatedUserData);
@@ -617,17 +635,17 @@ async function run() {
     //post all events joining members
     app.post("/join-event", async (req, res) => {
       const user = req.body;
-      console.log(user);
       const cursor = await allEventsFromData.insertOne(user);
       res.send(cursor);
     });
 
     // find the event join info
-    app.get("/join-event/:event_id", async (req, res) => {
-      const id = req.params.event_id;
-      const query = { event_id: id };
-      const cursor = await allEventsFromData.findOne(query);
-      res.send(cursor);
+    app.get("/join-event", async (req, res) => {
+      id = req.query.id;
+      email = req.query.email;
+      const filter = { event_id: id, email: email };
+      const result = await allEventsFromData.findOne(filter);
+      res.send(result);
     });
 
     // update the event join info
@@ -645,7 +663,11 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+      const result = await allEventsFromData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
       res.send(result);
     });
 
