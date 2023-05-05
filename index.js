@@ -34,16 +34,16 @@ async function run() {
       .collection("allAlumniGalleryData");
 
     const AllEventsData = client
+
       .db("alumni-management-app")
+
       .collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -97,10 +97,7 @@ async function run() {
 
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      console.log(successStoryComments);
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
 
@@ -176,11 +173,7 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updatedCharityInfo,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
     //charity end
@@ -223,11 +216,7 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updatedStory,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
 
@@ -504,14 +493,11 @@ async function run() {
       allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
+
+          res.status(500).send({ message: "Error saving user data to MongoDB" });
           return;
         }
+        res.send({ message: "User created successfully" });
         res.send({ message: "User created successfully" });
       });
     });
@@ -575,11 +561,7 @@ async function run() {
           },
         },
       };
-      const result = await allAlumniData.updateOne(
-        filter,
-        updatedUserData,
-        options
-      );
+      const result = await allAlumniData.updateOne(filter, updatedUserData, options);
       res.send(result);
       console.log("---- data -----", data);
       console.log("----updated data -----", updatedUserData);
@@ -663,11 +645,7 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
