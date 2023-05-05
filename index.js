@@ -490,7 +490,6 @@ async function run() {
     // get news array with author email
     app.get("/all-news/:email", async (req, res) => {
       email = req.params.email;
-      // console.log( email)
       const filter = { email: email };
       const result = await alumniNewsCollection.find(filter).toArray();
       res.send(result);
@@ -500,7 +499,6 @@ async function run() {
     app.put("/news/:id", async (req, res) => {
       const id = req.params.id;
       const newsInfo = req.body;
-      // console.log(newsInfo);
       const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updatedDoc = {
