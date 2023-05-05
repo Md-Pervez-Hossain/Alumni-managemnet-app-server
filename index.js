@@ -33,14 +33,17 @@ async function run() {
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
 
-    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
+    const AllEventsData = client
+      .db("alumni-management-app")
+      .collection("AllEvents");
 
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -82,7 +85,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("successFullStoryComments");
 
-      const allEventsFromData = client
+    const allEventsFromData = client
       .db("alumni-management-app")
       .collection("allEventsFromData");
 
@@ -95,7 +98,9 @@ async function run() {
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
       console.log(successStoryComments);
-      const cursor = await successFullStoryComments.insertOne(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
       res.send(cursor);
     });
 
@@ -312,8 +317,6 @@ async function run() {
 
     // All University Name data
 
-
-
     app.get("/all-university-name", async (req, res) => {
       const query = {};
       const newsResult = await allUniversityName.find(query).toArray();
@@ -372,20 +375,19 @@ async function run() {
       res.send(personData);
     });
 
-    // user created 
-    app.post('/alumni', (req, res) => {
-
-      
+    // user created
+    app.post("/alumni", (req, res) => {
       allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
-          res.status(500).send({ message: 'Error saving user data to MongoDB' });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
-        res.send({ message: 'User created successfully' });
+        res.send({ message: "User created successfully" });
       });
     });
-  
 
     //---- U T I L S ----//
 
@@ -432,107 +434,101 @@ async function run() {
       res.send(cursor);
     });
 
-
     // Event Joining Information
 
-
-     //post all events joining members
-     app.post("/join-event", async (req, res) => {
+    //post all events joining members
+    app.post("/join-event", async (req, res) => {
       const user = req.body;
       console.log(user);
       const cursor = await allEventsFromData.insertOne(user);
       res.send(cursor);
     });
 
-
     // find the event join info
-    app.get('/join-event', async (req, res) => {
-      id=req.query.id
-      email=req.query.email
+    app.get("/join-event", async (req, res) => {
+      id = req.query.id;
+      email = req.query.email;
       // console.log(id, email)
-      const filter = {event_id: id, email:email }
+      const filter = { event_id: id, email: email };
       const result = await allEventsFromData.findOne(filter);
       res.send(result);
-  })
-
+    });
 
     // update the event join info
-    app.put('/join-event/:id', async (req, res) => {
+    app.put("/join-event/:id", async (req, res) => {
       const id = req.params.id;
       const updateInfo = req.body;
-      const filter = { _id: new ObjectId(id) }
-      const options = { upsert: true }
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
       const updatedDoc = {
-          $set: {
-            first_name: updateInfo.first_name,
-            last_name: updateInfo.last_name,
-            email: updateInfo.email,
-            phone_number: updateInfo.phone_number,
-            date: updateInfo.date
-          }
-      }
-      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+        $set: {
+          first_name: updateInfo.first_name,
+          last_name: updateInfo.last_name,
+          email: updateInfo.email,
+          phone_number: updateInfo.phone_number,
+          date: updateInfo.date,
+        },
+      };
+      const result = await allEventsFromData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
       res.send(result);
-  })
+    });
 
+    // Delete The event joining info
+    app.delete("/join-event/delete/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await allEventsFromData.deleteOne(filter);
+      res.send(result);
+    });
 
-  // Delete The event joining info
-  app.delete('/join-event/delete/:id', async(req,res)=>{
+    // News CRUD system code
 
-    const id= req.params.id;
-    const filter = {_id: new ObjectId(id)};
-    const result = await allEventsFromData.deleteOne(filter);
-    res.send(result);
-})
+    // get news array with author email
+    app.get("/all-news/:email", async (req, res) => {
+      email = req.params.email;
+      // console.log( email)
+      const filter = { email: email };
+      const result = await alumniNewsCollection.find(filter).toArray();
+      res.send(result);
+    });
 
+    // update the News info
+    app.put("/news/:id", async (req, res) => {
+      const id = req.params.id;
+      const newsInfo = req.body;
+      // console.log(newsInfo);
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          heading: newsInfo.heading,
+          image: newsInfo.image,
+          author: newsInfo.author,
+          authorProfession: newsInfo.authorProfession,
+          NewsCategory: newsInfo.NewsCategory,
+          newsDetails: newsInfo.newsDetails,
+          time: newsInfo.time,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
 
-
-
-  // News CRUD system code
-
-  // get news array with author email
-  app.get('/all-news/:email', async (req, res) => {
-    email=req.params.email
-    // console.log( email)
-    const filter = {email:email }
-    const result = await alumniNewsCollection.find(filter).toArray();
-    res.send(result);
-})
-
-// update the News info
-app.put('/news/:id', async (req, res) => {
-  const id = req.params.id;
-  const newsInfo = req.body;
-  // console.log(newsInfo);
-  const filter = { _id: new ObjectId(id) }
-  const options = { upsert: true }
-  const updatedDoc = {
-      $set: {
-        heading:newsInfo.heading,
-        image: newsInfo.image,
-        author: newsInfo.author,
-        authorProfession:newsInfo.authorProfession,
-        NewsCategory:newsInfo.NewsCategory,
-        newsDetails:newsInfo.newsDetails,
-        time:newsInfo.time
-      }
-  }
-  const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
-  res.send(result);
-})
-
- // Delete The news
- app.delete('/news/delete/:id', async(req,res)=>{
-
-  const id= req.params.id;
-  const filter = {_id: new ObjectId(id)};
-  const result = await alumniNewsCollection.deleteOne(filter);
-  res.send(result);
-})
-
-
-
-
+    // Delete The news
+    app.delete("/news/delete/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await alumniNewsCollection.deleteOne(filter);
+      res.send(result);
+    });
   } finally {
   }
 }
