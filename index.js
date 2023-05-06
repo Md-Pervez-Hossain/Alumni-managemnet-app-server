@@ -532,12 +532,31 @@ async function run() {
     });
 
     // single person data
-    app.get("/alumni/:id", async (req, res) => {
-      const alumniId = req.params.id;
-      const query = { _id: new ObjectId(alumniId) };
+    app.get("/alumni/:email", async (req, res) => {
+      const alumniEmail = req.params.email;
+      const query = { email: alumniEmail };
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
+    // single person data EDIT
+    // app.put("/alumni/:email", async (req, res) => {
+    //   const alumniEmail = req.params.email;
+    //   const filter = { email: alumniEmail };
+    //   const updateInfo = req.body;
+    //   const options = { upsert: true };
+
+    //   const updatedDoc = {
+    //     $set: {
+    //       first_name: updateInfo.first_name,
+    //       last_name: updateInfo.last_name,
+    //       email: updateInfo.email,
+    //       phone_number: updateInfo.phone_number,
+    //       date: updateInfo.date,
+    //     },
+    //   };
+    //   const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+    //   res.send(result);
+    // });
 
     // user created
     app.post("/alumni", (req, res) => {
