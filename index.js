@@ -585,39 +585,28 @@ async function run() {
           firstName: data.firstName,
           lastName: data.lastName,
           name: `${data.firstName} ${data.lastName}`,
-          profile_picture: data.display_url,
           graduation_year: data.graduation_year,
-          degree: data.degree,
-          major: data.major,
+          degree: data.degreeEarned,
+          major: data.majorSubject,
           email: data.email,
-          phone: data.phone,
-          universityName: data.universityName,
-          phone_2: data.phone_2,
+          phone: data.mobile,
+          universityName: data.yourUniversityName,
           address: {
             street: data.streetAddress,
             city: data.city,
             state: data.stateName,
             zip: data.zipCode,
           },
-          education: [
-            {
-              degree: data.degree,
-              major: data.major,
-              institution: data.universityName,
-              graduation_year: data.graduation_year,
-              gpa: "",
-            },
-          ],
+          education: {
+            degree: data.degreeEarned,
+            major: data.majorSubject,
+            institution: data.yourUniversityName,
+            graduation_year: data.graduation_year,
+            gpa: "",
+          },
+
           is_employed: false,
-          careers: [
-            {
-              company: "",
-              position: "",
-              start_date: "",
-              end_date: "",
-              responsibilities: "",
-            },
-          ],
+
           personal_information: {
             date_of_birth: data.dateOfBirth,
             gender: data.gender,
