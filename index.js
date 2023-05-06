@@ -296,6 +296,12 @@ async function run() {
       const cursor = await newsComments.insertOne(comments);
       res.send(cursor);
     });
+    app.get("/newsComments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const singleNewsResult = await newsComments.findOne(query);
+      res.send(singleNewsResult);
+    });
     app.get("/newsComments", async (req, res) => {
       const query = {};
       const result = await newsComments.find(query).toArray();
@@ -305,6 +311,12 @@ async function run() {
       const commentsId = req.params.commentsId;
       const query = { commentsId: commentsId };
       const result = await newsComments.find(query).toArray();
+      res.send(result);
+    });
+    app.delete("/newsComments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await newsComments.deleteOne(query);
       res.send(result);
     });
 
