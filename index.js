@@ -85,6 +85,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("successFullStoryComments");
     const newsComments = client.db("alumni-management-app").collection("newsComments");
+    const newsComments = client.db("alumni-management-app").collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
@@ -267,6 +268,28 @@ async function run() {
       const cursor = await alumniNewsCollection.insertOne(news);
       res.send(cursor);
     });
+
+    // news comments start
+
+    app.post("/newsComments", async (req, res) => {
+      const comments = req.body;
+      console.log(newsComments);
+      const cursor = await newsComments.insertOne(comments);
+      res.send(cursor);
+    });
+    app.get("/newsComments", async (req, res) => {
+      const query = {};
+      const result = await newsComments.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/newsComments/:commentsId", async (req, res) => {
+      const commentsId = req.params.commentsId;
+      const query = { commentsId: commentsId };
+      const result = await newsComments.find(query).toArray();
+      res.send(result);
+    });
+
+    // news comments end
 
     // news comments start
 
@@ -637,6 +660,14 @@ async function run() {
 
     // Event Joining Information
 
+    // get all joined event with author email
+    app.get("/joined-event/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email: email };
+      const result = await allEventsFromData.find(filter).toArray();
+      res.send(result);
+    });
+
     //post all events joining members
     app.post("/join-event", async (req, res) => {
       const user = req.body;
@@ -716,6 +747,48 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await alumniNewsCollection.deleteOne(filter);
+      res.send(result);
+    });
+
+    // Event post Edit and Delete section
+
+    // get event array with author email
+    app.get("/event/:email", async (req, res) => {
+      email = req.params.email;
+      const filter = { authorEmail: email };
+      // console.log(email)
+      const result = await AllEventsData.find(filter).toArray();
+      res.send(result);
+    });
+
+    // update the Event info
+    app.put("/event/:id", async (req, res) => {
+      const id = req.params.id;
+      const eventInfo = req.body;
+      // console.log(eventInfo)
+      // console.log(id)
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          batch: eventInfo.batch,
+          category: eventInfo.category,
+          date: eventInfo.date,
+          description: eventInfo.description,
+          event_title: eventInfo.event_title,
+          image_url: eventInfo.image_url,
+          location: eventInfo.location,
+        },
+      };
+      const result = await AllEventsData.updateOne(filter, updatedDoc, options);
+      res.send(result);
+    });
+
+    // Delete The single event
+    app.delete("/event/delete/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await AllEventsData.deleteOne(filter);
       res.send(result);
     });
   } finally {
