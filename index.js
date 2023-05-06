@@ -85,7 +85,6 @@ async function run() {
       .db("alumni-management-app")
       .collection("successFullStoryComments");
     const newsComments = client.db("alumni-management-app").collection("newsComments");
-    const newsComments = client.db("alumni-management-app").collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
