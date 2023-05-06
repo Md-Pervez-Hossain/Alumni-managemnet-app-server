@@ -630,7 +630,18 @@ async function run() {
       res.send(cursor);
     });
 
+
+
+
     // Event Joining Information
+
+    // get all joined event with author email
+    app.get("/joined-event/:email", async(req, res)=>{
+      const email = req.params.email;
+      const filter = {email: email};
+      const result = await allEventsFromData.find(filter).toArray();
+      res.send(result);
+    })
 
     //post all events joining members
     app.post("/join-event", async (req, res) => {
@@ -722,8 +733,63 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await alumniNewsCollection.deleteOne(filter);
+      res.send(result); 
+    });
+
+
+
+
+    // Event post Edit and Delete section
+
+    // get event array with author email
+    app.get("/event/:email", async (req, res) => {
+      email = req.params.email;
+      const filter = { authorEmail: email };
+      // console.log(email)
+      const result = await AllEventsData.find(filter).toArray();
       res.send(result);
     });
+
+
+
+
+     // update the Event info
+     app.put("/event/:id", async (req, res) => {
+      const id = req.params.id;
+      const eventInfo = req.body;
+      // console.log(eventInfo)
+      // console.log(id)
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+         batch: eventInfo.batch,
+         category: eventInfo.category,
+         date: eventInfo.date,
+         description: eventInfo.description,
+         event_title: eventInfo.event_title,
+         image_url: eventInfo.image_url,
+         location: eventInfo.location,
+        },
+      };
+      const result = await AllEventsData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
+
+
+    // Delete The single event
+    app.delete("/event/delete/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await AllEventsData.deleteOne(filter);
+      res.send(result); 
+    });
+
+
 
   } finally {
   }
