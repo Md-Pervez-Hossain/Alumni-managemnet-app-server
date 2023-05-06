@@ -113,6 +113,12 @@ async function run() {
       const result = await successFullStoryComments.findOne(query);
       res.send(result);
     });
+    app.delete("/successFullStoryComment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await successFullStoryComments.deleteOne(query);
+      res.send(result);
+    });
 
     app.get("/successFullStoryComments/:commentsId", async (req, res) => {
       const commentsId = req.params.commentsId;
