@@ -150,7 +150,7 @@ async function run() {
         fail_url: `https://alumni-managemnet-app-server.vercel.app/payment/fail?transactionId=${transactionId}`,
         cancel_url:
           "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
-        ipn_url: "http://localhost:3030/ipn",
+        ipn_url: "https://alumni-managemnet-app-server.vercel.app/ipn",
         shipping_method: "Courier",
         product_name: "Computer.",
         product_category: "Electronic",
@@ -981,7 +981,9 @@ async function run() {
       const query = { email: email };
       const user = await allAlumniData.findOne(query);
       if (user) {
-        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: "1h" });
+        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, {
+          expiresIn: "1h",
+        });
         return res.send({ accessToken: token });
       }
       res.status(403).send({ accessToken: "" });
