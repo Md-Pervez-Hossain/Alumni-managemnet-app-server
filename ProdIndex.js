@@ -5,79 +5,54 @@ const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const { query } = require("express");
 require("dotenv").config();
-
-// SSL COMMERCE
-const SSLCommerzPayment = require("sslcommerz-lts");
-const store_id = process.env.STORE_ID;
-const store_passwd = process.env.STORE_PASSWORD;
-const is_live = false; //true for live, false for sandbox
+const alumniRoutes = require("./routes/v1/alumni.route");
+const dbConnect = require("./utils/dbConnect");
 
 // middleware.config
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.8itgidz.mongodb.net/?retryWrites=true&w=majority`;
+dbConnect();
 
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
+app.use("/api/v1/alumni", alumniRoutes);
 
 async function run() {
   try {
     const galleriesCategory = client
       .db("alumni-management-app")
       .collection("alumniGalleryCategories");
-
     const AllGalleryPhotos = client
       .db("alumni-management-app")
       .collection("allAlumniGalleryData");
-
-    const AllEventsData = client
-
-      .db("alumni-management-app")
-
-      .collection("AllEvents");
-
+    const AllEventsData = client.db("alumni-management-app").collection("AllEvents");
     const eventsCategory = client
       .db("alumni-management-app")
       .collection("allEventCategories");
-
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
-
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
     const allUniversityName = client
       .db("alumni-management-app")
       .collection("AllUniversityName");
     const allDegreePrograms = client
       .db("alumni-management-app")
       .collection("allDegreePrograms");
-
     const allBatchesName = client
       .db("alumni-management-app")
       .collection("allBatchesName");
-
     const allGraduationMajor = client
       .db("alumni-management-app")
       .collection("AllGraduationMajor");
-
     const alumniNewsCollection = client
       .db("alumni-management-app")
       .collection("alumniNews");
-
     const alumniNewsCategories = client
       .db("alumni-management-app")
       .collection("alumniNewsCategories");
-
     const membershipForm = client
       .db("alumni-management-app")
       .collection("mebership-Form-Data");
     const SuccessFullStory = client
       .db("alumni-management-app")
       .collection("all-successFull-story-data");
-
     const allFundingProjects = client
       .db("alumni-management-app")
       .collection("allFundingProjects");
@@ -87,149 +62,18 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
-    const newsComments = client
-      .db("alumni-management-app")
-      .collection("newsComments");
-
     const allEventsFromData = client
       .db("alumni-management-app")
       .collection("allEventsFromData");
-    const charityDonationData = client
-      .db("alumni-management-app")
-      .collection("charityDonationData");
-
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
-
     // successFullStoryComments start
-
-    // charity donation start
-
-    app.post("/charityDonation", (req, res) => {
-      const charityDonationInfo = req.body;
-      console.log(charityDonationInfo);
-      const {
-        cus_name,
-        cus_country,
-        cus_add1,
-        cus_city,
-        cus_state,
-        cus_email,
-        cus_postcode,
-        cus_phone,
-        cus_donationAmount,
-        currency,
-        donationId,
-        donationTitle,
-      } = charityDonationInfo;
-      if (
-        !cus_name ||
-        !cus_country ||
-        !cus_add1 ||
-        !cus_city ||
-        !cus_state ||
-        !cus_email ||
-        !cus_postcode ||
-        !cus_phone ||
-        !cus_donationAmount ||
-        !currency ||
-        !donationId ||
-        !donationTitle
-      ) {
-        return res.send({ error: "Pleaase Provide All The Information" });
-      }
-      const transactionId = new ObjectId().toString();
-      const data = {
-        total_amount: charityDonationInfo?.cus_donationAmount,
-        currency: charityDonationInfo?.currency,
-        tran_id: transactionId, // use unique tran_id for each api call
-        success_url: `http://localhost:8000/payment/success?transactionId=${transactionId}`,
-        fail_url: `http://localhost:8000/payment/fail?transactionId=${transactionId}`,
-        cancel_url: "http://localhost:8000/payment/cancle",
-        ipn_url: "http://localhost:3030/ipn",
-        shipping_method: "Courier",
-        product_name: "Computer.",
-        product_category: "Electronic",
-        product_profile: "general",
-        cus_name: charityDonationInfo?.cus_name,
-        cus_email: charityDonationInfo?.cus_email,
-        cus_add1: charityDonationInfo?.cus_add1,
-        cus_add2: "Dhaka",
-        cus_city: charityDonationInfo?.cus_add1,
-        cus_state: charityDonationInfo?.cus_state,
-        cus_postcode: charityDonationInfo?.cus_postcode,
-        cus_country: charityDonationInfo?.cus_country,
-        cus_phone: charityDonationInfo?.cus_phone,
-        cus_fax: "01711111111",
-        ship_name: "Customer Name",
-        ship_add1: "Dhaka",
-        ship_add2: "Dhaka",
-        ship_city: "Dhaka",
-        ship_state: "Dhaka",
-        ship_postcode: 1000,
-        ship_country: "Bangladesh",
-      };
-      const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
-      sslcz.init(data).then((apiResponse) => {
-        // Redirect the user to payment gateway
-        let GatewayPageURL = apiResponse.GatewayPageURL;
-        console.log(apiResponse);
-        charityDonationData.insertOne({
-          ...charityDonationInfo,
-          transactionId,
-          paid: false,
-        });
-        res.send({ url: GatewayPageURL });
-      });
-    });
-    app.post("/payment/success", async (req, res) => {
-      // console.log("success");
-      const { transactionId } = req.query;
-      console.log(transactionId);
-      if (!transactionId) {
-        res.redirect("http://localhost:3000/payment/fail");
-      }
-      const result = await charityDonationData.updateOne(
-        { transactionId },
-        { $set: { paid: true, paidAt: new Date() } }
-      );
-      if (result.modifiedCount > 0) {
-        res.redirect(`http://localhost:3000/payment/success/${transactionId}`);
-      }
-    });
-    app.post("/payment/fail", async (req, res) => {
-      const { transactionId } = req.query;
-      if (!transactionId) {
-        res.redirect("http://localhost:3000/payment/fail");
-      }
-      const result = await charityDonationData.deleteOne({ transactionId });
-      if (result.deletedCount > 0) {
-        res.redirect("http://localhost:3000/payment/fail");
-      }
-    });
-    app.get("/payment/success/:transactionId", async (req, res) => {
-      const transactionId = req.params.transactionId;
-      const query = { transactionId: transactionId };
-      const result = await charityDonationData.findOne(query);
-      res.send(result);
-    });
-
-    app.get("/charityDonation", async (req, res) => {
-      const query = {};
-      const result = await charityDonationData.find(query).toArray();
-      res.send(result);
-    });
-    // charity donation end
-
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
-
     app.get("/successFullStoryComments", async (req, res) => {
       const query = {};
       const result = await successFullStoryComments.find(query).toArray();
@@ -241,13 +85,6 @@ async function run() {
       const result = await successFullStoryComments.findOne(query);
       res.send(result);
     });
-    app.delete("/successFullStoryComment/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await successFullStoryComments.deleteOne(query);
-      res.send(result);
-    });
-
     app.get("/successFullStoryComments/:commentsId", async (req, res) => {
       const commentsId = req.params.commentsId;
       const query = { commentsId: commentsId };
@@ -255,7 +92,6 @@ async function run() {
       res.send(result);
     });
     // successFullStoryComments end
-
     //charity start
     app.post("/charity", async (req, res) => {
       const charityFunds = req.body;
@@ -263,13 +99,11 @@ async function run() {
       const cursor = await allCharityData.insertOne(charityFunds);
       res.send(cursor);
     });
-
     app.get("/charity", async (req, res) => {
       const query = {};
       const result = await allCharityData.find(query).toArray();
       res.send(result);
     });
-
     app.get("/charity/email/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
@@ -282,14 +116,7 @@ async function run() {
       const result = await allCharityData.deleteOne(query);
       res.send(result);
     });
-
     app.get("/charity/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await allCharityData.findOne(query);
-      res.send(result);
-    });
-    app.get("/charity/donation/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await allCharityData.findOne(query);
@@ -314,15 +141,10 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updatedCharityInfo,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
     //charity end
-
     // successFull Story start
     app.post("/successFullStory", async (req, res) => {
       const successFullStory = req.body;
@@ -361,14 +183,9 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updatedStory,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
-
     app.delete("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -384,7 +201,6 @@ async function run() {
       res.send(cursor);
     });
     // successFull Story end
-
     // N E W S //
     // all news data
     app.get("/news", async (req, res) => {
@@ -392,7 +208,6 @@ async function run() {
       const newsResult = await alumniNewsCollection.find(query).toArray();
       res.send(newsResult);
     });
-
     // all news Category data
     app.get("/alumniNewsCategories", async (req, res) => {
       const query = {};
@@ -400,7 +215,6 @@ async function run() {
       const galleries = await cursor.toArray();
       res.send(galleries);
     });
-
     //single news get
     app.get("/news/:id", async (req, res) => {
       const id = req.params.id;
@@ -408,71 +222,12 @@ async function run() {
       const singleNewsResult = await alumniNewsCollection.findOne(query);
       res.send(singleNewsResult);
     });
-
     // create a news
     app.post("/news", async (req, res) => {
       const news = req.body;
       const cursor = await alumniNewsCollection.insertOne(news);
       res.send(cursor);
     });
-
-    // news comments start
-
-    app.post("/newsComments", async (req, res) => {
-      const comments = req.body;
-      console.log(newsComments);
-      const cursor = await newsComments.insertOne(comments);
-      res.send(cursor);
-    });
-    app.get("/newsComments/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const singleNewsResult = await newsComments.findOne(query);
-      res.send(singleNewsResult);
-    });
-    app.get("/newsComments", async (req, res) => {
-      const query = {};
-      const result = await newsComments.find(query).toArray();
-      res.send(result);
-    });
-    app.get("/newsComment/:commentsId", async (req, res) => {
-      const commentsId = req.params.commentsId;
-      console.log(commentsId);
-      const query = { commentsId: commentsId };
-      const result = await newsComments.find(query).toArray();
-      res.send(result);
-    });
-    app.delete("/newsComments/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await newsComments.deleteOne(query);
-      res.send(result);
-    });
-
-    // news comments end
-
-    // news comments start
-
-    app.post("/newsComments", async (req, res) => {
-      const comments = req.body;
-      console.log(newsComments);
-      const cursor = await newsComments.insertOne(comments);
-      res.send(cursor);
-    });
-    app.get("/newsComments", async (req, res) => {
-      const query = {};
-      const result = await newsComments.find(query).toArray();
-      res.send(result);
-    });
-    app.get("/newsComments/:commentsId", async (req, res) => {
-      const commentsId = req.params.commentsId;
-      const query = { commentsId: commentsId };
-      const result = await newsComments.find(query).toArray();
-      res.send(result);
-    });
-
-    // news comments end
-
     // api end points
     // all gallery Category data
     app.get("/galleryCategories", async (req, res) => {
@@ -481,7 +236,6 @@ async function run() {
       const galleries = await cursor.toArray();
       res.send(galleries);
     });
-
     // single gallery Category data
     app.get("/galleryCategories/:id", async (req, res) => {
       const id = req.params.id;
@@ -489,7 +243,6 @@ async function run() {
       const category = await galleriesCategory.findOne(query);
       res.send(category);
     });
-
     // all gallery data
     app.get("/galleries", async (req, res) => {
       const query = {};
@@ -497,7 +250,6 @@ async function run() {
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
-
     app.post("/gallery", async (req, res) => {
       const gallery = req.body;
       console.log(gallery);
@@ -518,7 +270,6 @@ async function run() {
       const galleries = await cursor.toArray();
       res.send(galleries);
     });
-
     // gallery based on featured photos
     app.get("/galleries/featured", async (req, res) => {
       const query = { "others_info.is_fatured": true };
@@ -526,7 +277,6 @@ async function run() {
       const featuredItems = await cursor.toArray();
       res.send(featuredItems);
     });
-
     // gallery based on trending photos
     app.get("/galleries/trending", async (req, res) => {
       const query = { "others_info.is_trending": true };
@@ -534,7 +284,6 @@ async function run() {
       const trendingItems = await cursor.toArray();
       res.send(trendingItems);
     });
-
     // CategoryWise gallery data
     app.get("/galleries/:id", async (req, res) => {
       const id = req.params.id;
@@ -577,9 +326,7 @@ async function run() {
       const result = await AllGalleryPhotos.deleteOne(query);
       res.send(result);
     });
-
     // E V E N T S //
-
     // all events data
     app.get("/events", async (req, res) => {
       const query = {};
@@ -587,7 +334,6 @@ async function run() {
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
-
     // all event Category data
     app.get("/eventCategories", async (req, res) => {
       const query = {};
@@ -595,7 +341,6 @@ async function run() {
       const galleries = await cursor.toArray();
       res.send(galleries);
     });
-
     // CategoryWise event data
     app.get("/events/category/:id", async (req, res) => {
       const id = req.params.id;
@@ -604,7 +349,6 @@ async function run() {
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
-
     // batchWise event data
     app.get("/events/batch/:year", async (req, res) => {
       const year = req.params.year;
@@ -613,7 +357,6 @@ async function run() {
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
-
     // single event data
     app.get("/events/:id", async (req, res) => {
       const id = req.params.id;
@@ -621,44 +364,36 @@ async function run() {
       const category = await AllEventsData.findOne(query);
       res.send(category);
     });
-
     // create a event api // event post
     app.post("/events", async (req, res) => {
       const events = req.body;
       const cursor = await AllEventsData.insertOne(events);
       res.send(cursor);
     });
-
     // Alumni data
     // AllAlumniData
     // AllUniversityName
     // AllBatchesName
-
     // All University Name data
-
     app.get("/all-university-name", async (req, res) => {
       const query = {};
       const newsResult = await allUniversityName.find(query).toArray();
       res.send(newsResult);
     });
-
     // All Degree Programs
     app.get("/all-degree-programs", async (req, res) => {
       const query = {};
       const allDegree = await allDegreePrograms.find(query).toArray();
       res.send(allDegree);
     });
-
     // All Batches Name data
     app.get("/all-batches", async (req, res) => {
       const query = {};
       const options = { sort: { batchNumber: -1 } };
-
       const cursor = allBatchesName.find(query, options);
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
-
     // All Batches Name data
     app.get("/all-graduation-major", async (req, res) => {
       const query = {};
@@ -667,127 +402,7 @@ async function run() {
       const AllAlumni = await cursor.toArray();
       res.send(AllAlumni);
     });
-
-    //  A L U M N I //
-    //all Alumni data
-    app.get("/alumni", async (req, res) => {
-      const query = {};
-      const cursor = allAlumniData.find(query);
-      const AllAlumni = await cursor.toArray();
-      res.send(AllAlumni);
-    });
-
-    //year wise batch data
-    app.get("/alumni/batch/:year", async (req, res) => {
-      const year = req.params.year;
-      const query = { graduation_year: year };
-      const cursor = allAlumniData.find(query);
-      const yearWiseBatchData = await cursor.toArray();
-      res.send(yearWiseBatchData);
-    });
-
-    // single person data
-    app.get("/alumni/:email", async (req, res) => {
-      const alumniEmail = req.params.email;
-      const query = { email: alumniEmail };
-      const personData = await allAlumniData.findOne(query);
-      res.send(personData);
-    });
-    // single person data EDIT
-    // app.put("/alumni/:email", async (req, res) => {
-    //   const alumniEmail = req.params.email;
-    //   const filter = { email: alumniEmail };
-    //   const updateInfo = req.body;
-    //   const options = { upsert: true };
-
-    //   const updatedDoc = {
-    //     $set: {
-    //       first_name: updateInfo.first_name,
-    //       last_name: updateInfo.last_name,
-    //       email: updateInfo.email,
-    //       phone_number: updateInfo.phone_number,
-    //       date: updateInfo.date,
-    //     },
-    //   };
-    //   const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
-    //   res.send(result);
-    // });
-
-    // user created
-    app.post("/alumni", (req, res) => {
-      allAlumniData.insertOne(req.body, (err, result) => {
-        if (err) {
-          console.error(err);
-
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
-          return;
-        }
-        res.send({ message: "User created successfully" });
-        res.send({ message: "User created successfully" });
-      });
-    });
-
-    // user update
-    app.put("/alumni/:email", async (req, res) => {
-      const reqEmail = req.params.email;
-      const filter = { email: reqEmail };
-
-      // if not found then insert a new one
-      const options = { upsert: true };
-      const data = req.body;
-
-      const updateData = {
-        $set: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          name: `${data.firstName} ${data.lastName}`,
-          graduation_year: data.graduation_year,
-          degree: data.degree,
-          major: data.major,
-          email: data.email,
-          phone: data.phone,
-          universityName: data.universityName,
-          address: {
-            street: data.address.street,
-            city: data.address.city,
-            state: data.address.state,
-            zip: data.address.zip,
-          },
-          education: {
-            degree: data.education.degree,
-            major: data.education.major,
-            institution: data.education.institution,
-            graduation_year: data.education.graduation_year,
-            gpa: "",
-          },
-
-          is_employed: false,
-
-          personal_information: {
-            date_of_birth: data.personal_information.date_of_birth,
-            gender: data.personal_information.gender,
-            blood_group: data.personal_information.blood_group,
-            fathers_name: data.personal_information.fathers_name,
-            mothers_name: data.personal_information.mothers_name,
-            marital_status: "",
-            nationality: "Bangladeshi",
-            languages: ["English", "Bengali"],
-            hobbies: [],
-          },
-        },
-      };
-
-      // console.log("----updated data -----", updatedUserData);
-      const result = await allAlumniData.updateOne(filter, updateData, options);
-      res.send(result);
-      // console.log("---- data -----", data);
-      console.log("---- updateData -----", updateData);
-    });
-
     //---- U T I L S ----//
-
     //   replace "%20" with "-" for blank spaces
     app.get("/api/:query", (req, res) => {
       const query = req.params.query;
@@ -795,9 +410,7 @@ async function run() {
       // process the formatted query
       res.send(formattedQuery);
     });
-
     //Membership apply form post request
-
     app.post("/membership", (req, res) => {
       const formData = req.body;
       console.log(formData);
@@ -807,7 +420,6 @@ async function run() {
         client.close();
       });
     });
-
     // * Funding Projects * //
     // all Funding Projects data
     app.get("/funding-projects", async (req, res) => {
@@ -815,7 +427,6 @@ async function run() {
       const FundingProjects = await allFundingProjects.find(query).toArray();
       res.send(FundingProjects);
     });
-
     //single Funding Projects get
     app.get("/funding-projects/:id", async (req, res) => {
       const id = req.params.id;
@@ -823,31 +434,19 @@ async function run() {
       const singleFundingProjects = await allFundingProjects.findOne(query);
       res.send(singleFundingProjects);
     });
-
     // create a Funding Projects
     app.post("/funding-projects/", async (req, res) => {
       const fundingProjects = req.body;
       const cursor = await allFundingProjects.insertOne(fundingProjects);
       res.send(cursor);
     });
-
     // Event Joining Information
-
-    // get all joined event with author email
-    app.get("/joined-event/:email", async (req, res) => {
-      const email = req.params.email;
-      const filter = { email: email };
-      const result = await allEventsFromData.find(filter).toArray();
-      res.send(result);
-    });
-
     //post all events joining members
     app.post("/join-event", async (req, res) => {
       const user = req.body;
       const cursor = await allEventsFromData.insertOne(user);
       res.send(cursor);
     });
-
     // find the event join info
     app.get("/join-event", async (req, res) => {
       id = req.query.id;
@@ -856,7 +455,6 @@ async function run() {
       const result = await allEventsFromData.findOne(filter);
       res.send(result);
     });
-
     // update the event join info
     app.put("/join-event/:id", async (req, res) => {
       const id = req.params.id;
@@ -872,14 +470,9 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
-
     // Delete The event joining info
     app.delete("/join-event/delete/:id", async (req, res) => {
       const id = req.params.id;
@@ -887,9 +480,7 @@ async function run() {
       const result = await allEventsFromData.deleteOne(filter);
       res.send(result);
     });
-
     // News CRUD system code
-
     // get news array with author email
     app.get("/all-news/:email", async (req, res) => {
       email = req.params.email;
@@ -897,7 +488,6 @@ async function run() {
       const result = await alumniNewsCollection.find(filter).toArray();
       res.send(result);
     });
-
     // update the News info
     app.put("/news/:id", async (req, res) => {
       const id = req.params.id;
@@ -915,61 +505,14 @@ async function run() {
           time: newsInfo.time,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
-
     // Delete The news
     app.delete("/news/delete/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await alumniNewsCollection.deleteOne(filter);
-      res.send(result);
-    });
-
-    // Event post Edit and Delete section
-
-    // get event array with author email
-    app.get("/event/:email", async (req, res) => {
-      email = req.params.email;
-      const filter = { authorEmail: email };
-      // console.log(email)
-      const result = await AllEventsData.find(filter).toArray();
-      res.send(result);
-    });
-
-    // update the Event info
-    app.put("/event/:id", async (req, res) => {
-      const id = req.params.id;
-      const eventInfo = req.body;
-      // console.log(eventInfo)
-      // console.log(id)
-      const filter = { _id: new ObjectId(id) };
-      const options = { upsert: true };
-      const updatedDoc = {
-        $set: {
-          batch: eventInfo.batch,
-          category: eventInfo.category,
-          date: eventInfo.date,
-          description: eventInfo.description,
-          event_title: eventInfo.event_title,
-          image_url: eventInfo.image_url,
-          location: eventInfo.location,
-        },
-      };
-      const result = await AllEventsData.updateOne(filter, updatedDoc, options);
-      res.send(result);
-    });
-
-    // Delete The single event
-    app.delete("/event/delete/:id", async (req, res) => {
-      const id = req.params.id;
-      const filter = { _id: new ObjectId(id) };
-      const result = await AllEventsData.deleteOne(filter);
       res.send(result);
     });
   } finally {
@@ -982,6 +525,9 @@ app.get("/", (req, res) => {
   res.send("Hi From Alumni server");
 });
 
+app.all("*", (req, res) => {
+  res.send("No routes found");
+});
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

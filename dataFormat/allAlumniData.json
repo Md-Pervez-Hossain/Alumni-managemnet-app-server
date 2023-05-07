@@ -1,0 +1,193 @@
+[
+  {
+    "firstName": "Emily",
+    "lastName": "Jones",
+    "name": "Emily Jones",
+    "profile_picture": "https://randomuser.me/api/portraits/women/10.jpg",
+    "graduation_year": "2018",
+    "degree": "Bachelor's",
+    "department": "Computer Science",
+    "major": "Artificial Intelligence",
+    "email": "emilyjones@example.com",
+    "phone": "+1 123-456-7890",
+
+    "address": {
+      "street": "123 Main St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102"
+    },
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Artificial Intelligence",
+      "institution": "University of California, Berkeley",
+      "graduation_year": "2018",
+      "gpa": "3.8"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1996-05-20",
+      "gender": "Female",
+      "blood_group": "O+",
+      "fathers_name": "John Jones",
+      "mothers_name": "Linda Jones",
+      "marital_status": "Single",
+      "nationality": "American",
+      "languages": ["English", "Spanish"]
+    }
+  },
+  {
+    "firstName": "William",
+    "lastName": "Johnson",
+    "name": "William Johnson",
+    "profile_picture": "https://randomuser.me/api/portraits/men/5.jpg",
+    "graduation_year": "2014",
+    "degree": "Master's",
+    "department": "Business",
+    "major": "Marketing",
+    "email": "williamjohnson@example.com",
+    "phone": "+1 234-567-8901",
+    "address": {
+      "street": "456 Elm St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10010"
+    },
+    "education": {
+      "degree": "Master's",
+      "major": "Marketing",
+      "institution": "Columbia University",
+      "graduation_year": "2014",
+      "gpa": "3.7"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1988-08-15",
+      "gender": "Male",
+      "blood_group": "AB+",
+      "fathers_name": "James Johnson",
+      "mothers_name": "Karen Johnson",
+      "marital_status": "Married",
+      "nationality": "American",
+      "languages": ["English", "French"]
+    }
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Lee",
+    "name": "Sophia Lee",
+    "profile_picture": "https://randomuser.me/api/portraits/women/30.jpg",
+    "graduation_year": "2019",
+    "degree": "Bachelor's",
+    "department": "Psychology",
+    "major": "Cognitive Neuroscience",
+    "email": "sophialee@example.com",
+    "phone": "+1 345-678-9012",
+    "address": {
+      "street": "789 Maple Ave",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90025"
+    },
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Cognitive Neuroscience",
+      "institution": "University of California, Los Angeles",
+      "graduation_year": "2019",
+      "gpa": "3.9"
+    },
+
+    "is_employed": false,
+
+    "personal_information": {
+      "date_of_birth": "1997-11-12",
+      "gender": "Female",
+      "blood_group": "B-",
+      "fathers_name": "David Lee",
+      "mothers_name": "Michelle Lee",
+      "marital_status": "Single",
+      "nationality": "American",
+      "languages": ["English", "Korean"]
+    }
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Lee",
+    "name": "Sarah Lee",
+    "profile_picture": "https://randomuser.me/api/portraits/women/12.jpg",
+    "graduation_year": "2020",
+    "degree": "Master's",
+    "department": "Business Administration",
+    "major": "Marketing",
+    "email": "sarahlee@example.com",
+    "phone": "+1 987-654-3210",
+    "address": {
+      "street": "456 Elm St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001"
+    },
+    "education": {
+      "degree": "Master's",
+      "major": "Marketing",
+      "institution": "Columbia University",
+      "graduation_year": "2020",
+      "gpa": "3.9"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1994-08-12",
+      "gender": "Female",
+      "blood_group": "A-",
+      "fathers_name": "David Lee",
+      "mothers_name": "Karen Lee",
+      "marital_status": "Married",
+      "nationality": "American",
+      "languages": ["English", "Mandarin"]
+    }
+  },
+  {
+    "firstName": "David",
+    "lastName": "Nguyen",
+    "name": "David Nguyen",
+    "profile_picture": "https://randomuser.me/api/portraits/men/18.jpg",
+    "graduation_year": "2015",
+    "degree": "Bachelor's",
+    "department": "Computer Science",
+    "major": "Software Engineering",
+    "email": "davidnguyen@example.com",
+    "phone": "+1 456-789-0123",
+    "address": {
+      "street": "789 Oak St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90012"
+    },
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Software Engineering",
+      "institution": "University of California, Los Angeles",
+      "graduation_year": "2015",
+      "gpa": "3.5"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1992-03-25",
+      "gender": "Male",
+      "blood_group": "B+",
+      "fathers_name": "Michael Nguyen",
+      "mothers_name": "Helen Nguyen",
+      "marital_status": "Single",
+      "nationality": "American",
+      "languages": ["English", "Vietnamese"]
+    }
+  }
+]
