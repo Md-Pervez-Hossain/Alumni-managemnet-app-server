@@ -7,9 +7,10 @@ const { query } = require("express");
 require("dotenv").config();
 
 // SSL COMMERCE
-// const store_id = env.process.STORE_ID;
-// const store_passwd = env.process.STORE_PASSWORD;
-// const is_live = false; //true for live, false for sandbox
+const SSLCommerzPayment = require("sslcommerz-lts");
+const store_id = process.env.STORE_ID;
+const store_passwd = process.env.STORE_PASSWORD;
+const is_live = false; //true for live, false for sandbox
 
 // middleware.config
 app.use(cors());
@@ -43,7 +44,9 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
+    const allAlumniData = client
+      .db("alumni-management-app")
+      .collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -84,11 +87,16 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
-    const newsComments = client.db("alumni-management-app").collection("newsComments");
+    const newsComments = client
+      .db("alumni-management-app")
+      .collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
       .collection("allEventsFromData");
+    const charityDonationData = client
+      .db("alumni-management-app")
+      .collection("charityDonationData");
 
     // const eventsCollection = client
     //   .db("alumni-management-app")
@@ -96,9 +104,129 @@ async function run() {
 
     // successFullStoryComments start
 
+    // charity donation start
+
+    app.post("/charityDonation", (req, res) => {
+      const charityDonationInfo = req.body;
+      console.log(charityDonationInfo);
+      const {
+        cus_name,
+        cus_country,
+        cus_add1,
+        cus_city,
+        cus_state,
+        cus_email,
+        cus_postcode,
+        cus_phone,
+        cus_donationAmount,
+        currency,
+        donationId,
+        donationTitle,
+      } = charityDonationInfo;
+      if (
+        !cus_name ||
+        !cus_country ||
+        !cus_add1 ||
+        !cus_city ||
+        !cus_state ||
+        !cus_email ||
+        !cus_postcode ||
+        !cus_phone ||
+        !cus_donationAmount ||
+        !currency ||
+        !donationId ||
+        !donationTitle
+      ) {
+        return res.send({ error: "Pleaase Provide All The Information" });
+      }
+      const transactionId = new ObjectId().toString();
+      const data = {
+        total_amount: charityDonationInfo?.cus_donationAmount,
+        currency: charityDonationInfo?.currency,
+        tran_id: transactionId, // use unique tran_id for each api call
+        success_url: `http://localhost:8000/payment/success?transactionId=${transactionId}`,
+        fail_url: `http://localhost:8000/payment/fail?transactionId=${transactionId}`,
+        cancel_url: "http://localhost:8000/payment/cancle",
+        ipn_url: "http://localhost:3030/ipn",
+        shipping_method: "Courier",
+        product_name: "Computer.",
+        product_category: "Electronic",
+        product_profile: "general",
+        cus_name: charityDonationInfo?.cus_name,
+        cus_email: charityDonationInfo?.cus_email,
+        cus_add1: charityDonationInfo?.cus_add1,
+        cus_add2: "Dhaka",
+        cus_city: charityDonationInfo?.cus_add1,
+        cus_state: charityDonationInfo?.cus_state,
+        cus_postcode: charityDonationInfo?.cus_postcode,
+        cus_country: charityDonationInfo?.cus_country,
+        cus_phone: charityDonationInfo?.cus_phone,
+        cus_fax: "01711111111",
+        ship_name: "Customer Name",
+        ship_add1: "Dhaka",
+        ship_add2: "Dhaka",
+        ship_city: "Dhaka",
+        ship_state: "Dhaka",
+        ship_postcode: 1000,
+        ship_country: "Bangladesh",
+      };
+      const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
+      sslcz.init(data).then((apiResponse) => {
+        // Redirect the user to payment gateway
+        let GatewayPageURL = apiResponse.GatewayPageURL;
+        console.log(apiResponse);
+        charityDonationData.insertOne({
+          ...charityDonationInfo,
+          transactionId,
+          paid: false,
+        });
+        res.send({ url: GatewayPageURL });
+      });
+    });
+    app.post("/payment/success", async (req, res) => {
+      // console.log("success");
+      const { transactionId } = req.query;
+      console.log(transactionId);
+      if (!transactionId) {
+        res.redirect("http://localhost:3000/payment/fail");
+      }
+      const result = await charityDonationData.updateOne(
+        { transactionId },
+        { $set: { paid: true, paidAt: new Date() } }
+      );
+      if (result.modifiedCount > 0) {
+        res.redirect(`http://localhost:3000/payment/success/${transactionId}`);
+      }
+    });
+    app.post("/payment/fail", async (req, res) => {
+      const { transactionId } = req.query;
+      if (!transactionId) {
+        res.redirect("http://localhost:3000/payment/fail");
+      }
+      const result = await charityDonationData.deleteOne({ transactionId });
+      if (result.deletedCount > 0) {
+        res.redirect("http://localhost:3000/payment/fail");
+      }
+    });
+    app.get("/payment/success/:transactionId", async (req, res) => {
+      const transactionId = req.params.transactionId;
+      const query = { transactionId: transactionId };
+      const result = await charityDonationData.findOne(query);
+      res.send(result);
+    });
+
+    app.get("/charityDonation", async (req, res) => {
+      const query = {};
+      const result = await charityDonationData.find(query).toArray();
+      res.send(result);
+    });
+    // charity donation end
+
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(successStoryComments);
+      const cursor = await successFullStoryComments.insertOne(
+        successStoryComments
+      );
       res.send(cursor);
     });
 
@@ -161,6 +289,12 @@ async function run() {
       const result = await allCharityData.findOne(query);
       res.send(result);
     });
+    app.get("/charity/donation/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allCharityData.findOne(query);
+      res.send(result);
+    });
     app.put("/charity/:id", async (req, res) => {
       const charityInfo = req.body;
       const id = req.params.id;
@@ -180,7 +314,11 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
+      const result = await allCharityData.updateOne(
+        filter,
+        updatedCharityInfo,
+        options
+      );
       res.send(result);
     });
     //charity end
@@ -223,7 +361,11 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
+      const result = await SuccessFullStory.updateOne(
+        filter,
+        updatedStory,
+        options
+      );
       res.send(result);
     });
 
@@ -293,8 +435,9 @@ async function run() {
       const result = await newsComments.find(query).toArray();
       res.send(result);
     });
-    app.get("/newsComments/:commentsId", async (req, res) => {
+    app.get("/newsComment/:commentsId", async (req, res) => {
       const commentsId = req.params.commentsId;
+      console.log(commentsId);
       const query = { commentsId: commentsId };
       const result = await newsComments.find(query).toArray();
       res.send(result);
@@ -576,7 +719,9 @@ async function run() {
         if (err) {
           console.error(err);
 
-          res.status(500).send({ message: "Error saving user data to MongoDB" });
+          res
+            .status(500)
+            .send({ message: "Error saving user data to MongoDB" });
           return;
         }
         res.send({ message: "User created successfully" });
@@ -643,7 +788,11 @@ async function run() {
           },
         },
       };
-      const result = await allAlumniData.updateOne(filter, updatedUserData, options);
+      const result = await allAlumniData.updateOne(
+        filter,
+        updatedUserData,
+        options
+      );
       res.send(result);
       console.log("---- data -----", data);
       console.log("----updated data -----", updatedUserData);
@@ -735,7 +884,11 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+      const result = await allEventsFromData.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
       res.send(result);
     });
 
@@ -774,7 +927,11 @@ async function run() {
           time: newsInfo.time,
         },
       };
-      const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
+      const result = await alumniNewsCollection.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
       res.send(result);
     });
 
