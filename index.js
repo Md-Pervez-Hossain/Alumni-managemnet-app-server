@@ -737,50 +737,40 @@ async function run() {
       // if not found then insert a new one
       const options = { upsert: true };
       const data = req.body;
-      const updatedUserData = {
+
+      const updateData = {
         $set: {
           firstName: data.firstName,
           lastName: data.lastName,
           name: `${data.firstName} ${data.lastName}`,
-          profile_picture: data.display_url,
           graduation_year: data.graduation_year,
           degree: data.degree,
           major: data.major,
           email: data.email,
           phone: data.phone,
           universityName: data.universityName,
-          phone_2: data.phone_2,
           address: {
-            street: data.streetAddress,
-            city: data.city,
-            state: data.stateName,
-            zip: data.zipCode,
+            street: data.address.street,
+            city: data.address.city,
+            state: data.address.state,
+            zip: data.address.zip,
           },
-          education: [
-            {
-              degree: data.degree,
-              major: data.major,
-              institution: data.universityName,
-              graduation_year: data.graduation_year,
-              gpa: "",
-            },
-          ],
+          education: {
+            degree: data.education.degree,
+            major: data.education.major,
+            institution: data.education.institution,
+            graduation_year: data.education.graduation_year,
+            gpa: "",
+          },
+
           is_employed: false,
-          careers: [
-            {
-              company: "",
-              position: "",
-              start_date: "",
-              end_date: "",
-              responsibilities: "",
-            },
-          ],
+
           personal_information: {
-            date_of_birth: data.dateOfBirth,
-            gender: data.gender,
-            blood_group: data.bloodGroup,
-            fathers_name: data.fatherName,
-            mothers_name: data.motherName,
+            date_of_birth: data.personal_information.date_of_birth,
+            gender: data.personal_information.gender,
+            blood_group: data.personal_information.blood_group,
+            fathers_name: data.personal_information.fathers_name,
+            mothers_name: data.personal_information.mothers_name,
             marital_status: "",
             nationality: "Bangladeshi",
             languages: ["English", "Bengali"],
@@ -788,14 +778,12 @@ async function run() {
           },
         },
       };
-      const result = await allAlumniData.updateOne(
-        filter,
-        updatedUserData,
-        options
-      );
+
+      // console.log("----updated data -----", updatedUserData);
+      const result = await allAlumniData.updateOne(filter, updateData, options);
       res.send(result);
-      console.log("---- data -----", data);
-      console.log("----updated data -----", updatedUserData);
+      // console.log("---- data -----", data);
+      console.log("---- updateData -----", updateData);
     });
 
     //---- U T I L S ----//

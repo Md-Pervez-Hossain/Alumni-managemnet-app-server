@@ -1,1496 +1,193 @@
 [
   {
-    "name": "Sadia Rahman",
-    "profile_picture": "https://media.licdn.com/dms/image/C5603AQFtrnQuU6f5Sw/profile-displayphoto-shrink_800_800/0/1662099628632?e=2147483647&v=beta&t=z4540n_NqEDFFT4M0szi5pl5JsTxN4ukycepcNwubsI",
-    "graduation_year": "2015",
-    "degree": "Bachelor of Science",
-    "department": "Computer Science",
-    "major": "Computer Science",
-    "email": "sadia.rahman@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "123 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1205"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Ideal School and College",
-        "graduation_year": "2009",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Viqarunnisa Noon College",
-        "graduation_year": "2011",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Computer Science",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2015",
-        "gpa": 3.9
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Grameenphone",
-        "position": "Software Engineer",
-        "start_date": "2015-07-01",
-        "end_date": "2018-12-31",
-        "responsibilities": [
-          "Developed and maintained software applications",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Pathao",
-        "position": "Senior Software Engineer",
-        "start_date": "2019-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1993-01-01",
-      "gender": "Female",
-      "blood_group": "B+",
-      "fathers_name": "Md. Abdul Rahman",
-      "mothers_name": "Shahnaz Rahman",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Reading books", "Travelling"]
-    }
-  },
-
-  {
-    "name": "John Doe",
-    "profile_picture": "data:image/jpeg;base64,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g",
-    "graduation_year": "2010",
-    "degree": "Bachelor of Science",
-    "department": "Computer Science",
-    "major": "Computer Science",
-    "email": "johndoe@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "",
-    "address": {
-      "street": "456 Oak Street",
-      "city": "New York",
-      "state": "NY",
-      "zip": "10001"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "ABC School",
-        "graduation_year": "2006",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "DEF College",
-        "graduation_year": "2008",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Computer Science",
-        "institution": "XYZ University",
-        "graduation_year": "2010",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Google",
-        "position": "Software Engineer",
-        "start_date": "2010-06-01",
-        "end_date": "2014-12-31",
-        "responsibilities": [
-          "Developed and maintained software applications",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Facebook",
-        "position": "Senior Software Engineer",
-        "start_date": "2015-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1988-05-15",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "David Doe",
-      "mothers_name": "Mary Doe",
-      "marital_status": "Single",
-      "nationality": "American",
-      "languages": ["English", "Spanish"],
-      "hobbies": ["Playing basketball", "Watching movies"]
-    }
-  },
-
-  {
-    "name": "John Smith",
-    "profile_picture": "https://media.licdn.com/dms/image/C5603AQE_qFQUVkIu5A/profile-displayphoto-shrink_800_800/0/1661244893152?e=2147483647&v=beta&t=1bUt_8NtpHKhKHkH19B2GJnh6tw88ItWhaNBacDVdNo",
-    "graduation_year": "2010",
-    "degree": "Bachelor of Arts",
-    "department": "English",
-    "major": "Creative Writing",
-    "email": "john.smith@example.com",
-    "phone": "555-123-4567",
-    "phone_2": "",
-    "address": {
-      "street": "456 Elm Street",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zip": "90017"
-    },
-    "education": [
-      {
-        "degree": "High School Diploma",
-        "major": "",
-        "institution": "Washington High School",
-        "graduation_year": "2006",
-        "gpa": 3.5
-      },
-      {
-        "degree": "Bachelor of Arts",
-        "major": "Creative Writing",
-        "institution": "University of California, Los Angeles",
-        "graduation_year": "2010",
-        "gpa": 3.2
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Random House",
-        "position": "Editorial Assistant",
-        "start_date": "2010-06-01",
-        "end_date": "2012-12-31",
-        "responsibilities": [
-          "Edited and proofread manuscripts",
-          "Assisted senior editors with administrative tasks",
-          "Communicated with authors and literary agents"
-        ]
-      },
-      {
-        "company": "HBO",
-        "position": "Writer's Assistant",
-        "start_date": "2013-01-01",
-        "end_date": "2014-12-31",
-        "responsibilities": [
-          "Assisted showrunners and writers with research and script preparation",
-          "Answered phones and managed schedules",
-          "Participated in writers' room meetings"
-        ]
-      },
-      {
-        "company": "Netflix",
-        "position": "Staff Writer",
-        "start_date": "2015-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Wrote and revised scripts for original series",
-          "Collaborated with showrunners, directors, and producers",
-          "Pitched ideas for new projects"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1988-05-15",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Robert Smith",
-      "mothers_name": "Laura Smith",
-      "marital_status": "Single",
-      "nationality": "American",
-      "languages": ["English", "Spanish"],
-      "hobbies": ["Playing guitar", "Hiking"]
-    }
-  },
-
-  {
-    "name": "David Kim",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-    "graduation_year": "2012",
-    "degree": "Bachelor of Science",
-    "department": "Mechanical Engineering",
-    "major": "Mechanical Engineering",
-    "email": "david.kim@example.com",
-    "phone": "123-456-7890",
-    "address": {
-      "street": "456 Maple Street",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zip": "90001"
-    },
-    "education": [
-      {
-        "degree": "High School Diploma",
-        "major": "",
-        "institution": "John Marshall High School",
-        "graduation_year": "2008",
-        "gpa": 3.5
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Mechanical Engineering",
-        "institution": "University of California, Los Angeles",
-        "graduation_year": "2012",
-        "gpa": 3.7
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Boeing",
-        "position": "Aerospace Engineer",
-        "start_date": "2012-07-01",
-        "end_date": "2015-12-31",
-        "responsibilities": [
-          "Designed and tested aircraft components and systems",
-          "Developed and implemented new manufacturing processes",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget"
-        ]
-      },
-      {
-        "company": "SpaceX",
-        "position": "Senior Aerospace Engineer",
-        "start_date": "2016-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Designed and tested spacecraft components and systems",
-          "Led a team of engineers to develop new rocket propulsion technology",
-          "Collaborated with external partners to develop innovative solutions for space exploration"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1990-06-15",
-      "gender": "Male",
-      "blood_group": "A+",
-      "fathers_name": "James Kim",
-      "mothers_name": "Maria Kim",
-      "marital_status": "Single",
-      "nationality": "American",
-      "languages": ["English", "Korean"],
-      "hobbies": ["Playing basketball", "Traveling"]
-    }
-  },
-
-  {
-    "name": "Rakib Hassan",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
+    "firstName": "Emily",
+    "lastName": "Jones",
+    "name": "Emily Jones",
+    "profile_picture": "https://randomuser.me/api/portraits/women/10.jpg",
     "graduation_year": "2018",
-    "degree": "Bachelor of Science",
-    "department": "Electrical and Electronic Engineering",
-    "major": "Electrical and Electronic Engineering",
-    "email": "rakib.hassan@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "",
+    "degree": "Bachelor's",
+    "department": "Computer Science",
+    "major": "Artificial Intelligence",
+    "email": "emilyjones@example.com",
+    "phone": "+1 123-456-7890",
+
     "address": {
-      "street": "456 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1205"
+      "street": "123 Main St",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102"
     },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2012",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Adamjee Cantonment College",
-        "graduation_year": "2014",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Electrical and Electronic Engineering",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2018",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Robi Axiata Limited",
-        "position": "Graduate Engineer",
-        "start_date": "2018-10-01",
-        "end_date": "2020-12-31",
-        "responsibilities": [
-          "Worked on 2G/3G/LTE network optimization and performance improvement",
-          "Performed network KPI analysis and reporting",
-          "Collaborated with cross-functional teams to resolve network issues"
-        ]
-      },
-      {
-        "company": "Ericsson Bangladesh Limited",
-        "position": "Assistant Engineer",
-        "start_date": "2021-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Work on 5G network planning and implementation",
-          "Perform network KPI analysis and optimization",
-          "Collaborate with customers to provide network solutions"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1996-02-14",
-      "gender": "Male",
-      "blood_group": "A+",
-      "fathers_name": "Abdul Mannan",
-      "mothers_name": "Farida Yasmin",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing cricket", "Travelling"]
-    }
-  },
-
-  {
-    "name": "Shakil Ahmed",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2017",
-    "degree": "Bachelor of Science",
-    "department": "Mechanical Engineering",
-    "major": "Mechanical Engineering",
-    "email": "shakil.ahmed@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Elm Street",
-      "city": "Chittagong",
-      "state": "",
-      "zip": "4000"
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Artificial Intelligence",
+      "institution": "University of California, Berkeley",
+      "graduation_year": "2018",
+      "gpa": "3.8"
     },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Chittagong Collegiate School",
-        "graduation_year": "2012",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Chittagong Government College",
-        "graduation_year": "2014",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Mechanical Engineering",
-        "institution": "Chittagong University of Engineering and Technology",
-        "graduation_year": "2017",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Toyota",
-        "position": "Design Engineer",
-        "start_date": "2017-08-01",
-        "end_date": "2020-12-31",
-        "responsibilities": [
-          "Designed and developed new car models",
-          "Collaborated with cross-functional teams to ensure project success",
-          "Created technical drawings and models using CAD software"
-        ]
-      },
-      {
-        "company": "General Electric",
-        "position": "Senior Design Engineer",
-        "start_date": "2021-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of engineers to design new products",
-          "Collaborate with product management to define product requirements",
-          "Develop and improve design processes to increase efficiency"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1995-05-20",
-      "gender": "Male",
-      "blood_group": "AB+",
-      "fathers_name": "Abdul Latif",
-      "mothers_name": "Nurjahan Begum",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing football", "Watching movies"]
-    }
-  },
 
-  {
-    "name": "Amrita Dae",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2014",
-    "degree": "Bachelor of Science in Nursing",
-    "department": "Health Sciences",
-    "major": "Nursing",
-    "email": "amrita.dae@example.com",
-    "phone": "555-123-4567",
-    "phone_2": "555-987-6543",
-    "address": {
-      "street": "789 Main Street",
-      "city": "New York",
-      "state": "NY",
-      "zip": "10001"
-    },
-    "education": [
-      {
-        "degree": "High School Diploma",
-        "major": "General Studies",
-        "institution": "John F. Kennedy High School",
-        "graduation_year": "2010",
-        "gpa": 3.5
-      },
-      {
-        "degree": "Bachelor of Science in Nursing",
-        "major": "Nursing",
-        "institution": "New York University",
-        "graduation_year": "2014",
-        "gpa": 3.8
-      }
-    ],
     "is_employed": true,
-    "careers": [
-      {
-        "company": "Mount Sinai Hospital",
-        "position": "Registered Nurse",
-        "start_date": "2014-07-01",
-        "end_date": null,
-        "responsibilities": [
-          "Provided patient care and medication administration",
-          "Monitored and documented patient progress",
-          "Collaborated with interdisciplinary team members"
-        ]
-      }
-    ],
+
     "personal_information": {
-      "date_of_birth": "1992-05-25",
+      "date_of_birth": "1996-05-20",
       "gender": "Female",
       "blood_group": "O+",
-      "fathers_name": "Anupam Dae",
-      "mothers_name": "Sarita Dae",
+      "fathers_name": "John Jones",
+      "mothers_name": "Linda Jones",
       "marital_status": "Single",
       "nationality": "American",
-      "languages": ["English", "Spanish"],
-      "hobbies": ["Reading", "Yoga"]
+      "languages": ["English", "Spanish"]
     }
   },
-
   {
-    "name": "Rana Ahmed",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2017",
-    "degree": "Bachelor of Arts",
-    "department": "English",
-    "major": "Literature",
-    "email": "rana.ahmed@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Broadway",
-      "city": "New York",
-      "state": "NY",
-      "zip": "10013"
-    },
-    "education": [
-      {
-        "degree": "High School Diploma",
-        "major": "",
-        "institution": "Stuyvesant High School",
-        "graduation_year": "2013",
-        "gpa": 3.8
-      },
-      {
-        "degree": "Bachelor of Arts",
-        "major": "Literature",
-        "institution": "New York University",
-        "graduation_year": "2017",
-        "gpa": 3.5
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Penguin Random House",
-        "position": "Editorial Assistant",
-        "start_date": "2017-09-01",
-        "end_date": "2018-12-31",
-        "responsibilities": [
-          "Assisted senior editors in the acquisition and development of new titles",
-          "Drafted pitch letters and prepared submission materials for new book proposals",
-          "Coordinated with authors, agents, and other publishing professionals"
-        ]
-      },
-      {
-        "company": "HarperCollins Publishers",
-        "position": "Assistant Editor",
-        "start_date": "2019-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Managed a portfolio of titles from manuscript to publication",
-          "Worked with authors and agents to ensure timely delivery of materials",
-          "Collaborated with design, marketing, and publicity teams to execute book launches"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1995-05-02",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Abdul Ahmed",
-      "mothers_name": "Najma Ahmed",
-      "marital_status": "Single",
-      "nationality": "American",
-      "languages": ["English", "French"],
-      "hobbies": ["Playing guitar", "Watching movies"]
-    }
-  },
-
-  {
-    "name": "Nahid Rahman",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2016",
-    "degree": "Bachelor of Business Administration",
-    "department": "Business Administration",
+    "firstName": "William",
+    "lastName": "Johnson",
+    "name": "William Johnson",
+    "profile_picture": "https://randomuser.me/api/portraits/men/5.jpg",
+    "graduation_year": "2014",
+    "degree": "Master's",
+    "department": "Business",
     "major": "Marketing",
-    "email": "nahid.rahman@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
+    "email": "williamjohnson@example.com",
+    "phone": "+1 234-567-8901",
     "address": {
-      "street": "456 Park Avenue",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1212"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2010",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Business Studies",
-        "institution": "Dhaka City College",
-        "graduation_year": "2012",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Business Administration",
-        "major": "Marketing",
-        "institution": "North South University",
-        "graduation_year": "2016",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Unilever",
-        "position": "Assistant Brand Manager",
-        "start_date": "2016-07-01",
-        "end_date": "2018-12-31",
-        "responsibilities": [
-          "Developed and executed brand plans",
-          "Collaborated with cross-functional teams to launch new products",
-          "Conducted market research and analyzed consumer insights"
-        ]
-      },
-      {
-        "company": "Procter & Gamble",
-        "position": "Brand Manager",
-        "start_date": "2019-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Managed a portfolio of brands",
-          "Developed and executed marketing campaigns",
-          "Collaborated with sales teams to drive business growth"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1994-06-01",
-      "gender": "Male",
-      "blood_group": "AB+",
-      "fathers_name": "Md. Abdur Rahman",
-      "mothers_name": "Sultana Akter",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing football", "Travelling"]
-    }
-  },
-
-  {
-    "name": "Amit Sharma",
-    "profile_picture": "https://example.com/amit-sharma/profile_picture.jpg",
-    "graduation_year": "2016",
-    "degree": "Bachelor of Technology",
-    "department": "Computer Science and Engineering",
-    "major": "Computer Science and Engineering",
-    "email": "amit.sharma@example.com",
-    "phone": "+91 1234567890",
-    "phone_2": "+91 9876543210",
-    "address": {
-      "street": "45/A, West Avenue",
-      "city": "New Delhi",
-      "state": "Delhi",
-      "zip": "110001",
-      "country": "India"
-    },
-    "education": [
-      {
-        "degree": "Secondary School Certificate (SSC)",
-        "major": "Science",
-        "institution": "Kendriya Vidyalaya",
-        "graduation_year": "2010",
-        "gpa": 9.6
-      },
-      {
-        "degree": "Higher Secondary Certificate (HSC)",
-        "major": "Science",
-        "institution": "Kendriya Vidyalaya",
-        "graduation_year": "2012",
-        "gpa": 9.2
-      },
-      {
-        "degree": "Bachelor of Technology",
-        "major": "Computer Science and Engineering",
-        "institution": "Indian Institute of Technology",
-        "graduation_year": "2016",
-        "gpa": 8.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Microsoft",
-        "position": "Software Engineer",
-        "start_date": "2016-08-01",
-        "end_date": "2020-12-31",
-        "responsibilities": [
-          "Developed and maintained software applications",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Google",
-        "position": "Senior Software Engineer",
-        "start_date": "2021-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1994-05-25",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Anil Sharma",
-      "mothers_name": "Sunita Sharma",
-      "marital_status": "Unmarried",
-      "nationality": "Indian",
-      "languages": ["Hindi", "English"],
-      "hobbies": ["Playing guitar", "Watching movies"]
-    }
-  },
-
-  {
-    "name": "Momena Begum",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2012",
-    "degree": "Bachelor of Arts",
-    "department": "English",
-    "major": "Literature",
-    "email": "momena.begum@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Oak Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1212"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2006",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Viqarunnisa Noon College",
-        "graduation_year": "2008",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Arts",
-        "major": "Literature",
-        "institution": "University of Dhaka",
-        "graduation_year": "2012",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Prothom Alo",
-        "position": "Reporter",
-        "start_date": "2012-07-01",
-        "end_date": "2016-12-31",
-        "responsibilities": [
-          "Covered breaking news stories",
-          "Researched and wrote articles for print and online media",
-          "Interviewed sources and conducted research for investigative pieces"
-        ]
-      },
-      {
-        "company": "BBC",
-        "position": "International Correspondent",
-        "start_date": "2017-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Reported on current events and breaking news from around the world",
-          "Produced radio and television news segments",
-          "Collaborated with local correspondents and fixers to cover stories in difficult environments"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1990-06-15",
-      "gender": "Female",
-      "blood_group": "O+",
-      "fathers_name": "Abdul Gafur",
-      "mothers_name": "Najma Begum",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English", "Arabic"],
-      "hobbies": ["Reading", "Traveling", "Cooking"]
-    }
-  },
-
-  {
-    "name": "Anik Hasan",
-    "profile_picture": "http://example.com/profile_picture",
-    "graduation_year": "2017",
-    "degree": "Bachelor of Science",
-    "department": "Computer Science and Engineering",
-    "major": "Computer Science",
-    "email": "anik.hasan@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Ideal School and College",
-        "graduation_year": "2011",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Viqarunnisa Noon College",
-        "graduation_year": "2013",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Computer Science",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2017",
-        "gpa": 3.7
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Pathao",
-        "position": "Software Engineer",
-        "start_date": "2017-07-01",
-        "end_date": "2019-12-31",
-        "responsibilities": [
-          "Developed and maintained software applications",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Grameenphone",
-        "position": "Senior Software Engineer",
-        "start_date": "2020-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1995-03-15",
-      "gender": "Male",
-      "blood_group": "A+",
-      "fathers_name": "Md. Hasan Ali",
-      "mothers_name": "Sultana Parvin",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing football", "Reading books"]
-    }
-  },
-
-  {
-    "name": "Mehedi Hasan",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2017",
-    "degree": "Bachelor of Science",
-    "department": "Electrical and Electronic Engineering",
-    "major": "Electronics",
-    "email": "mehedi.hasan@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Elm Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "St. Joseph Higher Secondary School",
-        "graduation_year": "2011",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2013",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Electronics",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2017",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Grameenphone",
-        "position": "Software Engineer",
-        "start_date": "2017-09-01",
-        "end_date": "2019-06-30",
-        "responsibilities": [
-          "Developed and maintained software applications",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Robi Axiata Limited",
-        "position": "Senior Software Engineer",
-        "start_date": "2019-07-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1995-01-01",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Md. Abdur Rahman",
-      "mothers_name": "Ruma Rahman",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing cricket", "Reading books"]
-    }
-  },
-
-  {
-    "name": "Ramim Ahmed",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2018",
-    "degree": "Bachelor of Science",
-    "department": "Electrical and Electronic Engineering",
-    "major": "Electrical and Electronic Engineering",
-    "email": "ramim.ahmed@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2014",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Adamjee Cantonment College",
-        "graduation_year": "2016",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Electrical and Electronic Engineering",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2018",
-        "gpa": 3.7
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Robi Axiata Limited",
-        "position": "Network Engineer",
-        "start_date": "2019-02-01",
-        "end_date": null,
-        "responsibilities": [
-          "Design, plan and implement network infrastructure",
-          "Provide technical support to customers",
-          "Perform network performance analysis and tuning"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1997-04-06",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Md. Abdul Aziz",
-      "mothers_name": "Nasrin Ahmed",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing football", "Travelling"]
-    }
-  },
-
-  {
-    "name": "Majeda Akter",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2014",
-    "degree": "Bachelor of Science",
-    "department": "Chemical Engineering",
-    "major": "Chemical Engineering",
-    "email": "majeda.akter@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "123 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1205"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Siddheswari Girls' High School",
-        "graduation_year": "2008",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Viqarunnisa Noon College",
-        "graduation_year": "2010",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Chemical Engineering",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2014",
-        "gpa": 3.7
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Unilever",
-        "position": "Production Engineer",
-        "start_date": "2014-07-01",
-        "end_date": "2018-12-31",
-        "responsibilities": [
-          "Monitored and ensured production efficiency and quality standards",
-          "Identified areas for process improvement and implemented solutions",
-          "Trained and supervised production team members"
-        ]
-      },
-      {
-        "company": "Procter & Gamble",
-        "position": "Senior Process Engineer",
-        "start_date": "2019-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Developed and implemented new processes for product development",
-          "Led cross-functional teams in new product launches",
-          "Analyzed data and identified trends for process optimization"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1992-05-12",
-      "gender": "Female",
-      "blood_group": "A+",
-      "fathers_name": "Md. Abdul Hakim",
-      "mothers_name": "Razia Sultana",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Cooking", "Travelling"]
-    }
-  },
-
-  {
-    "name": "Sadik Ahmed",
-    "profile_picture": "https://example.com/profile_picture.jpg",
-    "graduation_year": "2010",
-    "degree": "Bachelor of Science",
-    "department": "Electrical and Electronic Engineering",
-    "major": "Electrical and Electronic Engineering",
-    "email": "sadik.ahmed@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Main Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model College",
-        "graduation_year": "2006",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Dhaka College",
-        "graduation_year": "2008",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Electrical and Electronic Engineering",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2012",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Robi Axiata Limited",
-        "position": "Network Engineer",
-        "start_date": "2012-08-01",
-        "end_date": "2016-12-31",
-        "responsibilities": [
-          "Managed and maintained company's network infrastructure",
-          "Troubleshot and resolved network issues",
-          "Performed regular network maintenance and upgrades"
-        ]
-      },
-      {
-        "company": "Grameenphone",
-        "position": "Senior Network Engineer",
-        "start_date": "2017-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Designed and implemented network architecture for large-scale applications",
-          "Managed and mentored a team of network engineers",
-          "Collaborated with other teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1990-07-12",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Md. Abdul Hakim",
-      "mothers_name": "Nurjahan Begum",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing cricket", "Watching movies"]
-    }
-  },
-
-  {
-    "name": "Salma Begum",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2010",
-    "degree": "Bachelor of Arts",
-    "department": "English",
-    "major": "English Literature",
-    "email": "salma.begum@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Park Avenue",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Ideal School and College",
-        "graduation_year": "2006",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Humanities",
-        "institution": "Holy Cross College",
-        "graduation_year": "2008",
-        "gpa": 4.8
-      },
-      {
-        "degree": "Bachelor of Arts",
-        "major": "English Literature",
-        "institution": "University of Dhaka",
-        "graduation_year": "2012",
-        "gpa": 3.9
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "The Daily Star",
-        "position": "Journalist",
-        "start_date": "2012-07-01",
-        "end_date": "2018-12-31",
-        "responsibilities": [
-          "Reported on various beats including politics, business, and entertainment",
-          "Conducted interviews with public figures and experts",
-          "Wrote feature articles and investigative reports"
-        ]
-      },
-      {
-        "company": "BBC World Service",
-        "position": "Senior Producer",
-        "start_date": "2019-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Managed a team of reporters and producers",
-          "Produced news and current affairs programs for broadcast and online platforms",
-          "Developed and executed editorial strategies"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1990-03-15",
-      "gender": "Female",
-      "blood_group": "O+",
-      "fathers_name": "Abdul Khaleque",
-      "mothers_name": "Nurjahan Begum",
-      "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English", "French"],
-      "hobbies": ["Reading", "Traveling", "Cooking"]
-    }
-  },
-
-  {
-    "name": "Saima Katun",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2012",
-    "degree": "Bachelor of Science",
-    "department": "Physics",
-    "major": "Theoretical Physics",
-    "email": "saima.katun@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "",
-    "address": {
-      "street": "456 Second Avenue",
+      "street": "456 Elm St",
       "city": "New York",
       "state": "NY",
       "zip": "10010"
     },
-    "education": [
-      {
-        "degree": "High School Diploma",
-        "major": "",
-        "institution": "Brooklyn Technical High School",
-        "graduation_year": "2008",
-        "gpa": 3.7
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Theoretical Physics",
-        "institution": "Columbia University",
-        "graduation_year": "2012",
-        "gpa": 3.9
-      }
-    ],
+    "education": {
+      "degree": "Master's",
+      "major": "Marketing",
+      "institution": "Columbia University",
+      "graduation_year": "2014",
+      "gpa": "3.7"
+    },
+
     "is_employed": true,
-    "careers": [
-      {
-        "company": "NASA",
-        "position": "Research Scientist",
-        "start_date": "2013-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Conduct research on gravitational waves",
-          "Collaborate with other scientists to design and implement experiments",
-          "Publish papers in scientific journals"
-        ]
-      }
-    ],
+
     "personal_information": {
-      "date_of_birth": "1990-07-15",
-      "gender": "Female",
-      "blood_group": "O+",
-      "fathers_name": "Mohammad Katun",
-      "mothers_name": "Farida Begum",
+      "date_of_birth": "1988-08-15",
+      "gender": "Male",
+      "blood_group": "AB+",
+      "fathers_name": "James Johnson",
+      "mothers_name": "Karen Johnson",
       "marital_status": "Married",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Reading books", "Playing the piano"]
+      "nationality": "American",
+      "languages": ["English", "French"]
     }
   },
-
   {
-    "name": "Tamim Ahmed",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2016",
-    "degree": "Bachelor of Science",
-    "department": "Electrical and Electronic Engineering",
-    "major": "Electronics",
-    "email": "tamim.ahmed@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
+    "firstName": "Sophia",
+    "lastName": "Lee",
+    "name": "Sophia Lee",
+    "profile_picture": "https://randomuser.me/api/portraits/women/30.jpg",
+    "graduation_year": "2019",
+    "degree": "Bachelor's",
+    "department": "Psychology",
+    "major": "Cognitive Neuroscience",
+    "email": "sophialee@example.com",
+    "phone": "+1 345-678-9012",
     "address": {
-      "street": "456 Elm Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
+      "street": "789 Maple Ave",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90025"
     },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Dhaka Residential Model School and College",
-        "graduation_year": "2010",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Dhaka College",
-        "graduation_year": "2012",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Science",
-        "major": "Electronics",
-        "institution": "Bangladesh University of Engineering and Technology",
-        "graduation_year": "2016",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Samsung",
-        "position": "Software Engineer",
-        "start_date": "2016-08-01",
-        "end_date": "2020-12-31",
-        "responsibilities": [
-          "Developed and maintained software applications for Samsung's mobile devices",
-          "Collaborated with cross-functional teams to deliver projects on time and within budget",
-          "Participated in code reviews and provided feedback to team members"
-        ]
-      },
-      {
-        "company": "Apple",
-        "position": "Senior Software Engineer",
-        "start_date": "2021-01-01",
-        "end_date": null,
-        "responsibilities": [
-          "Lead a team of software engineers",
-          "Develop and design software architecture for large-scale applications",
-          "Collaborate with product and design teams to ensure timely delivery of high-quality products"
-        ]
-      }
-    ],
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Cognitive Neuroscience",
+      "institution": "University of California, Los Angeles",
+      "graduation_year": "2019",
+      "gpa": "3.9"
+    },
+
+    "is_employed": false,
+
     "personal_information": {
-      "date_of_birth": "1994-02-10",
+      "date_of_birth": "1997-11-12",
+      "gender": "Female",
+      "blood_group": "B-",
+      "fathers_name": "David Lee",
+      "mothers_name": "Michelle Lee",
+      "marital_status": "Single",
+      "nationality": "American",
+      "languages": ["English", "Korean"]
+    }
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Lee",
+    "name": "Sarah Lee",
+    "profile_picture": "https://randomuser.me/api/portraits/women/12.jpg",
+    "graduation_year": "2020",
+    "degree": "Master's",
+    "department": "Business Administration",
+    "major": "Marketing",
+    "email": "sarahlee@example.com",
+    "phone": "+1 987-654-3210",
+    "address": {
+      "street": "456 Elm St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001"
+    },
+    "education": {
+      "degree": "Master's",
+      "major": "Marketing",
+      "institution": "Columbia University",
+      "graduation_year": "2020",
+      "gpa": "3.9"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1994-08-12",
+      "gender": "Female",
+      "blood_group": "A-",
+      "fathers_name": "David Lee",
+      "mothers_name": "Karen Lee",
+      "marital_status": "Married",
+      "nationality": "American",
+      "languages": ["English", "Mandarin"]
+    }
+  },
+  {
+    "firstName": "David",
+    "lastName": "Nguyen",
+    "name": "David Nguyen",
+    "profile_picture": "https://randomuser.me/api/portraits/men/18.jpg",
+    "graduation_year": "2015",
+    "degree": "Bachelor's",
+    "department": "Computer Science",
+    "major": "Software Engineering",
+    "email": "davidnguyen@example.com",
+    "phone": "+1 456-789-0123",
+    "address": {
+      "street": "789 Oak St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90012"
+    },
+    "education": {
+      "degree": "Bachelor's",
+      "major": "Software Engineering",
+      "institution": "University of California, Los Angeles",
+      "graduation_year": "2015",
+      "gpa": "3.5"
+    },
+
+    "is_employed": true,
+
+    "personal_information": {
+      "date_of_birth": "1992-03-25",
       "gender": "Male",
       "blood_group": "B+",
-      "fathers_name": "Md. Abu Ahmed",
-      "mothers_name": "Nasrin Ahmed",
+      "fathers_name": "Michael Nguyen",
+      "mothers_name": "Helen Nguyen",
       "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing cricket", "Travelling"]
-    }
-  },
-
-  {
-    "name": "Mahin",
-    "profile_picture": "https://media.istockphoto.com/id/1318482009/photo/young-woman-ready-for-job-business-concept.jpg?s=612x612&w=0&k=20&c=Jc1NcoUMoM78AxPTh9EApaPU2kXh2evb499JgW99b0g=",
-
-    "graduation_year": "2020",
-    "degree": "Bachelor of Business Administration",
-    "department": "Management",
-    "major": "Marketing",
-    "email": "mahin@example.com",
-    "phone": "123-456-7890",
-    "phone_2": "555-555-5555",
-    "address": {
-      "street": "456 Oak Street",
-      "city": "Dhaka",
-      "state": "",
-      "zip": "1207"
-    },
-    "education": [
-      {
-        "degree": "SSC",
-        "major": "Science",
-        "institution": "Ideal School and College",
-        "graduation_year": "2014",
-        "gpa": 5.0
-      },
-      {
-        "degree": "HSC",
-        "major": "Science",
-        "institution": "Viqarunnisa Noon College",
-        "graduation_year": "2016",
-        "gpa": 5.0
-      },
-      {
-        "degree": "Bachelor of Business Administration",
-        "major": "Marketing",
-        "institution": "North South University",
-        "graduation_year": "2020",
-        "gpa": 3.8
-      }
-    ],
-    "is_employed": true,
-    "careers": [
-      {
-        "company": "Unilever Bangladesh",
-        "position": "Assistant Brand Manager",
-        "start_date": "2020-07-01",
-        "end_date": "2022-06-30",
-        "responsibilities": [
-          "Developed and executed marketing plans for assigned brands",
-          "Conducted consumer research and analyzed market trends",
-          "Collaborated with cross-functional teams to achieve business objectives"
-        ]
-      },
-      {
-        "company": "Procter & Gamble",
-        "position": "Brand Manager",
-        "start_date": "2022-07-01",
-        "end_date": null,
-        "responsibilities": [
-          "Develop and execute marketing strategies for assigned brands",
-          "Lead cross-functional teams to deliver projects on time and within budget",
-          "Analyze market trends and consumer insights to identify business opportunities"
-        ]
-      }
-    ],
-    "personal_information": {
-      "date_of_birth": "1996-05-12",
-      "gender": "Male",
-      "blood_group": "O+",
-      "fathers_name": "Md. Abdul Ali",
-      "mothers_name": "Jahanara Begum",
-      "marital_status": "Single",
-      "nationality": "Bangladeshi",
-      "languages": ["Bengali", "English"],
-      "hobbies": ["Playing football", "Travelling"]
+      "nationality": "American",
+      "languages": ["English", "Vietnamese"]
     }
   }
 ]
