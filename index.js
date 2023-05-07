@@ -4,6 +4,8 @@ const app = express();
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const { query } = require("express");
+const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 // SSL COMMERCE
@@ -715,25 +717,6 @@ async function run() {
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
-    // single person data EDIT
-    // app.put("/alumni/:email", async (req, res) => {
-    //   const alumniEmail = req.params.email;
-    //   const filter = { email: alumniEmail };
-    //   const updateInfo = req.body;
-    //   const options = { upsert: true };
-
-    //   const updatedDoc = {
-    //     $set: {
-    //       first_name: updateInfo.first_name,
-    //       last_name: updateInfo.last_name,
-    //       email: updateInfo.email,
-    //       phone_number: updateInfo.phone_number,
-    //       date: updateInfo.date,
-    //     },
-    //   };
-    //   const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
-    //   res.send(result);
-    // });
 
     // user created
     app.post("/alumni", (req, res) => {
@@ -746,7 +729,6 @@ async function run() {
             .send({ message: "Error saving user data to MongoDB" });
           return;
         }
-        res.send({ message: "User created successfully" });
         res.send({ message: "User created successfully" });
       });
     });
@@ -804,8 +786,6 @@ async function run() {
       // console.log("----updated data -----", updatedUserData);
       const result = await allAlumniData.updateOne(filter, updateData, options);
       res.send(result);
-      // console.log("---- data -----", data);
-      console.log("---- updateData -----", updateData);
     });
 
     //---- U T I L S ----//
@@ -993,6 +973,18 @@ async function run() {
       const filter = { _id: new ObjectId(id) };
       const result = await AllEventsData.deleteOne(filter);
       res.send(result);
+    });
+
+    // JWT Authentication
+    app.get("/auth/jwt", async (req, res) => {
+      const email = req.query.email;
+      const query = { email: email };
+      const user = await allAlumniData.findOne(query);
+      if (user) {
+        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: "1h" });
+        return res.send({ accessToken: token });
+      }
+      res.status(403).send({ accessToken: "" });
     });
   } finally {
   }
