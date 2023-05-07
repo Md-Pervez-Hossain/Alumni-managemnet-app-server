@@ -144,9 +144,10 @@ async function run() {
         total_amount: charityDonationInfo?.cus_donationAmount,
         currency: charityDonationInfo?.currency,
         tran_id: transactionId, // use unique tran_id for each api call
-        success_url: `http://localhost:8000/payment/success?transactionId=${transactionId}`,
-        fail_url: `http://localhost:8000/payment/fail?transactionId=${transactionId}`,
-        cancel_url: "http://localhost:8000/payment/cancle",
+        success_url: `https://alumni-managemnet-app-server.vercel.app/payment/success?transactionId=${transactionId}`,
+        fail_url: `https://alumni-managemnet-app-server.vercel.app/payment/fail?transactionId=${transactionId}`,
+        cancel_url:
+          "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
         ipn_url: "http://localhost:3030/ipn",
         shipping_method: "Courier",
         product_name: "Computer.",
@@ -188,24 +189,32 @@ async function run() {
       const { transactionId } = req.query;
       console.log(transactionId);
       if (!transactionId) {
-        res.redirect("http://localhost:3000/payment/fail");
+        res.redirect(
+          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
+        );
       }
       const result = await charityDonationData.updateOne(
         { transactionId },
         { $set: { paid: true, paidAt: new Date() } }
       );
       if (result.modifiedCount > 0) {
-        res.redirect(`http://localhost:3000/payment/success/${transactionId}`);
+        res.redirect(
+          `https://alumni-managemnet-app-server.vercel.app/payment/success/${transactionId}`
+        );
       }
     });
     app.post("/payment/fail", async (req, res) => {
       const { transactionId } = req.query;
       if (!transactionId) {
-        res.redirect("http://localhost:3000/payment/fail");
+        res.redirect(
+          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
+        );
       }
       const result = await charityDonationData.deleteOne({ transactionId });
       if (result.deletedCount > 0) {
-        res.redirect("http://localhost:3000/payment/fail");
+        res.redirect(
+          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
+        );
       }
     });
     app.get("/payment/success/:transactionId", async (req, res) => {
@@ -217,6 +226,20 @@ async function run() {
 
     app.get("/charityDonation", async (req, res) => {
       const query = {};
+      const result = await charityDonationData.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/charityDonation/:cus_email", async (req, res) => {
+      const cus_email = req.params.cus_email;
+      const query = { cus_email: cus_email };
+      const result = await charityDonationData.find(query).toArray();
+      res.send(result);
+    });
+
+    app.get("/charityDonation/:donationId", async (req, res) => {
+      const donationId = req.params.donationId;
+      const query = { donationId: donationId };
       const result = await charityDonationData.find(query).toArray();
       res.send(result);
     });
@@ -497,7 +520,6 @@ async function run() {
       const gallery = await cursor.toArray();
       res.send(gallery);
     });
-
     app.post("/gallery", async (req, res) => {
       const gallery = req.body;
       console.log(gallery);
