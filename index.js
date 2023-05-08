@@ -280,6 +280,7 @@ async function run() {
       res.send(result);
     });
 
+    // get charity of individual user
     app.get("/charity/email/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
@@ -945,8 +946,7 @@ async function run() {
     app.put("/event/:id", async (req, res) => {
       const id = req.params.id;
       const eventInfo = req.body;
-      // console.log(eventInfo)
-      // console.log(id)
+
       const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updatedDoc = {
