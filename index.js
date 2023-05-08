@@ -4,8 +4,6 @@ const app = express();
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const { query } = require("express");
-const jwt = require("jsonwebtoken");
-
 require("dotenv").config();
 
 // SSL COMMERCE
@@ -46,9 +44,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -89,9 +85,7 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
-    const newsComments = client
-      .db("alumni-management-app")
-      .collection("newsComments");
+    const newsComments = client.db("alumni-management-app").collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
@@ -103,8 +97,6 @@ async function run() {
     // const eventsCollection = client
     //   .db("alumni-management-app")
     //   .collection("alumniEvents");
-
-    // successFullStoryComments start
 
     // charity donation start
 
@@ -148,8 +140,7 @@ async function run() {
         tran_id: transactionId, // use unique tran_id for each api call
         success_url: `https://alumni-managemnet-app-server.vercel.app/payment/success?transactionId=${transactionId}`,
         fail_url: `https://alumni-managemnet-app-server.vercel.app/payment/fail?transactionId=${transactionId}`,
-        cancel_url:
-          "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
+        cancel_url: "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
         ipn_url: "https://alumni-managemnet-app-server.vercel.app/ipn",
         shipping_method: "Courier",
         product_name: "Computer.",
@@ -191,9 +182,7 @@ async function run() {
       const { transactionId } = req.query;
       console.log(transactionId);
       if (!transactionId) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
       const result = await charityDonationData.updateOne(
         { transactionId },
@@ -208,15 +197,11 @@ async function run() {
     app.post("/payment/fail", async (req, res) => {
       const { transactionId } = req.query;
       if (!transactionId) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
       const result = await charityDonationData.deleteOne({ transactionId });
       if (result.deletedCount > 0) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
     });
     app.get("/payment/success/:transactionId", async (req, res) => {
@@ -247,11 +232,11 @@ async function run() {
     });
     // charity donation end
 
+    // successFullStoryComments start
+
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
 
@@ -339,11 +324,7 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updatedCharityInfo,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
     //charity end
@@ -386,11 +367,7 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updatedStory,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
 
@@ -717,6 +694,25 @@ async function run() {
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
+    // single person data EDIT
+    // app.put("/alumni/:email", async (req, res) => {
+    //   const alumniEmail = req.params.email;
+    //   const filter = { email: alumniEmail };
+    //   const updateInfo = req.body;
+    //   const options = { upsert: true };
+
+    //   const updatedDoc = {
+    //     $set: {
+    //       first_name: updateInfo.first_name,
+    //       last_name: updateInfo.last_name,
+    //       email: updateInfo.email,
+    //       phone_number: updateInfo.phone_number,
+    //       date: updateInfo.date,
+    //     },
+    //   };
+    //   const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
+    //   res.send(result);
+    // });
 
     // user created
     app.post("/alumni", (req, res) => {
@@ -724,11 +720,10 @@ async function run() {
         if (err) {
           console.error(err);
 
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
+          res.status(500).send({ message: "Error saving user data to MongoDB" });
           return;
         }
+        res.send({ message: "User created successfully" });
         res.send({ message: "User created successfully" });
       });
     });
@@ -785,6 +780,16 @@ async function run() {
 
       // console.log("----updated data -----", updatedUserData);
       const result = await allAlumniData.updateOne(filter, updateData, options);
+      res.send(result);
+      // console.log("---- data -----", data);
+      console.log("---- updateData -----", updateData);
+    });
+
+    // delete alumni information
+    app.delete("/alumni/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await allAlumniData.deleteOne(query);
       res.send(result);
     });
 
@@ -874,11 +879,7 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
@@ -917,11 +918,7 @@ async function run() {
           time: newsInfo.time,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
@@ -973,20 +970,6 @@ async function run() {
       const filter = { _id: new ObjectId(id) };
       const result = await AllEventsData.deleteOne(filter);
       res.send(result);
-    });
-
-    // JWT Authentication
-    app.get("/auth/jwt", async (req, res) => {
-      const email = req.query.email;
-      const query = { email: email };
-      const user = await allAlumniData.findOne(query);
-      if (user) {
-        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, {
-          expiresIn: "1h",
-        });
-        return res.send({ accessToken: token });
-      }
-      res.status(403).send({ accessToken: "" });
     });
   } finally {
   }
