@@ -46,9 +46,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -89,9 +87,7 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
-    const newsComments = client
-      .db("alumni-management-app")
-      .collection("newsComments");
+    const newsComments = client.db("alumni-management-app").collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
@@ -148,8 +144,7 @@ async function run() {
         tran_id: transactionId, // use unique tran_id for each api call
         success_url: `https://alumni-managemnet-app-server.vercel.app/payment/success?transactionId=${transactionId}`,
         fail_url: `https://alumni-managemnet-app-server.vercel.app/payment/fail?transactionId=${transactionId}`,
-        cancel_url:
-          "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
+        cancel_url: "https://alumni-managemnet-app-server.vercel.app/payment/cancle",
         ipn_url: "https://alumni-managemnet-app-server.vercel.app/ipn",
         shipping_method: "Courier",
         product_name: "Computer.",
@@ -191,9 +186,7 @@ async function run() {
       const { transactionId } = req.query;
       console.log(transactionId);
       if (!transactionId) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
       const result = await charityDonationData.updateOne(
         { transactionId },
@@ -208,15 +201,11 @@ async function run() {
     app.post("/payment/fail", async (req, res) => {
       const { transactionId } = req.query;
       if (!transactionId) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
       const result = await charityDonationData.deleteOne({ transactionId });
       if (result.deletedCount > 0) {
-        res.redirect(
-          "https://alumni-managemnet-app-server.vercel.app/payment/fail"
-        );
+        res.redirect("https://alumni-managemnet-app-server.vercel.app/payment/fail");
       }
     });
     app.get("/payment/success/:transactionId", async (req, res) => {
@@ -249,9 +238,7 @@ async function run() {
 
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
 
@@ -339,11 +326,7 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updatedCharityInfo,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
     //charity end
@@ -386,11 +369,7 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updatedStory,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
 
@@ -724,9 +703,7 @@ async function run() {
         if (err) {
           console.error(err);
 
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
+          res.status(500).send({ message: "Error saving user data to MongoDB" });
           return;
         }
         res.send({ message: "User created successfully" });
@@ -785,6 +762,14 @@ async function run() {
 
       // console.log("----updated data -----", updatedUserData);
       const result = await allAlumniData.updateOne(filter, updateData, options);
+      res.send(result);
+    });
+
+    // delete alumni information
+    app.delete("/alumni/:email", async (req, res) => {
+      const reqEmail = req.params.email;
+      const query = { email: reqEmail };
+      const result = await allAlumniData.deleteOne(query);
       res.send(result);
     });
 
@@ -874,11 +859,7 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
@@ -917,11 +898,7 @@ async function run() {
           time: newsInfo.time,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
