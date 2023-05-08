@@ -312,6 +312,38 @@ async function run() {
       const result = await allCharityData.findOne(query);
       res.send(result);
     });
+    app.put("/approveCharity/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await allCharityData.updateOne(
+        filter,
+        updateCharity,
+        options
+      );
+      res.send(result);
+    });
+    app.put("/unApproveCharity/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await allCharityData.updateOne(
+        filter,
+        updateCharity,
+        options
+      );
+      res.send(result);
+    });
     app.put("/charity/:id", async (req, res) => {
       const charityInfo = req.body;
       const id = req.params.id;
@@ -408,6 +440,41 @@ async function run() {
       const query = {};
       const newsResult = await alumniNewsCollection.find(query).toArray();
       res.send(newsResult);
+    });
+
+    app.put("/approveNews/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(
+        filter,
+        updateCharity,
+        options
+      );
+      res.send(result);
+    });
+
+    //upApprove News
+    app.put("/unApproveNews/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(
+        filter,
+        updateCharity,
+        options
+      );
+      res.send(result);
     });
 
     // all news Category data
