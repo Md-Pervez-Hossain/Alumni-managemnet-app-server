@@ -995,6 +995,41 @@ async function run() {
       const result = await AllEventsData.deleteOne(filter);
       res.send(result);
     });
+
+
+    // find the single news comments
+    app.get("/single-comment", async (req, res) => {
+      id = req.query.id;
+      email = req.query.email;
+      console.log(id, email)
+      const filter = { _id: new ObjectId(id), email: email };
+      const result = await newsComments.findOne(filter);
+      res.send(result);
+    });
+
+    // update the previous comment
+    app.put("/update-comment/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedData = req.body;
+      // console.log(updatedData)
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          comments: updatedData.comments,
+          edit: true,
+          time: updatedData.time
+        },
+      };
+      const result = await newsComments.updateOne(filter, updatedDoc, options);
+      res.send(result);
+    });
+    
+
+
+
+
+
   } finally {
   }
 }
