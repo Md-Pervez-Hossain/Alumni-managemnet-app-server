@@ -3,7 +3,6 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const { query } = require("express");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -316,11 +315,7 @@ async function run() {
           status: true,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updateCharity, options);
       res.send(result);
     });
     app.put("/unApproveCharity/:id", async (req, res) => {
@@ -332,11 +327,7 @@ async function run() {
           status: false,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updateCharity, options);
       res.send(result);
     });
     app.put("/charity/:id", async (req, res) => {
@@ -430,11 +421,7 @@ async function run() {
           status: true,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updateCharity, options);
       res.send(result);
     });
     app.put("/unApproveSuccessStory/:id", async (req, res) => {
@@ -446,11 +433,7 @@ async function run() {
           status: false,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updateCharity, options);
       res.send(result);
     });
 
@@ -473,11 +456,7 @@ async function run() {
           status: true,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
       res.send(result);
     });
 
@@ -491,11 +470,7 @@ async function run() {
           status: false,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
       res.send(result);
     });
 
@@ -744,11 +719,7 @@ async function run() {
           status: true,
         },
       };
-      const result = await AllEventsData.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await AllEventsData.updateOne(filter, updateCharity, options);
       res.send(result);
     });
 
@@ -762,11 +733,7 @@ async function run() {
           status: false,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updateCharity,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
       res.send(result);
     });
 
@@ -1136,3 +1103,9 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+app.use(
+  cors({
+    origin: "https://alumni-management-42856.web.app",
+  })
+);
