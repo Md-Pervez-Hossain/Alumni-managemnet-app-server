@@ -822,8 +822,9 @@ async function run() {
     // });
 
     // user created
-    app.post("/alumni", async (req, res) => {
-      await allAlumniData.insertOne(req.body, (err, result) => {
+    app.post("/alumni", (req, res) => {
+      const body = req.body;
+      allAlumniData.insertOne(body, (err, result) => {
         if (err) {
           console.error(err);
 
