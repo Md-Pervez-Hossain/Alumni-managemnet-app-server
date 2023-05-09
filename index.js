@@ -367,6 +367,15 @@ async function run() {
       const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
+
+    // batch wise charity get api data
+    app.get("/charity/batch/:batch", async (req, res) => {
+      const batch = req.params.batch;
+      const query = { batchNumber: batch };
+      const result = await allCharityData.find(query).toArray();
+      res.send(result);
+    });
+
     //charity end
 
     // successFull Story start
@@ -710,6 +719,19 @@ async function run() {
       res.send(gallery);
     });
 
+    // batch ways data get
+    app.get("/events/:batch", async (req, res) => {
+      const batch = req.params.batch; // Get the batch value from the request URL
+      const query = { batch: batch };
+      try {
+        const events = await AllEventsData.find(query).sort({ date: 1 }).toArray();
+        res.send(events);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
     // single event data
     app.get("/events/:id", async (req, res) => {
       const id = req.params.id;
@@ -725,7 +747,7 @@ async function run() {
       res.send(cursor);
     });
 
-    // event unapprove
+    // event unapproved
     app.put("/approveEvents/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -1239,6 +1261,10 @@ run().catch((err) => console.error(err));
 
 app.get("/", (req, res) => {
   res.send("Alumni server Running!!!");
+});
+
+app.use((req, res) => {
+  res.status(404).send("Wrong URL");
 });
 
 app.listen(port, () => {
