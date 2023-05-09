@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const { query } = require("express");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // SSL COMMERCE
@@ -44,9 +44,7 @@ async function run() {
       .db("alumni-management-app")
       .collection("allEventCategories");
 
-    const allAlumniData = client
-      .db("alumni-management-app")
-      .collection("AllAlumniData");
+    const allAlumniData = client.db("alumni-management-app").collection("AllAlumniData");
 
     const allUniversityName = client
       .db("alumni-management-app")
@@ -87,9 +85,7 @@ async function run() {
     const successFullStoryComments = client
       .db("alumni-management-app")
       .collection("successFullStoryComments");
-    const newsComments = client
-      .db("alumni-management-app")
-      .collection("newsComments");
+    const newsComments = client.db("alumni-management-app").collection("newsComments");
 
     const allEventsFromData = client
       .db("alumni-management-app")
@@ -240,9 +236,7 @@ async function run() {
 
     app.post("/successFullStoryComments", async (req, res) => {
       const successStoryComments = req.body;
-      const cursor = await successFullStoryComments.insertOne(
-        successStoryComments
-      );
+      const cursor = await successFullStoryComments.insertOne(successStoryComments);
       res.send(cursor);
     });
 
@@ -312,6 +306,30 @@ async function run() {
       const result = await allCharityData.findOne(query);
       res.send(result);
     });
+    app.put("/approveCharity/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await allCharityData.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+    app.put("/unApproveCharity/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await allCharityData.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
     app.put("/charity/:id", async (req, res) => {
       const charityInfo = req.body;
       const id = req.params.id;
@@ -331,11 +349,7 @@ async function run() {
           time: charityInfo?.time,
         },
       };
-      const result = await allCharityData.updateOne(
-        filter,
-        updatedCharityInfo,
-        options
-      );
+      const result = await allCharityData.updateOne(filter, updatedCharityInfo, options);
       res.send(result);
     });
     //charity end
@@ -378,11 +392,7 @@ async function run() {
           time: story?.time,
         },
       };
-      const result = await SuccessFullStory.updateOne(
-        filter,
-        updatedStory,
-        options
-      );
+      const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
 
@@ -400,6 +410,33 @@ async function run() {
       const cursor = await SuccessFullStory.find(query).toArray();
       res.send(cursor);
     });
+
+    //approve successsFul story
+    app.put("/approveSuccessStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await SuccessFullStory.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+    app.put("/unApproveSuccessStory/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await SuccessFullStory.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+
     // successFull Story end
 
     // N E W S //
@@ -408,6 +445,33 @@ async function run() {
       const query = {};
       const newsResult = await alumniNewsCollection.find(query).toArray();
       res.send(newsResult);
+    });
+
+    app.put("/approveNews/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+
+    //upApprove News
+    app.put("/unApproveNews/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
+      res.send(result);
     });
 
     // all news Category data
@@ -645,6 +709,34 @@ async function run() {
       res.send(cursor);
     });
 
+    // event unapprove
+    app.put("/approveEvents/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: true,
+        },
+      };
+      const result = await AllEventsData.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+
+    // event unapprove
+    app.put("/unApproveEvents/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateCharity = {
+        $set: {
+          status: false,
+        },
+      };
+      const result = await alumniNewsCollection.updateOne(filter, updateCharity, options);
+      res.send(result);
+    });
+
     // Alumni data
     // AllAlumniData
     // AllUniversityName
@@ -704,8 +796,8 @@ async function run() {
 
     // single person data
     app.get("/alumni/:email", async (req, res) => {
-      const alumniEmail = req.params.email;
-      const query = { email: alumniEmail };
+      const alumniEmail = await req.params.email;
+      const query = await { email: alumniEmail };
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
@@ -730,17 +822,14 @@ async function run() {
     // });
 
     // user created
-    app.post("/alumni", (req, res) => {
-      allAlumniData.insertOne(req.body, (err, result) => {
+    app.post("/alumni", async (req, res) => {
+      await allAlumniData.insertOne(req.body, (err, result) => {
         if (err) {
           console.error(err);
 
-          res
-            .status(500)
-            .send({ message: "Error saving user data to MongoDB" });
+          res.status(500).send({ message: "Error saving user data to MongoDB" });
           return;
         }
-        res.send({ message: "User created successfully" });
         res.send({ message: "User created successfully" });
       });
     });
@@ -824,7 +913,6 @@ async function run() {
 
     app.post("/membership", (req, res) => {
       const formData = req.body;
-      console.log(formData);
       membershipForm.insertOne(formData, (err, result) => {
         if (err) throw err;
         res.status(200).send("data inserted successfully");
@@ -896,11 +984,7 @@ async function run() {
           date: updateInfo.date,
         },
       };
-      const result = await allEventsFromData.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
@@ -939,11 +1023,7 @@ async function run() {
           time: newsInfo.time,
         },
       };
-      const result = await alumniNewsCollection.updateOne(
-        filter,
-        updatedDoc,
-        options
-      );
+      const result = await alumniNewsCollection.updateOne(filter, updatedDoc, options);
       res.send(result);
     });
 
@@ -1058,6 +1138,20 @@ async function run() {
 
 
 
+    //  JWT Authorization
+
+    app.get("/jwt", async (req, res) => {
+      const email = req.query.email;
+      const query = { email: email };
+      const user = await allAlumniData.findOne(query);
+
+      if (user) {
+        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: "1h" });
+        return res.send({ accessToken: token });
+      }
+
+      res.status(403).send({ accessToken: "" });
+    });
   } finally {
   }
 }
@@ -1071,3 +1165,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
