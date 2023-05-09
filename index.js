@@ -793,6 +793,7 @@ async function run() {
     });
 
     //  A L U M N I //
+
     //all Alumni data
     app.get("/alumni", async (req, res) => {
       const query = {};
@@ -801,31 +802,61 @@ async function run() {
       res.send(AllAlumni);
     });
 
-    //make batch admin
-    app.put("/alumni/BatchAdmin/:id", async (req, res) => {
+    //is the user admin??
+    app.get("/alumni/admin/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
+      const user = allAlumniData.find(query);
+      res.send({ isAdmin: user?.role === "Admin" });
+    });
+
+    //is the user Batch Admin??
+    app.get("/alumni/BatchAdmin/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const user = allAlumniData.find(query);
+      res.send({ isAdmin: user?.role === "Batch_Admin" });
+    });
+
+    //make batch admin
+    app.put("/alumni/BatchAdmin/:id", verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+      const query = { email: decodedEmail };
+      const user = await allAlumniData.find(query);
+      if (user?.role !== "Admin") {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
       const updatedDoc = {
         $set: {
           role: "Batch_Admin",
         },
       };
-      const result = await allAlumniData.updateOne(query, updatedDoc, option);
+      const result = await allAlumniData.updateOne(filter, updatedDoc, option);
       res.send(result);
     });
 
     //make super admin
-    app.put("/alumni/admin/:id", async (req, res) => {
+    app.put("/alumni/admin/:id", verifyJWT, async (req, res) => {
+      const decodedEmail = req.decoded.email;
+      const query = { email: decodedEmail };
+      const user = await allAlumniData.find(query);
+
+      if (user?.role !== "Admin" || user?.role == "Batch_Admin") {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+
       const id = req.params.id;
-      const query = { _id: ObjectId(id) };
+      const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
       const updatedDoc = {
         $set: {
           role: "Admin",
         },
       };
-      const result = await allAlumniData.updateOne(query, updatedDoc, option);
+      const result = await allAlumniData.updateOne(filter, updatedDoc, option);
       res.send(result);
     });
 
