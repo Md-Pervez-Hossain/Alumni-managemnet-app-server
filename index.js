@@ -1007,7 +1007,7 @@ async function run() {
       res.send(result);
     });
 
-    // update the previous comment
+    // update the previous comment of news
     app.put("/update-comment/:id", async (req, res) => {
       const id = req.params.id;
       const updatedData = req.body;
@@ -1026,6 +1026,35 @@ async function run() {
     });
     
 
+
+    // find the single successful comments
+    app.get("/single-successful-comment", async (req, res) => {
+      id = req.query.id;
+      email = req.query.email;
+      // console.log(id, email)
+      const filter = { _id: new ObjectId(id), email: email };
+      const result = await successFullStoryComments.findOne(filter);
+      res.send(result);
+    });
+
+
+    // update the previous comment of Successful story
+    app.put("/update-successful-comment/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedData = req.body;
+      // console.log(updatedData)
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          comments: updatedData.comments,
+          edit: true,
+          time: updatedData.time
+        },
+      };
+      const result = await successFullStoryComments.updateOne(filter, updatedDoc, options);
+      res.send(result);
+    });
 
 
 
