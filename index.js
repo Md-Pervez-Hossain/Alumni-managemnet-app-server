@@ -24,6 +24,21 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
+function verifyJWT(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).send("unauthorized access");
+  }
+  const token = authHeader.split(" ")[1];
+  jwt.verify(token, process.env.ACCESS_TOKEN, function (err, decoded) {
+    if (err) {
+      return res.status(403).send("forbidden access");
+    }
+    req.decoded = decoded;
+    next();
+  });
+}
+
 async function run() {
   try {
     const galleriesCategory = client
@@ -443,6 +458,7 @@ async function run() {
     // all news data
     app.get("/news", async (req, res) => {
       const query = {};
+      console.log("token", req.headers.authorization);
       const newsResult = await alumniNewsCollection.find(query).toArray();
       res.send(newsResult);
     });
@@ -785,6 +801,48 @@ async function run() {
       res.send(AllAlumni);
     });
 
+    //make batch admin
+    app.put("/alumni/BatchAdmin/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const option = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          role: "Batch_Admin",
+        },
+      };
+      const result = await allAlumniData.updateOne(query, updatedDoc, option);
+      res.send(result);
+    });
+
+    //make super admin
+    app.put("/alumni/admin/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const option = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          role: "Admin",
+        },
+      };
+      const result = await allAlumniData.updateOne(query, updatedDoc, option);
+      res.send(result);
+    });
+
+    //remove admin
+    app.put("/alumni/admin/remove/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const option = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          role: "Admin",
+        },
+      };
+      const result = await allAlumniData.updateOne(query, updatedDoc, option);
+      res.send(result);
+    });
+
     //year wise batch data
     app.get("/alumni/batch/:year", async (req, res) => {
       const year = req.params.year;
@@ -801,25 +859,6 @@ async function run() {
       const personData = await allAlumniData.findOne(query);
       res.send(personData);
     });
-    // single person data EDIT
-    // app.put("/alumni/:email", async (req, res) => {
-    //   const alumniEmail = req.params.email;
-    //   const filter = { email: alumniEmail };
-    //   const updateInfo = req.body;
-    //   const options = { upsert: true };
-
-    //   const updatedDoc = {
-    //     $set: {
-    //       first_name: updateInfo.first_name,
-    //       last_name: updateInfo.last_name,
-    //       email: updateInfo.email,
-    //       phone_number: updateInfo.phone_number,
-    //       date: updateInfo.date,
-    //     },
-    //   };
-    //   const result = await allEventsFromData.updateOne(filter, updatedDoc, options);
-    //   res.send(result);
-    // });
 
     // user created
     app.post("/alumni", async (req, res) => {
@@ -1150,6 +1189,17 @@ async function run() {
 
       res.status(403).send({ accessToken: "" });
     });
+
+    // ////////////////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////////////////////
+    // const decodedEmail = req.decoded.email;
+
+    // if (email !== decodedEmail) {
+    //   return res.status(403).send({ message: "forbidden access" });
+    // }
+
+    // ////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////   D A S H B O A R D       ////////////////////////////////
   } finally {
   }
 }
