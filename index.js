@@ -12,7 +12,7 @@ const store_id = process.env.STORE_ID;
 const store_passwd = process.env.STORE_PASSWORD;
 const is_live = false; //true for live, false for sandbox
 
-// middleware.config
+// middleware configuration
 app.use(cors());
 app.use(express.json());
 
@@ -1097,7 +1097,7 @@ async function run() {
 run().catch((err) => console.error(err));
 
 app.get("/", (req, res) => {
-  res.send("Hi From Alumni server");
+  res.send("Alumni server Running");
 });
 
 app.listen(port, () => {
