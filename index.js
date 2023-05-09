@@ -1,12 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-
-// middleware.config
-app.use(cors());
-app.use(express.json());
-
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -16,6 +11,10 @@ const SSLCommerzPayment = require("sslcommerz-lts");
 const store_id = process.env.STORE_ID;
 const store_passwd = process.env.STORE_PASSWORD;
 const is_live = false; //true for live, false for sandbox
+
+// middleware.config
+app.use(cors());
+app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.8itgidz.mongodb.net/?retryWrites=true&w=majority`;
 
