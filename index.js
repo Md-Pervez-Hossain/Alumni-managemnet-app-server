@@ -871,6 +871,7 @@ async function run() {
       const email = req.params.email;
       const query = { email: email };
       const user = await allAlumniData.findOne(query);
+      console.log(user);
       res.send({ isAdmin: user?.role === "Admin" });
     });
 
@@ -879,6 +880,7 @@ async function run() {
       const email = req.params.email;
       const query = { email: email };
       const user = await allAlumniData.findOne(query);
+      console.log(user);
       res.send({ isAdmin: user?.role === "Batch_Admin" });
     });
 
