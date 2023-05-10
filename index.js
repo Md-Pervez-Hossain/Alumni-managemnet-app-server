@@ -26,6 +26,7 @@ const client = new MongoClient(uri, {
 
 function verifyJWT(req, res, next) {
   const authHeader = req.headers.authorization;
+  console.log({ authHeader });
   if (!authHeader) {
     return res.status(401).send("unauthorized access");
   }
@@ -905,7 +906,7 @@ async function run() {
     });
 
     //make batch admin
-    app.put("/alumni/BatchAdmin/:id", verifyJWT, async (req, res) => {
+    app.put("/alumni/BatchAdmin/:id", async (req, res) => {
       const decodedEmail = req.decoded.email;
       const query = { email: decodedEmail };
       const user = await allAlumniData.find(query);
@@ -913,7 +914,7 @@ async function run() {
         return res.status(403).send({ message: "forbidden access" });
       }
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const option = { upsert: true };
       const updatedDoc = {
         $set: {
@@ -926,16 +927,15 @@ async function run() {
 
     //make super admin
     app.put("/alumni/admin/:id", verifyJWT, async (req, res) => {
-      // const decodedEmail = req.decoded.email;
-      // const query = { email: decodedEmail };
-      // const user = await allAlumniData.find(query);
-      // console.log(decodedEmail);
-      // if (user?.role !== "Admin") {
-      //   return res.status(403).send({ message: "forbidden access admin" });
-      // }
-
+      const decodedEmail = req.decoded.email;
+      console.log({ decodedEmail });
+      const query = { email: decodedEmail };
+      const user = await allAlumniData.findOne(query);
+      if (user?.role !== "Admin") {
+        return res.status(403).send({ message: "forbidden access admin" });
+      }
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const option = { upsert: true };
       const updatedDoc = {
         $set: {
@@ -949,7 +949,7 @@ async function run() {
     //remove admin
     app.put("/alumni/admin/remove/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: ObjectId(id) };
+      const query = { _id: new ObjectId(id) };
       const option = { upsert: true };
       const updatedDoc = {
         $set: {
