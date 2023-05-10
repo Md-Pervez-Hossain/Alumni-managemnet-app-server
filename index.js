@@ -245,6 +245,7 @@ async function run() {
       const result = await charityDonationData.find(query).toArray();
       res.send(result);
     });
+
     // charity donation end
 
     // successFullStoryComments start
@@ -282,13 +283,15 @@ async function run() {
     // successFullStoryComments end
 
     //charity start
+
+    // create a charity
     app.post("/charity", async (req, res) => {
       const charityFunds = req.body;
-      console.log(charityFunds);
       const cursor = await allCharityData.insertOne(charityFunds);
       res.send(cursor);
     });
 
+    // get all charity data
     app.get("/charity", async (req, res) => {
       const query = {};
       const result = await allCharityData.find(query).toArray();
@@ -302,6 +305,20 @@ async function run() {
       const result = await allCharityData.find(query).toArray();
       res.send(result);
     });
+
+    // Get all charity data for a particular user based on their email
+    app.get("/charity/myCharity/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      try {
+        const myCharity = await allCharityData.find(query).toArray();
+        res.status(200).send(myCharity);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
     app.delete("/charity/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -390,18 +407,37 @@ async function run() {
       const successStoryResult = await SuccessFullStory.find(query).toArray();
       res.send(successStoryResult);
     });
+
+    // Get all success stories for a particular user based on their email
+
     app.get("/successFullStory/email/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
       const result = await SuccessFullStory.find(query).toArray();
       res.send(result);
     });
+
+    // Get all success stories for a particular user based on their email
+    // app.get("/success/mySuccessStory/:email", async (req, res) => {
+    //   const email = req.params.email;
+    //   const query = { email: email };
+    //   try {
+    //     const mySuccessStory = await SuccessFullStory.find(query).toArray();
+    //     res.status(200).send(mySuccessStory);
+    //   } catch (error) {
+    //     console.error(error);
+    //     res.status(500).send("Internal Server Error");
+    //   }
+    // });
+
+    // single successful story
     app.get("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const successStoryResult = await SuccessFullStory.findOne(query);
       res.send(successStoryResult);
     });
+    // update  successful story
     app.put("/successFullStory/:id", async (req, res) => {
       const story = req.body;
       const id = req.params.id;
@@ -419,13 +455,14 @@ async function run() {
       const result = await SuccessFullStory.updateOne(filter, updatedStory, options);
       res.send(result);
     });
-
+    // delete successful story
     app.delete("/successFullStory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await SuccessFullStory.deleteOne(query);
       res.send(result);
     });
+    // get successful story batch wise
     app.get("/successFullStory/batch/:batchNumber", async (req, res) => {
       const batchNumber = req.params.batchNumber;
       console.log(batchNumber);
@@ -435,7 +472,7 @@ async function run() {
       res.send(cursor);
     });
 
-    //approve successsFul story
+    //approve successful story
     app.put("/approveSuccessStory/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -448,6 +485,7 @@ async function run() {
       const result = await SuccessFullStory.updateOne(filter, updateCharity, options);
       res.send(result);
     });
+    //unapproved successful story
     app.put("/unApproveSuccessStory/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -522,11 +560,25 @@ async function run() {
       res.send(cursor);
     });
 
+    // Get all news articles for a particular user based on their email
+    app.get("/news/mynews/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      try {
+        const mynews = await alumniNewsCollection.find(query).toArray();
+        res.status(200).send(mynews);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
+    // news comments start
+
     // news comments start
 
     app.post("/newsComments", async (req, res) => {
       const comments = req.body;
-      console.log(newsComments);
       const cursor = await newsComments.insertOne(comments);
       res.send(cursor);
     });
@@ -543,7 +595,6 @@ async function run() {
     });
     app.get("/newsComment/:commentsId", async (req, res) => {
       const commentsId = req.params.commentsId;
-      console.log(commentsId);
       const query = { commentsId: commentsId };
       const result = await newsComments.find(query).toArray();
       res.send(result);
@@ -552,28 +603,6 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await newsComments.deleteOne(query);
-      res.send(result);
-    });
-
-    // news comments end
-
-    // news comments start
-
-    app.post("/newsComments", async (req, res) => {
-      const comments = req.body;
-      console.log(newsComments);
-      const cursor = await newsComments.insertOne(comments);
-      res.send(cursor);
-    });
-    app.get("/newsComments", async (req, res) => {
-      const query = {};
-      const result = await newsComments.find(query).toArray();
-      res.send(result);
-    });
-    app.get("/newsComments/:commentsId", async (req, res) => {
-      const commentsId = req.params.commentsId;
-      const query = { commentsId: commentsId };
-      const result = await newsComments.find(query).toArray();
       res.send(result);
     });
 
@@ -726,6 +755,19 @@ async function run() {
       try {
         const events = await AllEventsData.find(query).sort({ date: 1 }).toArray();
         res.send(events);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+
+    // Get all events data for a particular user based on their email
+    app.get("/events/myEvents/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      try {
+        const myEvents = await AllEventsData.find(query).toArray();
+        res.status(200).send(myEvents);
       } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
@@ -1227,6 +1269,8 @@ async function run() {
       );
       res.send(result);
     });
+
+    // * EMAIL WISE DATA
 
     //  JWT Authorization
 
