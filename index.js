@@ -868,20 +868,40 @@ async function run() {
 
     //is the user admin??
     app.get("/alumni/admin/:email", async (req, res) => {
-      const email = req.params.email;
-      const query = { email: email };
-      const user = await allAlumniData.findOne(query);
-      console.log(user);
-      res.send({ isAdmin: user?.role === "Admin" });
+      try {
+        const email = req.params.email;
+        const user = await allAlumniData.findOne({ email });
+
+        if (!user) {
+          res.status(404).send({ message: "User not found" });
+          return;
+        }
+
+        const isAdmin = user.role === "Admin";
+        res.send({ isAdmin });
+      } catch (error) {
+        console.error("Error retrieving user:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
     });
 
     //is the user Batch Admin??
     app.get("/alumni/BatchAdmin/:email", async (req, res) => {
-      const email = req.params.email;
-      const query = { email: email };
-      const user = await allAlumniData.findOne(query);
-      console.log(user);
-      res.send({ isAdmin: user?.role === "Batch_Admin" });
+      try {
+        const email = req.params.email;
+        const user = await allAlumniData.findOne({ email });
+
+        if (!user) {
+          res.status(404).send({ message: "User not found" });
+          return;
+        }
+
+        const isBatchAdmin = user.role === "Batch_Admin";
+        res.send({ isBatchAdmin });
+      } catch (error) {
+        console.error("Error retrieving user:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
     });
 
     //make batch admin
