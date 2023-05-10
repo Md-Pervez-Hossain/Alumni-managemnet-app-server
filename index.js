@@ -870,16 +870,16 @@ async function run() {
     app.get("/alumni/admin/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
-      const user = allAlumniData.find(query);
-      res.send({ isAdmin: user?.role == "Admin" });
+      const user = await allAlumniData.findOne(query);
+      res.send({ isAdmin: user?.role === "Admin" });
     });
 
     //is the user Batch Admin??
     app.get("/alumni/BatchAdmin/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
-      const user = allAlumniData.find(query);
-      res.send({ isAdmin: user?.role == "Batch_Admin" });
+      const user = await allAlumniData.findOne(query);
+      res.send({ isAdmin: user?.role === "Batch_Admin" });
     });
 
     //make batch admin
@@ -903,7 +903,7 @@ async function run() {
     });
 
     //make super admin
-    app.put("/alumni/admin/:id", async (req, res) => {
+    app.put("/alumni/admin/:id", verifyJWT, async (req, res) => {
       // const decodedEmail = req.decoded.email;
       // const query = { email: decodedEmail };
       // const user = await allAlumniData.find(query);
