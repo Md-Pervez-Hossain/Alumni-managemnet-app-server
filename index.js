@@ -775,7 +775,7 @@ async function run() {
     });
 
     // single event data
-    app.get("/events/:id", async (req, res) => {
+    app.get("/event/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const category = await AllEventsData.findOne(query);
@@ -1175,7 +1175,6 @@ async function run() {
     app.get("/event/:email", async (req, res) => {
       email = req.params.email;
       const filter = { authorEmail: email };
-      // console.log(email)
       const result = await AllEventsData.find(filter).toArray();
       res.send(result);
     });
