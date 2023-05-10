@@ -764,7 +764,7 @@ async function run() {
     // Get all events data for a particular user based on their email
     app.get("/events/myEvents/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email };
+      const query = { authorEmail: email };
       try {
         const myEvents = await AllEventsData.find(query).toArray();
         res.status(200).send(myEvents);
