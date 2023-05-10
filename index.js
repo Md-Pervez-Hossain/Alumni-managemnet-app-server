@@ -32,7 +32,7 @@ function verifyJWT(req, res, next) {
   const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.ACCESS_TOKEN, function (err, decoded) {
     if (err) {
-      return res.status(403).send("forbidden access");
+      return res.status(403).send("forbidden access from jwt");
     }
     req.decoded = decoded;
     next();
@@ -871,7 +871,7 @@ async function run() {
       const email = req.params.email;
       const query = { email: email };
       const user = allAlumniData.find(query);
-      res.send({ isAdmin: user?.role === "Admin" });
+      res.send({ isAdmin: user?.role == "Admin" });
     });
 
     //is the user Batch Admin??
@@ -879,7 +879,7 @@ async function run() {
       const email = req.params.email;
       const query = { email: email };
       const user = allAlumniData.find(query);
-      res.send({ isAdmin: user?.role === "Batch_Admin" });
+      res.send({ isAdmin: user?.role == "Batch_Admin" });
     });
 
     //make batch admin
@@ -887,7 +887,7 @@ async function run() {
       const decodedEmail = req.decoded.email;
       const query = { email: decodedEmail };
       const user = await allAlumniData.find(query);
-      if (user?.role !== "Admin") {
+      if (user?.role !== "Admin" || user?.role == "Batch_Admin") {
         return res.status(403).send({ message: "forbidden access" });
       }
       const id = req.params.id;
@@ -903,14 +903,14 @@ async function run() {
     });
 
     //make super admin
-    app.put("/alumni/admin/:id", verifyJWT, async (req, res) => {
-      const decodedEmail = req.decoded.email;
-      const query = { email: decodedEmail };
-      const user = await allAlumniData.find(query);
-
-      if (user?.role !== "Admin" || user?.role == "Batch_Admin") {
-        return res.status(403).send({ message: "forbidden access" });
-      }
+    app.put("/alumni/admin/:id", async (req, res) => {
+      // const decodedEmail = req.decoded.email;
+      // const query = { email: decodedEmail };
+      // const user = await allAlumniData.find(query);
+      // console.log(decodedEmail);
+      // if (user?.role !== "Admin") {
+      //   return res.status(403).send({ message: "forbidden access admin" });
+      // }
 
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
@@ -1282,7 +1282,6 @@ async function run() {
         const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: "1h" });
         return res.send({ accessToken: token });
       }
-
       res.status(403).send({ accessToken: "" });
     });
 
